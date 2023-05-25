@@ -29,6 +29,9 @@
 
 # Packages
 [Aa]ssets/Packages/
+[Aa]ssets/packages/
+[Aa]ssets/_Packages/
+[Aa]ssets/_*/
 [Aa]ssets/Polaris*/
 [Aa]ssets/Plugin*/
 
