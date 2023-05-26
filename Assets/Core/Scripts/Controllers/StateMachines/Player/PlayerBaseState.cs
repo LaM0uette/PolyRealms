@@ -2,11 +2,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public abstract class PlayerBaseState : State
     {
-        protected PlayerStateMachine stateMachine;
+        protected PlayerStateMachine StateMachine;
 
-        public PlayerBaseState(PlayerStateMachine stateMachine)
+        protected PlayerBaseState(PlayerStateMachine stateMachine)
         {
-            this.stateMachine = stateMachine;
+            StateMachine = stateMachine;
         }
     }
 }
