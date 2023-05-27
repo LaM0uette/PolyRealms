@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerIdleState : PlayerBaseState

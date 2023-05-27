@@ -241,6 +241,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &808926776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 522746014275061289, guid: 8757fd30e013beb428773fe8d2a9a600,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593326383919096914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +507,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: _cinemachineCameraTarget
+      value: 
+      objectReference: {fileID: 808926776}
+    - target: {fileID: 6531092084692618835, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
