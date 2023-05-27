@@ -9,11 +9,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     {
         #region Statements
 
+        public InputReader Input { get; private set; }
         public CharacterController Controller { get; private set; }
         public Animator Animator { get; private set; }
 
         private void Awake()
         {
+            Input = GetComponent<InputReader>();
             Controller = GetComponent<CharacterController>();
             Animator = GetComponent<Animator>();
         }
@@ -23,7 +25,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            //SwitchState(new PlayerFreeLookState(this));
+            SwitchState(new PlayerIdleState(this));
         }
 
         #endregion
