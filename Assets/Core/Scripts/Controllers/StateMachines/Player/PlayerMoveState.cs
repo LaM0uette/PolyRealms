@@ -1,12 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
-    public class PlayerIdleState : PlayerBaseState
+    public class PlayerMoveState : PlayerBaseState
     {
         #region Statements
 
-        public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine)
+        public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -16,7 +16,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            if (!StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerIdleState(StateMachine));
         }
 
         #endregion

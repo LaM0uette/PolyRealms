@@ -9,13 +9,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     {
         #region Statements
 
-        public InputReader Input { get; private set; }
+        public InputReader Inputs { get; private set; }
         public CharacterController Controller { get; private set; }
         public Animator Animator { get; private set; }
 
         private void Awake()
         {
-            Input = GetComponent<InputReader>();
+            Inputs = GetComponent<InputReader>();
             Controller = GetComponent<CharacterController>();
             Animator = GetComponent<Animator>();
         }
@@ -27,6 +27,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             SwitchState(new PlayerIdleState(this));
         }
+
+        #endregion
+
+        #region Functions
+
+        public bool IsMoving() => !Inputs.MoveValue.Equals(Vector2.zero);
 
         #endregion
     }

@@ -14,14 +14,14 @@ namespace Core.Scripts.Controllers
 
         #region Events
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void OnMove(InputValue value)
         {
-            MoveValue = context.ReadValue<Vector2>();
+            MoveValue = value.Get<Vector2>();
         }
 
-        public void OnLook(InputAction.CallbackContext context)
+        public void OnLook(InputValue value)
         {
-            LookValue = context.ReadValue<Vector2>();
+            LookValue = value.Get<Vector2>();
         }
 
         #endregion
