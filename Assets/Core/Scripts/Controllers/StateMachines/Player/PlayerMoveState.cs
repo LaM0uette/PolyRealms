@@ -20,6 +20,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (!StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerIdleState(StateMachine));
         }
 
+        private (float speed, float animationValue) GetSpeed()
+        {
+            return StateMachine.Inputs.RunValue ? (StateMachine.RunSpeed, 2f) : (StateMachine.WalkSpeed, 1f);
+        }
+
         #endregion
 
         #region Events
@@ -32,9 +37,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             CheckStateChange();
-            Move(StateMachine.WalkSpeed);
             
-            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 1, .1f);
+            var (speed, animationValue) = GetSpeed();
+            
+            Move(speed);
+            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, animationValue, .1f);
         }
         
         public override void TickLate(float deltaTime)
@@ -44,6 +51,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            StateMachine.Inputs.RunValue = false;
         }
 
         #endregion

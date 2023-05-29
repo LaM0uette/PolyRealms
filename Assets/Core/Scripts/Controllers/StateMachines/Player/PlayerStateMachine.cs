@@ -15,8 +15,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public Camera MainCamera { get; private set; }
         
         [Header("Move")]
-        public float WalkSpeed = 3f;
-        public float RunSpeed = 6f;
+        public float WalkSpeed = 2f;
+        public float RunSpeed = 5f;
         public float JumpForce = 10f;
         [HideInInspector] public Vector3 Velocity;
         
