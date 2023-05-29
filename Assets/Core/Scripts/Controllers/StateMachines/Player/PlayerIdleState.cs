@@ -1,3 +1,4 @@
+using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
@@ -32,6 +33,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
             Move();
+
+            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0, .1f);
         }
         
         public override void TickLate(float deltaTime)

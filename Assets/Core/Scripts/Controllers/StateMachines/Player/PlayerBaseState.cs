@@ -5,8 +5,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public abstract class PlayerBaseState : State
     {
+        #region Statements
+
         protected readonly PlayerStateMachine StateMachine;
 
+        private const float OFFSET = .1f;
+        
         // Move
         private float _speed;
         private float _targetRotation;
@@ -14,12 +18,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         // Rotation
         private static float _cinemachineTargetYaw;
         private static float _cinemachineTargetPitch;
-        private const float _offset = 0.1f;
 
         protected PlayerBaseState(PlayerStateMachine stateMachine)
         {
             StateMachine = stateMachine;
         }
+
+        #endregion
         
         #region Functions
 
@@ -35,7 +40,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var controllerVelocity = StateMachine.Controller.velocity;
             var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
 
-            if (currentHorizontalSpeed < targetSpeed - _offset || currentHorizontalSpeed > targetSpeed + _offset)
+            if (currentHorizontalSpeed < targetSpeed - OFFSET || currentHorizontalSpeed > targetSpeed + OFFSET)
             {
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * 10f);
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -43,17 +48,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             else _speed = targetSpeed;
 
             var inputDirection = new Vector3(StateMachine.Inputs.MoveValue.x, 0, StateMachine.Inputs.MoveValue.y).normalized;
-            if (!StateMachine.Inputs.MoveValue.Equals(Vector2.zero))
+            if (StateMachine.IsMoving())
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
-                var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, _offset);
+                var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET);
                 StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
             }
             
             var targetDirection = Quaternion.Euler(0, _targetRotation, 0) * Vector3.forward;
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
-            
-            StateMachine.Animator.SetFloat(PlayerAnimationIds.LocomotionSpeed, targetSpeed, _offset, Time.deltaTime);
         }
 
         protected void CameraRotation()
@@ -69,6 +72,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine._cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
         }
 
+        protected void AnimatorSetFloat(int id, float value, float dampTime)
+        {
+            StateMachine.Animator.SetFloat(id, value, dampTime, Time.deltaTime);
+        }
+        
         #endregion
     }
 }

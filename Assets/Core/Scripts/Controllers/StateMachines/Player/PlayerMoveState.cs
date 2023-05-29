@@ -33,6 +33,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
             Move(StateMachine.WalkSpeed);
+            
+            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 1, .1f);
         }
         
         public override void TickLate(float deltaTime)
