@@ -1,3 +1,4 @@
+using System;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -13,6 +14,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public InputReader Inputs { get; private set; }
         public CharacterController Controller { get; private set; }
         public Animator Animator { get; private set; }
+        public Camera MainCamera { get; private set; }
+        
+        [Header("Move")]
+        public float WalkSpeed = 3f;
+        public float RunSpeed = 6f;
+        //public float JumpForce = 10f;
+        public float Gravity = -9.81f;
 
         [Header("Cinemachine")]
         [Range(0f, 100f)] public float MouseSensitivity = 30f;
@@ -28,6 +36,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Inputs = GetComponent<InputReader>();
             Controller = GetComponent<CharacterController>();
             Animator = GetComponent<Animator>();
+            MainCamera = Camera.main;
         }
 
         private void Start()
@@ -36,11 +45,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Cursor.visible = false;
             
             SwitchState(new PlayerIdleState(this));
-        }
-
-        private void Update()
-        {
-            CameraRotation();
         }
 
         #endregion
@@ -53,7 +57,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         #region Functions
 
-        private void CameraRotation()
+        public void CameraRotation()
         {
             var deltaTimeMultiplier = Time.deltaTime;
 
@@ -64,6 +68,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _cinemachineTargetPitch = _cinemachineTargetPitch.ClampAngle(BottomClamp, TopClamp);
 
             _cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
+        }
+
+        #endregion
+
+        #region Events
+
+        private void LateUpdate()
+        {
+            CameraRotation();
         }
 
         #endregion
