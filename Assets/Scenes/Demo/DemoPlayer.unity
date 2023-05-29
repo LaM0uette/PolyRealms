@@ -510,6 +510,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
+      propertyPath: RunSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: WalkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
       propertyPath: _cinemachineCameraTarget
       value: 
       objectReference: {fileID: 808926776}
