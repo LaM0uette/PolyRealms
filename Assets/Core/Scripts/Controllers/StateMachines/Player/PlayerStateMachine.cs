@@ -2,23 +2,22 @@ using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
-    [RequireComponent(typeof(InputReader))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(InputReader))]
     [RequireComponent(typeof(CharacterController))]
     public class PlayerStateMachine : StateMachine
     {
         #region Statements
 
+        public Animator Animator { get; private set; }
         public InputReader Inputs { get; private set; }
         public CharacterController Controller { get; private set; }
-        public Animator Animator { get; private set; }
         public Camera MainCamera { get; private set; }
         
         [Header("Move")]
         public float WalkSpeed = 3f;
         public float RunSpeed = 6f;
         public float JumpForce = 10f;
-        public float Gravity = -9.81f;
         [HideInInspector] public Vector3 Velocity;
         
         [Header("Cinemachine")]
@@ -29,9 +28,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void Awake()
         {
+            Animator = GetComponent<Animator>();
             Inputs = GetComponent<InputReader>();
             Controller = GetComponent<CharacterController>();
-            Animator = GetComponent<Animator>();
             MainCamera = Camera.main;
         }
 
