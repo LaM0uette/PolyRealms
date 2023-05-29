@@ -12,6 +12,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         }
 
         #endregion
+        
+        #region Subscribe/Unsubscribe Events
+
+        private void SubscribeEvents()
+        {
+            StateMachine.Inputs.JumpEvent += OnJump;
+        }
+        
+        private void UnsubscribeEvents()
+        {
+            StateMachine.Inputs.JumpEvent -= OnJump;
+        }
+
+        #endregion
 
         #region Functions
 
@@ -32,6 +46,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             StateMachine.Velocity.y = Physics.gravity.y;
+
+            SubscribeEvents();
         }
 
         public override void Tick(float deltaTime)
@@ -52,6 +68,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             StateMachine.Inputs.RunValue = false;
+
+            UnsubscribeEvents();
+        }
+        
+        private void OnJump()
+        {
+            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0);
+            StateMachine.SwitchState(new PlayerJumpState(StateMachine));
         }
 
         #endregion

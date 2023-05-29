@@ -72,6 +72,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine._cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
         }
 
+        protected void AnimatorSetFloat(int id, float value)
+        {
+            StateMachine.Animator.SetFloat(id, value);
+        }
+        
         protected void AnimatorSetFloat(int id, float value, float dampTime)
         {
             StateMachine.Animator.SetFloat(id, value, dampTime, Time.deltaTime);

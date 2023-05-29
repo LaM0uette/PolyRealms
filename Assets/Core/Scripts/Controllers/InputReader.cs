@@ -11,6 +11,8 @@ namespace Core.Scripts.Controllers
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
         public bool RunValue { get; set; }
+        
+        public Action JumpEvent { get; set; }
 
         #endregion
 
@@ -19,7 +21,8 @@ namespace Core.Scripts.Controllers
         public void OnMove(InputValue value) => MoveValue = value.Get<Vector2>();
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
         
-        public void OnRun(InputValue _) => RunValue = !RunValue;
+        public void OnRun() => RunValue = !RunValue;
+        public void OnJump() => JumpEvent?.Invoke();
 
         #endregion
     }
