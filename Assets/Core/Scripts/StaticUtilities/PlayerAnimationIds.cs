@@ -6,7 +6,14 @@ namespace Core.Scripts.StaticUtilities
     {
         #region Locomotion
 
+        public static readonly int LocomotionBlendTree = Animator.StringToHash("LocomotionBlendTree");
         public static readonly int LocomotionSpeed = Animator.StringToHash("LocomotionSpeed");
+
+        #endregion
+        
+        #region Actions
+
+        public static readonly int Jump = Animator.StringToHash("Jump");
 
         #endregion
     }

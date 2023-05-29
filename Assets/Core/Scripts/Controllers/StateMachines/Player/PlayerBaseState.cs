@@ -27,6 +27,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #endregion
         
         #region Functions
+        
+        protected void ApplyGravity()
+        {
+            if (StateMachine.Velocity.y > Physics.gravity.y)
+            {
+                StateMachine.Velocity.y += Physics.gravity.y * Time.deltaTime;
+            }
+        }
 
         protected void Move()
         {
