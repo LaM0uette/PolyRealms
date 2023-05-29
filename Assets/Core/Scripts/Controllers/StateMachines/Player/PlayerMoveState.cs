@@ -26,12 +26,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            StateMachine.Velocity.y = Physics.gravity.y;
         }
 
         public override void Tick(float deltaTime)
         {
             CheckStateChange();
-            Move();
+            Move(StateMachine.WalkSpeed);
         }
         
         public override void TickLate(float deltaTime)
