@@ -31,6 +31,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
         }
+        
+        public override void TickLate(float deltaTime)
+        {
+            CameraRotation();
+        }
 
         public override void Exit()
         {

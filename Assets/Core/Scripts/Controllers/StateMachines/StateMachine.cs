@@ -17,5 +17,10 @@ namespace Core.Scripts.Controllers.StateMachines
         {
             _currentState.Tick(Time.deltaTime);
         }
+        
+        private void LateUpdate()
+        {
+            _currentState.TickLate(Time.deltaTime);
+        }
     }
 }
