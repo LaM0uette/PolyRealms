@@ -10,9 +10,9 @@ namespace Core.Scripts.Controllers
 
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
-        public bool WalkValue;
-        public bool RunValue;
-        public bool CrouchValue;
+        public bool WalkValue  { get; set; }
+        public bool RunValue  { get; set; }
+        public bool CrouchValue  { get; set; }
         
         public Action JumpEvent { get; set; }
         public Action RollEvent { get; set; }

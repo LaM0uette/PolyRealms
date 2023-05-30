@@ -34,7 +34,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #region Functions
 
-        private void Roll(float speed)
+        private void Slide(float speed)
         {
             var controllerVelocity = StateMachine.Controller.velocity;
             var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
@@ -63,9 +63,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            //var speed = StateMachine.RollSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed);
-            //Roll(speed);
-            MoveRotation();
+            var speed = StateMachine.SlideSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed);
+            Slide(speed);
         }
 
         public override void TickLate(float deltaTime)

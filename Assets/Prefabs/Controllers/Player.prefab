@@ -11863,6 +11863,7 @@ MonoBehaviour:
   NormalSpeed: 2
   RunSpeed: 5
   RollSpeed: 3
+  SlideSpeed: 4.2
   JumpForce: 3
   Velocity: {x: 0, y: 0, z: 0}
   MouseSensitivity: 30
