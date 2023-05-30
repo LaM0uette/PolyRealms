@@ -742,16 +742,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: WalkSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: NormalSpeed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
