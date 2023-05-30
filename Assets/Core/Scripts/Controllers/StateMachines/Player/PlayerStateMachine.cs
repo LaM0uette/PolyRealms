@@ -17,7 +17,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Header("Move")]
         public float WalkSpeed = 2f;
         public float RunSpeed = 5f;
-        public float RollSpeed = 4f;
+        public float RollSpeed = 3f;
         public float JumpForce = 3f;
         [HideInInspector] public Vector3 Velocity;
         

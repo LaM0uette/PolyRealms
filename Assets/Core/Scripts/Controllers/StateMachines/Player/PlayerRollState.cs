@@ -55,7 +55,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            var speed = StateMachine.RollSpeed;
+            var speed = StateMachine.RollSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed);
             Roll(speed);
             MoveRotation();
         }
@@ -72,7 +72,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void StopAnimation()
         {
-            StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
