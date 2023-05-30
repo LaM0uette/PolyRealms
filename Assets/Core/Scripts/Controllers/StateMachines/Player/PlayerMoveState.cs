@@ -18,11 +18,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void SubscribeEvents()
         {
             StateMachine.Inputs.JumpEvent += OnJump;
+            StateMachine.Inputs.RollEvent += OnRoll;
         }
         
         private void UnsubscribeEvents()
         {
             StateMachine.Inputs.JumpEvent -= OnJump;
+            StateMachine.Inputs.RollEvent -= OnRoll;
         }
 
         #endregion
@@ -77,6 +79,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0);
             StateMachine.SwitchState(new PlayerJumpState(StateMachine));
+        }
+        
+        private void OnRoll()
+        {
+            StateMachine.SwitchState(new PlayerRollState(StateMachine));
         }
 
         #endregion

@@ -18,11 +18,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void SubscribeEvents()
         {
             StateMachine.Inputs.JumpEvent += OnJump;
+            StateMachine.Inputs.RollEvent += OnRoll;
         }
         
         private void UnsubscribeEvents()
         {
             StateMachine.Inputs.JumpEvent -= OnJump;
+            StateMachine.Inputs.RollEvent -= OnRoll;
         }
 
         #endregion
@@ -44,7 +46,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Inputs.RunValue = false;
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.LocomotionBlendTree, .1f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.LocomotionBlendTree, .2f);
 
             SubscribeEvents();
         }
@@ -70,6 +72,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void OnJump()
         {
             StateMachine.SwitchState(new PlayerJumpState(StateMachine));
+        }
+
+        private void OnRoll()
+        {
+            StateMachine.SwitchState(new PlayerRollState(StateMachine));
         }
 
         #endregion

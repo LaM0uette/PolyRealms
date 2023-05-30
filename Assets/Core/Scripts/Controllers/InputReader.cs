@@ -13,6 +13,9 @@ namespace Core.Scripts.Controllers
         public bool RunValue { get; set; }
         
         public Action JumpEvent { get; set; }
+        public Action RollEvent { get; set; }
+        
+        public Action StopAnimationEvent { get; set; }
 
         #endregion
 
@@ -23,6 +26,9 @@ namespace Core.Scripts.Controllers
         
         public void OnRun() => RunValue = !RunValue;
         public void OnJump() => JumpEvent?.Invoke();
+        public void OnRoll() => RollEvent?.Invoke();
+        
+        public void StopAnimation() => StopAnimationEvent?.Invoke();
 
         #endregion
     }

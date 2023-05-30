@@ -15,6 +15,7 @@ namespace Core.Scripts.StaticUtilities
 
         public static readonly int Jump = Animator.StringToHash("Jump");
         public static readonly int Fall = Animator.StringToHash("Fall");
+        public static readonly int Roll = Animator.StringToHash("Roll");
 
         #endregion
     }
