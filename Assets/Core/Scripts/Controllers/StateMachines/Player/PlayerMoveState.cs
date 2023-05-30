@@ -19,12 +19,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.Inputs.JumpEvent += OnJump;
             StateMachine.Inputs.RollEvent += OnRoll;
+            StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
         }
         
         private void UnsubscribeEvents()
         {
             StateMachine.Inputs.JumpEvent -= OnJump;
             StateMachine.Inputs.RollEvent -= OnRoll;
+            StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
         }
 
         #endregion
@@ -84,6 +86,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void OnRoll()
         {
             StateMachine.SwitchState(new PlayerRollState(StateMachine));
+        }
+        
+        private void OnCrouchAction()
+        {
+            if (!StateMachine.IsMoving()) return;
+            
+            OnRoll();
         }
 
         #endregion

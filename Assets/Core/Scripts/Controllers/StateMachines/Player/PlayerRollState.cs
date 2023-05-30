@@ -29,9 +29,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             var controllerVelocity = StateMachine.Controller.velocity;
             var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
-            var targetDirection = StateMachine.transform.forward; // Le joueur roule dans la direction où il est actuellement tourné.
-
-            // Votre logique de mouvement existante ici, mais avec targetDirection au lieu de inputDirection.
+            var targetDirection = StateMachine.transform.forward;
+            
             if (currentHorizontalSpeed < speed - OFFSET || currentHorizontalSpeed > speed + OFFSET)
             {
                 _speed = Mathf.Lerp(currentHorizontalSpeed, speed, Time.deltaTime * 10f);

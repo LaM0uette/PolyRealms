@@ -11,9 +11,11 @@ namespace Core.Scripts.Controllers
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
         public bool RunValue { get; set; }
+        public bool CrouchValue { get; set; }
         
         public Action JumpEvent { get; set; }
         public Action RollEvent { get; set; }
+        public Action CrouchActionEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
 
@@ -25,8 +27,11 @@ namespace Core.Scripts.Controllers
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
         
         public void OnRun() => RunValue = !RunValue;
+        public void OnCrouch() => CrouchValue = !CrouchValue;
+        
         public void OnJump() => JumpEvent?.Invoke();
         public void OnRoll() => RollEvent?.Invoke();
+        public void OnCrouchAction() => CrouchActionEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 
