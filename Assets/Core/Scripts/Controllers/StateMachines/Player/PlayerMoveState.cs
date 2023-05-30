@@ -20,6 +20,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.JumpEvent += OnJump;
             StateMachine.Inputs.RollEvent += OnRoll;
             StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
+            StateMachine.Inputs.SlideEvent += OnSlide;
         }
         
         private void UnsubscribeEvents()
@@ -27,6 +28,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.JumpEvent -= OnJump;
             StateMachine.Inputs.RollEvent -= OnRoll;
             StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
+            StateMachine.Inputs.SlideEvent -= OnSlide;
         }
 
         #endregion
@@ -37,6 +39,17 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
             else if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
+        }
+
+        private void CheckLocomotionValue()
+        {
+            if (!StateMachine.IsMoving())
+            {
+                StateMachine.Inputs.RunValue = false;
+                StateMachine.Inputs.WalkValue = false;
+            }
+            
+            if (StateMachine.Inputs.WalkValue) StateMachine.Inputs.RunValue = false;
         }
 
         #endregion
@@ -55,6 +68,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             CheckStateChange();
+            CheckLocomotionValue();
             
             var (speed, animationValue) = GetSpeed();
             Move(speed);
@@ -88,10 +102,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             OnRoll();
         }
+        
+        private void OnSlide()
+        {
+            StateMachine.SwitchState(new PlayerSlideState(StateMachine));
+        }
 
         #endregion
     }
 }
-
-//StateMachine.Inputs.RunValue = false;
-//StateMachine.Inputs.WalkValue = false;

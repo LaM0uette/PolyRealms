@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "MultiTap",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Slide",
+                    "type": "Button",
+                    "id": "260f4a37-b26d-4d83-a657-ceab3af204d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -351,6 +360,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "abb23f72-138f-4728-af0c-2867a6b89fc5",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "Hold(duration=0.2)",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Slide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -98,6 +98,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""MultiTap"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""260f4a37-b26d-4d83-a657-ceab3af204d1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abb23f72-138f-4728-af0c-2867a6b89fc5"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -419,6 +439,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_CrouchAction = m_Player.FindAction("CrouchAction", throwIfNotFound: true);
+        m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -488,6 +509,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_CrouchAction;
+    private readonly InputAction m_Player_Slide;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -500,6 +522,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @CrouchAction => m_Wrapper.m_Player_CrouchAction;
+        public InputAction @Slide => m_Wrapper.m_Player_Slide;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -533,6 +556,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CrouchAction.started += instance.OnCrouchAction;
             @CrouchAction.performed += instance.OnCrouchAction;
             @CrouchAction.canceled += instance.OnCrouchAction;
+            @Slide.started += instance.OnSlide;
+            @Slide.performed += instance.OnSlide;
+            @Slide.canceled += instance.OnSlide;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -561,6 +587,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CrouchAction.started -= instance.OnCrouchAction;
             @CrouchAction.performed -= instance.OnCrouchAction;
             @CrouchAction.canceled -= instance.OnCrouchAction;
+            @Slide.started -= instance.OnSlide;
+            @Slide.performed -= instance.OnSlide;
+            @Slide.canceled -= instance.OnSlide;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -606,5 +635,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnCrouchAction(InputAction.CallbackContext context);
+        void OnSlide(InputAction.CallbackContext context);
     }
 }
