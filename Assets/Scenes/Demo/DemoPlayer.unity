@@ -320,12 +320,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 688609682}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &808926776 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 522746014275061289, guid: 8757fd30e013beb428773fe8d2a9a600,
-    type: 3}
-  m_PrefabInstance: {fileID: 6593326383919096914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,9 +682,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 888449854970199360, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 503352989481473025, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: m_ApplyRootMotion
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 781781752531712403, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
@@ -706,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
@@ -753,35 +752,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 2500225882847798279, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: RunSpeed
-      value: 5
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 4238512039488571175, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: JumpForce
-      value: 3
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 4440536041876447765, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: RollSpeed
-      value: 3
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 6413959229202859405, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: WalkSpeed
-      value: 2
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 6607767367461766739, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: _cinemachineCameraTarget
-      value: 
-      objectReference: {fileID: 808926776}
-    - target: {fileID: 6531092084692618835, guid: 8757fd30e013beb428773fe8d2a9a600,
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734709880596869289, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8082264562462041464, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477060600987661076, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
