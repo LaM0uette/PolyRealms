@@ -5,15 +5,22 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerJumpState : PlayerBaseState
     {
+        #region Statements
+        
+        private float _initialVelocityY;
+
         public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
+
+        #endregion
 
         #region Functions
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Velocity.y < _initialVelocityY && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            else if (StateMachine.Velocity.y < 0 && StateMachine.IsGround()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
@@ -22,9 +29,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            _initialVelocityY = StateMachine.Velocity.y;
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
 
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .1f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .2f);
         }
 
         public override void Tick(float deltaTime)
@@ -32,7 +40,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
             CheckStateChange();
             
-            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 1.4f;
+            var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed;
             Move(speed);
         }
 
@@ -43,6 +51,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            _initialVelocityY = 0;
         }
 
         #endregion
