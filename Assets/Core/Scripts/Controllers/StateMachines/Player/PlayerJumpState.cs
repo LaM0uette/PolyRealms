@@ -14,6 +14,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         }
 
         #endregion
+        
+        #region Subscribe/Unsubscribe Events
+
+        private void SubscribeEvents()
+        {
+            StateMachine.Inputs.StopAnimationEvent += StopAnimation;
+        }
+        
+        private void UnsubscribeEvents()
+        {
+            StateMachine.Inputs.StopAnimationEvent -= StopAnimation;
+        }
+
+        #endregion
 
         #region Functions
 
@@ -29,7 +43,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius, .5f);
+            SubscribeEvents();
+
+            const float offset = .5f;
+            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius, offset);
             
             _initialVelocityY = -StateMachine.JumpForce;
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
@@ -40,7 +57,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
             CheckStateChange();
-
+            
             var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
             Move(speed);
         }
@@ -52,6 +69,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            UnsubscribeEvents();
+        }
+        
+        private void StopAnimation()
+        {
+            ResetCapsuleSize();
         }
 
         #endregion

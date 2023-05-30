@@ -30,7 +30,11 @@ namespace Core.Scripts.Controllers
         
         public void OnWalk() => WalkValue = !WalkValue;
         public void OnRun() => RunValue = !RunValue;
-        public void OnCrouch() { if (!RunValue) CrouchValue = !CrouchValue; }
+        public void OnCrouch()
+        {
+            if (!RunValue) CrouchValue = !CrouchValue;
+            if (CrouchValue && (WalkValue || RunValue)) CrouchValue = !CrouchValue;
+        }
         
         public void OnJump() => JumpEvent?.Invoke();
         public void OnRoll() => RollEvent?.Invoke();
