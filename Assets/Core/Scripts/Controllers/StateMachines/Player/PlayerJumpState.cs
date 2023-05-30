@@ -29,7 +29,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            _initialVelocityY = StateMachine.Velocity.y;
+            _initialVelocityY = -StateMachine.JumpForce;
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
 
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .2f);
@@ -39,7 +39,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
             CheckStateChange();
-            
+
             var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed;
             Move(speed);
         }
@@ -51,7 +51,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            _initialVelocityY = 0;
         }
 
         #endregion

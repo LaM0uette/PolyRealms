@@ -24,7 +24,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.Velocity.y = 0;
 
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Fall, .5f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Fall, .1f);
         }
 
         public override void Tick(float deltaTime)
