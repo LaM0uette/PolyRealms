@@ -13,8 +13,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.IsGround()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-            else if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
         }
 
         #endregion
@@ -31,11 +30,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
+            CheckStateChange();
             
             var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 1.4f;
             Move(speed);
-            
-            CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)
