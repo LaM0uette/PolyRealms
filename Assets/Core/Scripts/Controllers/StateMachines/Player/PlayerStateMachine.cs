@@ -29,6 +29,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Range(0f, 180f)] public float TopClamp = 70.0f;
         [Range(0f, -180f)] public float BottomClamp = -30.0f;
         public GameObject _cinemachineCameraTarget;
+        
+        // Player
+        [HideInInspector] public float InitialCapsuleHeight;
+        [HideInInspector] public float InitialCapsuleRadius;
 
         private void Awake()
         {
@@ -36,6 +40,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Inputs = GetComponent<InputReader>();
             Controller = GetComponent<CharacterController>();
             MainCamera = Camera.main;
+            
+            InitialCapsuleHeight = Controller.height;
+            InitialCapsuleRadius = Controller.radius;
         }
 
         private void Start()

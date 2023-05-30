@@ -58,11 +58,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Velocity.y = Physics.gravity.y;
+            SubscribeEvents();
+            ResetCapsuleSize();
             
+            StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .1f);
 
-            SubscribeEvents();
         }
 
         public override void Tick(float deltaTime)

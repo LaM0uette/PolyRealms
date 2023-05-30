@@ -99,6 +99,22 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Animator.SetFloat(id, value, dampTime, Time.deltaTime);
         }
         
+        protected void ResetCapsuleSize()
+        {
+            SetCapsuleSize(StateMachine.InitialCapsuleHeight, StateMachine.InitialCapsuleRadius);
+        }
+	    
+        protected void SetCapsuleSize(float newHeight, float newRadius, float offsetY = 0)
+        {
+            StateMachine.Controller.height = newHeight;
+            StateMachine.Controller.center = new Vector3(0, newHeight * 0.5f + offsetY, 0);
+
+            if (newRadius > newHeight * 0.5f)
+                newRadius = newHeight * 0.5f;
+
+            StateMachine.Controller.radius = newRadius;
+        }
+
         #endregion
     }
 }

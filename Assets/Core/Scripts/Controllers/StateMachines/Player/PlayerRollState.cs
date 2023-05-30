@@ -48,7 +48,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-
+            SetCapsuleSize(.5f, StateMachine.InitialCapsuleRadius);
+            
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .2f);
         }
 

@@ -45,11 +45,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Velocity.y = Physics.gravity.y;
+            SubscribeEvents();
+            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius);
             
+            StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.CrouchBlendTree, .1f);
 
-            SubscribeEvents();
         }
 
         public override void Tick(float deltaTime)

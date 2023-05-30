@@ -29,9 +29,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius, .5f);
+            
             _initialVelocityY = -StateMachine.JumpForce;
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
-
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .2f);
         }
 
