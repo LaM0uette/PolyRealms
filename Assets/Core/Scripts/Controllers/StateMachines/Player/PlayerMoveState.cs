@@ -41,10 +41,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private (float speed, float animationValue) GetSpeed()
         {
-            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 3f);
-            if (StateMachine.Inputs.WalkValue) return (StateMachine.WalkSpeed, 1f);
+            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
+            if (StateMachine.Inputs.WalkValue) return (StateMachine.WalkSpeed, -1f);
 
-            return (StateMachine.NormalSpeed, 2f);
+            return (StateMachine.NormalSpeed, 1f);
         }
 
         #endregion
