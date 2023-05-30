@@ -37,6 +37,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
             else if (!StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+            else if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
 
         private (float speed, float animationValue) GetSpeed()
