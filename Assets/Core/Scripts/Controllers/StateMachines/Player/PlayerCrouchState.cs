@@ -36,15 +36,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
-            else if (!StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+            else if (!StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         private (float speed, float animationValue) GetSpeed()
         {
-            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
             if (StateMachine.Inputs.WalkValue) return (StateMachine.WalkSpeed, -1f);
-
-            return (StateMachine.NormalSpeed, 1f);
+            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
+            
+            return StateMachine.IsMoving() ? (StateMachine.NormalSpeed, 1f) : (0, 0);
         }
 
         #endregion
@@ -67,7 +67,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var (speed, animationValue) = GetSpeed();
             
             Move(speed * 0.75f);
-            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, animationValue, .1f);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }
         
         public override void TickLate(float deltaTime)
@@ -82,8 +82,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         private void OnJump()
         {
-            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0);
-            StateMachine.SwitchState(new PlayerJumpState(StateMachine));
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, 0);
+            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
         
         private void OnRoll()

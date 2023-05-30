@@ -36,16 +36,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
-            else if (!StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerIdleState(StateMachine));
             else if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
 
         private (float speed, float animationValue) GetSpeed()
         {
-            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
             if (StateMachine.Inputs.WalkValue) return (StateMachine.WalkSpeed, -1f);
-
-            return (StateMachine.NormalSpeed, 1f);
+            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
+            
+            return StateMachine.IsMoving() ? (StateMachine.NormalSpeed, 1f) : (0, 0);
         }
 
         #endregion
@@ -56,7 +55,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.Velocity.y = Physics.gravity.y;
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.LocomotionBlendTree, .1f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .1f);
 
             SubscribeEvents();
         }
@@ -66,9 +65,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             CheckStateChange();
             
             var (speed, animationValue) = GetSpeed();
-            
             Move(speed);
-            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, animationValue, .1f);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }
         
         public override void TickLate(float deltaTime)
@@ -83,7 +81,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         private void OnJump()
         {
-            AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, 0);
             StateMachine.SwitchState(new PlayerJumpState(StateMachine));
         }
         
@@ -102,3 +100,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #endregion
     }
 }
+
+//StateMachine.Inputs.RunValue = false;
+//StateMachine.Inputs.WalkValue = false;

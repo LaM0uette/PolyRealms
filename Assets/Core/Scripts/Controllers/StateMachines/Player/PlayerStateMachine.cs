@@ -42,7 +42,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            SwitchState(new PlayerIdleState(this));
+            SwitchState(new PlayerMoveState(this));
         }
 
         #endregion
