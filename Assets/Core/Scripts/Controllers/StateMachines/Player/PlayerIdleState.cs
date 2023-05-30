@@ -41,6 +41,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             StateMachine.Velocity.y = Physics.gravity.y;
+            StateMachine.Inputs.RunValue = false;
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.LocomotionBlendTree, .1f);
 

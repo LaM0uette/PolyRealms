@@ -30,13 +30,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
-            Move();
+            
+            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 1.4f;
+            Move(speed);
             
             CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)
         {
+            CameraRotation();
         }
 
         public override void Exit()

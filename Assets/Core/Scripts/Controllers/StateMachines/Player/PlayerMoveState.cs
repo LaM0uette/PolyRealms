@@ -69,8 +69,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.Inputs.RunValue = false;
-
             UnsubscribeEvents();
         }
         
