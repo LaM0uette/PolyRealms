@@ -39,14 +39,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             else if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
 
-        private (float speed, float animationValue) GetSpeed()
-        {
-            if (StateMachine.Inputs.WalkValue) return (StateMachine.WalkSpeed, -1f);
-            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
-            
-            return StateMachine.IsMoving() ? (StateMachine.NormalSpeed, 1f) : (0, 0);
-        }
-
         #endregion
 
         #region Events

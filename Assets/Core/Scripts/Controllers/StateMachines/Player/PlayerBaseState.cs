@@ -35,12 +35,17 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 StateMachine.Velocity.y += Physics.gravity.y * Time.deltaTime;
             }
         }
-
-        protected void Move()
-        {
-            StateMachine.Controller.Move(StateMachine.Velocity * Time.deltaTime);
-        }
         
+        protected (float speed, float animationValue) GetSpeed()
+        {
+            if (!StateMachine.IsMoving()) return StateMachine.Inputs.CrouchValue ? (0, -1f) : (0, 0);
+            
+            if (StateMachine.Inputs.WalkValue) return StateMachine.Inputs.CrouchValue ? (StateMachine.WalkSpeed, 0) : (StateMachine.WalkSpeed, -1f);
+            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
+            
+            return (StateMachine.NormalSpeed, 1f);
+        }
+
         protected void Move(float targetSpeed)
         {
             if (!StateMachine.IsMoving()) targetSpeed = 0;
