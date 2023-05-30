@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -15,7 +16,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public Camera MainCamera { get; private set; }
         
         [Header("Move")]
-        public float WalkSpeed = 2f;
+        public float WalkSpeed = 1f;
+        public float NormalSpeed = 2f;
         public float RunSpeed = 5f;
         public float RollSpeed = 3f;
         public float JumpForce = 3f;

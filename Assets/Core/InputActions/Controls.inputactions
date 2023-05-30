@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Walk",
+                    "type": "Button",
+                    "id": "472a1826-d0e6-4d07-910e-fb14aed13b32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "ba8082a9-c78e-419c-94ad-d73a1b2b1234",
@@ -272,7 +281,7 @@
                     "name": "",
                     "id": "751c5078-2183-49d8-a75a-845894f1297a",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Roll",
@@ -283,7 +292,7 @@
                     "name": "",
                     "id": "0ce8787f-b981-4671-8adc-93bfe4b79fbd",
                     "path": "<Keyboard>/leftAlt",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "PC",
                     "action": "Crouch",
@@ -293,7 +302,7 @@
                 {
                     "name": "",
                     "id": "9f1d525e-8d0b-41ae-9f30-6dda5180e525",
-                    "path": "<Gamepad>/rightStickPress",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -315,11 +324,33 @@
                 {
                     "name": "",
                     "id": "16022e05-44fa-435f-a712-93d1a71275cc",
-                    "path": "<Gamepad>/rightStickPress",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "CrouchAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be0bfc43-8726-43d0-9086-f5346e9ddb22",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdab6bbf-957b-4ffc-b666-567048b90264",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

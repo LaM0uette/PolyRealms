@@ -682,16 +682,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 503352989481473025, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 781781752531712403, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_RootOrder
@@ -752,45 +742,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2500225882847798279, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4238512039488571175, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440536041876447765, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413959229202859405, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6607767367461766739, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6734709880596869289, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8082264562462041464, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_IsActive
+      propertyPath: WalkSpeed
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8477060600987661076, guid: 8757fd30e013beb428773fe8d2a9a600,
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: NormalSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -31,7 +31,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
             
-            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 3f;
+            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed) / 3f;
             Move(speed);
             
             CheckStateChange();

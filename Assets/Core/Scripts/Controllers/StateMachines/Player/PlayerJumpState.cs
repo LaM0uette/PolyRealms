@@ -40,7 +40,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
             CheckStateChange();
 
-            var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed;
+            var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
             Move(speed);
         }
 

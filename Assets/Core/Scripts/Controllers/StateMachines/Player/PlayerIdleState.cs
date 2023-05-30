@@ -45,6 +45,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Inputs.RunValue = false;
+            StateMachine.Inputs.WalkValue = false;
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.LocomotionBlendTree, .2f);
 

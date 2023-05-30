@@ -10,6 +10,7 @@ namespace Core.Scripts.Controllers
 
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
+        public bool WalkValue { get; set; }
         public bool RunValue { get; set; }
         public bool CrouchValue { get; set; }
         
@@ -26,6 +27,7 @@ namespace Core.Scripts.Controllers
         public void OnMove(InputValue value) => MoveValue = value.Get<Vector2>();
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
         
+        public void OnWalk() => WalkValue = !WalkValue;
         public void OnRun() => RunValue = !RunValue;
         public void OnCrouch() => CrouchValue = !CrouchValue;
         
