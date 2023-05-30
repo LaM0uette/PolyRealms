@@ -57,7 +57,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             var speed = StateMachine.RollSpeed;
             Roll(speed);
-            Move(speed);
+            MoveRotation();
         }
 
         public override void TickLate(float deltaTime)

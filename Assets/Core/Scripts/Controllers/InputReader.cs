@@ -26,13 +26,7 @@ namespace Core.Scripts.Controllers
         
         public void OnRun() => RunValue = !RunValue;
         public void OnJump() => JumpEvent?.Invoke();
-
-        public void OnRoll()
-        {
-            if (MoveValue.Equals(Vector2.zero)) return;
-            
-            RollEvent?.Invoke();
-        }
+        public void OnRoll() => RollEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 

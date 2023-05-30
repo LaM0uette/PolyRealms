@@ -55,16 +55,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             }
             else _speed = targetSpeed;
 
-            var inputDirection = new Vector3(StateMachine.Inputs.MoveValue.x, 0, StateMachine.Inputs.MoveValue.y).normalized;
-            if (StateMachine.IsMoving())
-            {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
-                var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET);
-                StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
-            }
+            MoveRotation();
             
             var targetDirection = Quaternion.Euler(0, _targetRotation, 0) * Vector3.forward;
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
+        }
+
+        protected void MoveRotation()
+        {
+            var inputDirection = new Vector3(StateMachine.Inputs.MoveValue.x, 0, StateMachine.Inputs.MoveValue.y).normalized;
+            if (!StateMachine.IsMoving()) return;
+            
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
+            var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET);
+            StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
         }
 
         protected void CameraRotation()
