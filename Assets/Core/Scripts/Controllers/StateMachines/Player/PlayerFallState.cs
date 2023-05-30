@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
-    public class PlayerJumpState : PlayerBaseState
+    public class PlayerFallState : PlayerBaseState
     {
-        public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+        public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -13,8 +13,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.IsGround()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-            else if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Controller.isGrounded) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
@@ -23,16 +22,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
+            StateMachine.Velocity.y = 0;
 
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .1f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Fall, .5f);
         }
 
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
             
-            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 1.4f;
+            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) / 3f;
             Move(speed);
             
             CheckStateChange();

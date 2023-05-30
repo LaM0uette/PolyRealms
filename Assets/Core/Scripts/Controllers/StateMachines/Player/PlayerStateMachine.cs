@@ -47,6 +47,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #region Checkers
 
         public bool IsMoving() => !Inputs.MoveValue.Equals(Vector2.zero);
+        public bool IsGround() => Controller.isGrounded;
 
         #endregion
     }

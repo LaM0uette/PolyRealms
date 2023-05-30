@@ -31,7 +31,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            else if (StateMachine.IsMoving()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
@@ -52,7 +53,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
             Move();
-
+            
             AnimatorSetFloat(PlayerAnimationIds.LocomotionSpeed, 0, .1f);
         }
         
