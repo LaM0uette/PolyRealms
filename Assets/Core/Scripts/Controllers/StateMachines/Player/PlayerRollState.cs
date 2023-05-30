@@ -23,18 +23,40 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #endregion
 
+        #region Functions
+
+        private void Roll(float speed)
+        {
+            var controllerVelocity = StateMachine.Controller.velocity;
+            var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
+            var targetDirection = StateMachine.transform.forward; // Le joueur roule dans la direction où il est actuellement tourné.
+
+            // Votre logique de mouvement existante ici, mais avec targetDirection au lieu de inputDirection.
+            if (currentHorizontalSpeed < speed - OFFSET || currentHorizontalSpeed > speed + OFFSET)
+            {
+                _speed = Mathf.Lerp(currentHorizontalSpeed, speed, Time.deltaTime * 10f);
+                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            }
+            else _speed = speed;
+
+            StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
+        }
+
+        #endregion
+        
         #region Events
 
         public override void Enter()
         {
             SubscribeEvents();
-            
+
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .2f);
         }
 
         public override void Tick(float deltaTime)
         {
-            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.WalkSpeed) * 2f;
+            var speed = StateMachine.RollSpeed;
+            Roll(speed);
             Move(speed);
         }
 

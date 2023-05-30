@@ -9,10 +9,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         protected readonly PlayerStateMachine StateMachine;
 
-        private const float OFFSET = .1f;
+        protected const float OFFSET = .1f;
         
         // Move
-        private float _speed;
+        protected float _speed;
         private float _targetRotation;
 
         // Rotation
