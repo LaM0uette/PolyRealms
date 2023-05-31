@@ -6,7 +6,6 @@ namespace Core.Scripts.Controllers
     public class PlayerController : MonoBehaviour
     {
         public PlayerStateMachine StateMachine { get; private set; }
-        public AnimationCurve ClimbCurve;
 
         private void Start()
         {
@@ -21,7 +20,8 @@ namespace Core.Scripts.Controllers
             }
             else if (other.gameObject.CompareTag("TopLadder"))
             {
-                StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, other.transform, ClimbCurve));
+                Transform topPosition = other.gameObject.transform.Find("LadderTopPosition");
+                StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, other.transform, topPosition));
             }
         }
 
