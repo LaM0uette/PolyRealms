@@ -11729,6 +11729,7 @@ GameObject:
   - component: {fileID: 7215445723340613764}
   - component: {fileID: 4814126951624874135}
   - component: {fileID: 4781422814450638667}
+  - component: {fileID: 6046284612448114656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11844,9 +11845,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f92759b153a544c8be2e0f6769bda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkValue: 0
-  RunValue: 0
-  CrouchValue: 0
 --- !u!114 &4781422814450638667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11864,12 +11862,27 @@ MonoBehaviour:
   RunSpeed: 5
   RollSpeed: 3
   SlideSpeed: 4.2
+  LadderSpeed: 2
   JumpForce: 3
   Velocity: {x: 0, y: 0, z: 0}
   MouseSensitivity: 30
   TopClamp: 70
   BottomClamp: -30
   _cinemachineCameraTarget: {fileID: 522746014275061289}
+  InitialCapsuleHeight: 0
+  InitialCapsuleRadius: 0
+--- !u!114 &6046284612448114656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670116002568411073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f292f9efa060c4dbb1a700b7b4dc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1676392655429280367
 GameObject:
   m_ObjectHideFlags: 0

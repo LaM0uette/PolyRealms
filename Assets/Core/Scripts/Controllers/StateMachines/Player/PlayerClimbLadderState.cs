@@ -6,7 +6,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerClimbLadderState : PlayerBaseState
     {
-        private Transform _ladder;
+        private readonly Transform _ladder;
 
         public PlayerClimbLadderState(PlayerStateMachine stateMachine, Transform ladder) : base(stateMachine)
         {
@@ -25,7 +25,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Vector3 lookAtPosition = _ladder.position;
             lookAtPosition.y = StateMachine.transform.position.y;
             StateMachine.transform.LookAt(lookAtPosition);
-            
+
             StateMachine.transform.Translate(0, verticalInput * StateMachine.LadderSpeed * deltaTime, 0);
 
             if (verticalInput > 0)
