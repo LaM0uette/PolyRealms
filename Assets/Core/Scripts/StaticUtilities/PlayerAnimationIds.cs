@@ -19,6 +19,10 @@ namespace Core.Scripts.StaticUtilities
         public static readonly int Fall = Animator.StringToHash("Actions.Fall");
         public static readonly int Roll = Animator.StringToHash("Actions.Roll");
         public static readonly int Slide = Animator.StringToHash("Actions.Slide");
+        
+        public static readonly int ClimbingLadderUp = Animator.StringToHash("Actions.ClimbingLadderUp");
+        public static readonly int ClimbingLadderDown = Animator.StringToHash("Actions.ClimbingLadderDown");
+        public static readonly int ClimbingLadderTop = Animator.StringToHash("Actions.ClimbingLadderTop");
 
         #endregion
     }
