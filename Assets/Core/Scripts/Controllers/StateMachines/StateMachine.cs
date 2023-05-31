@@ -1,3 +1,4 @@
+using Core.Scripts.Controllers.StateMachines.Player;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines
