@@ -103,7 +103,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43024545782250808, guid: b12652e24f1dc624eb69e10155c12355, type: 2}
 --- !u!1 &4001361325490251655
@@ -209,7 +209,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43024545782250808, guid: b12652e24f1dc624eb69e10155c12355, type: 2}
 --- !u!1 &6724839757478075840
@@ -245,7 +245,7 @@ Transform:
   - {fileID: 7627926127398074114}
   - {fileID: 2095993700939531317}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &113040487967625696
 BoxCollider:
@@ -266,8 +266,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.50646794, y: 6.0846133, z: 0.19592053}
-  m_Center: {x: -0.005483642, y: 3.0398214, z: -0.413038}
+  m_Size: {x: 0.50646794, y: 6.1266117, z: 0.25636667}
+  m_Center: {x: -0.0054836273, y: 3.0608206, z: -0.44326103}
 --- !u!1001 &4351963905526001195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,6 +335,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5805624
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.3700304
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.60179615
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.0071872175
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.32762957
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.19011259
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

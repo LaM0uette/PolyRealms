@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5178716, y: 6.094211, z: 0.13678159}
-  m_Center: {x: 0.0050446987, y: 3.0350134, z: -0.09359028}
+  m_Size: {x: 0.5178716, y: 6.1210895, z: 0.22588527}
+  m_Center: {x: 0.0050446987, y: 3.0484526, z: -0.17998603}
 --- !u!1 &1520890975741182647
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43958748731675490, guid: ba63cbff90a0c054ba5a6ae51676946b, type: 2}
 --- !u!1 &2742253358590081424
@@ -265,7 +265,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43958748731675490, guid: ba63cbff90a0c054ba5a6ae51676946b, type: 2}
 --- !u!1001 &3232005962692444733
@@ -335,6 +335,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.55397016
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.3442688
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.43618
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.0045918524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.29401207
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015014783019125471, guid: 3bf605bbf38937c438ae388e81724ce5,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.21071245
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

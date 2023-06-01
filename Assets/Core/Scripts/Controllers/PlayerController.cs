@@ -23,10 +23,13 @@ namespace Core.Scripts.Controllers
         {
             if (other.gameObject.CompareTag(TagIds.Ladder))
             {
+                _stateMachine.IsClimbing = true;
                 _stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, other.transform));
             }
             else if (other.gameObject.CompareTag(TagIds.TopLadder))
             {
+                if (!_stateMachine.IsClimbing) return;
+
                 var topPosition = other.gameObject.transform.Find("LadderTopPosition");
                 _stateMachine.SwitchState(new PlayerClimbTopLadderState(_stateMachine, topPosition));
             }
@@ -36,6 +39,7 @@ namespace Core.Scripts.Controllers
         {
             if (other.gameObject.CompareTag(TagIds.Ladder))
             {
+                _stateMachine.IsClimbing = false;
                 _stateMachine.SwitchState(new PlayerMoveState(_stateMachine));
             }
         }

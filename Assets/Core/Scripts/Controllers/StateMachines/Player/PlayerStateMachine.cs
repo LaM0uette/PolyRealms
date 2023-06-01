@@ -23,6 +23,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float LadderSpeed = 2f;
         public float JumpForce = 4f;
         [HideInInspector] public Vector3 Velocity;
+        public bool IsClimbing;
         
         [Header("Cinemachine")]
         [Range(0f, 100f)] public float MouseSensitivity = 30f;

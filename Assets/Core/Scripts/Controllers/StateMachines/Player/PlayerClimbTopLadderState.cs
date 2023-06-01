@@ -51,6 +51,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.transform.position = _topPosition.position;
             SetControllerEnable(true);
+            StateMachine.IsClimbing = false;
         }
 
         #endregion
