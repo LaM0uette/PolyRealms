@@ -39,13 +39,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var controllerVelocity = StateMachine.Controller.velocity;
             var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
             var targetDirection = StateMachine.transform.forward;
-            
-            if (currentHorizontalSpeed < speed - OFFSET || currentHorizontalSpeed > speed + OFFSET)
+
+            var animationFraction = 1f - StateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            var adjustedSpeed = Mathf.Lerp(speed, 0, animationFraction);
+
+            if (currentHorizontalSpeed < adjustedSpeed - OFFSET || currentHorizontalSpeed > adjustedSpeed + OFFSET)
             {
-                _speed = Mathf.Lerp(currentHorizontalSpeed, speed, Time.deltaTime * 10f);
+                _speed = Mathf.Lerp(currentHorizontalSpeed, adjustedSpeed, Time.deltaTime * 10f);
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
-            else _speed = speed;
+            else _speed = adjustedSpeed;
 
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
