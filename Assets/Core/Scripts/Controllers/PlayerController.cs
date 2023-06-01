@@ -1,37 +1,45 @@
-using System;
 using Core.Scripts.Controllers.StateMachines.Player;
+using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-        public PlayerStateMachine StateMachine { get; private set; }
+        #region Statements
 
-        private void Start()
+        private PlayerStateMachine _stateMachine;
+
+        private void Awake()
         {
-            StateMachine = GetComponent<PlayerStateMachine>();
+            _stateMachine = GetComponent<PlayerStateMachine>();
         }
+
+        #endregion
+
+        #region Events
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Ladder"))
+            if (other.gameObject.CompareTag(TagIds.Ladder))
             {
-                StateMachine.SwitchState(new PlayerClimbLadderState(StateMachine, other.transform));
+                _stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, other.transform));
             }
-            else if (other.gameObject.CompareTag("TopLadder"))
+            else if (other.gameObject.CompareTag(TagIds.TopLadder))
             {
                 var topPosition = other.gameObject.transform.Find("LadderTopPosition");
-                StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, topPosition));
+                _stateMachine.SwitchState(new PlayerClimbTopLadderState(_stateMachine, topPosition));
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag("Ladder"))
+            if (other.gameObject.CompareTag(TagIds.Ladder))
             {
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+                _stateMachine.SwitchState(new PlayerMoveState(_stateMachine));
             }
         }
+
+        #endregion
     }
 }
