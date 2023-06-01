@@ -19,7 +19,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float NormalSpeed = 2f;
         public float RunSpeed = 5f;
         public float RollSpeed = 3f;
-        public float SlideSpeed = 4.2f;
+        public float SlideSpeed = 5f;
         public float LadderSpeed = 2f;
         public float JumpForce = 4f;
         [HideInInspector] public Vector3 Velocity;
