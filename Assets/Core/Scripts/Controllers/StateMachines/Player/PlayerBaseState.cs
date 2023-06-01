@@ -32,7 +32,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.Velocity.y > Physics.gravity.y)
             {
-                StateMachine.Velocity.y += Physics.gravity.y * Time.deltaTime;
+                StateMachine.Velocity.y += Physics.gravity.y * 1.4f * Time.deltaTime;
             }
         }
         

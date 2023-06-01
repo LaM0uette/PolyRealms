@@ -21,7 +21,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RollSpeed = 3f;
         public float SlideSpeed = 4.2f;
         public float LadderSpeed = 2f;
-        public float JumpForce = 3f;
+        public float JumpForce = 4f;
         [HideInInspector] public Vector3 Velocity;
         
         [Header("Cinemachine")]

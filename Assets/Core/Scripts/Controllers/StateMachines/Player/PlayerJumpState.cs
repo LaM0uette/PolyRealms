@@ -46,7 +46,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SubscribeEvents();
 
             const float offset = .5f;
-            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius, offset);
+            SetCapsuleSize(1.1f, StateMachine.InitialCapsuleRadius, offset);
             
             _initialVelocityY = -StateMachine.JumpForce;
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);

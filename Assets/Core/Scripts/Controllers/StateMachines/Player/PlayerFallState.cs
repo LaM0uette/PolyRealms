@@ -22,8 +22,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Velocity.y = 0;
-
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Fall, .1f);
         }
 

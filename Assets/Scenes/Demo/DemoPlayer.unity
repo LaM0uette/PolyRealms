@@ -1532,6 +1532,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: JumpForce
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6046284612448114656, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: Go
