@@ -15,17 +15,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            var ladderPosition = _ladder.position;
-            ladderPosition.y = StateMachine.transform.position.y;
-    
-            var offset = _ladder.forward * .3f;
-            ladderPosition -= offset;
-            ladderPosition += Vector3.up * .1f;
-
-            StateMachine.transform.position = ladderPosition;
-
-            var lookAtPosition = _ladder.position;
-            StateMachine.transform.LookAt(lookAtPosition);
         }
 
         public override void Tick(float deltaTime)
