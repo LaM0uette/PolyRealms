@@ -114,6 +114,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             StateMachine.Controller.radius = newRadius;
         }
+        
+        protected void SetControllerEnable(bool value)
+        {
+            StateMachine.Controller.enabled = value;
+        }
 
         #endregion
     }

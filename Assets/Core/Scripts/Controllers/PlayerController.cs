@@ -22,7 +22,7 @@ namespace Core.Scripts.Controllers
             else if (other.gameObject.CompareTag("TopLadder"))
             {
                 var topPosition = other.gameObject.transform.Find("LadderTopPosition");
-                StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, other.transform, topPosition));
+                StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, topPosition));
             }
         }
 

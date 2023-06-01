@@ -17,6 +17,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #endregion
 
+        #region Events
+
         public override void Enter()
         {
         }
@@ -53,5 +55,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
         }
+
+        #endregion
     }
 }

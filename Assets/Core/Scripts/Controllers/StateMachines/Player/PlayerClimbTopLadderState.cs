@@ -5,28 +5,41 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerClimbTopLadderState : PlayerBaseState
     {
-        private Transform _ladder;
-        private Transform _topPosition;
+        #region Statements
 
-        public PlayerClimbTopLadderState(PlayerStateMachine stateMachine, Transform ladder, Transform topPosition) : base(stateMachine)
+        private readonly Transform _topPosition;
+
+        public PlayerClimbTopLadderState(PlayerStateMachine stateMachine, Transform topPosition) : base(stateMachine)
         {
-            _ladder = ladder;
             _topPosition = topPosition;
         }
 
+        #endregion
+
+        #region Functions
+
+        private void CheckStateChange()
+        {
+            var currentAnimatorStateInfo = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            if(currentAnimatorStateInfo.IsName("Actions.ClimbingLadderTop") && currentAnimatorStateInfo.normalizedTime >= 1)
+            {
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            }
+        }
+
+        #endregion
+
+        #region Events
+
         public override void Enter()
         {
-            StateMachine.Controller.enabled = false;
+            SetControllerEnable(false);
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadderTop, .1f);
         }
 
         public override void Tick(float deltaTime)
         {
-            if(StateMachine.Animator.GetCurrentAnimatorStateInfo(0).IsName("Actions.ClimbingLadderTop") && 
-               StateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-            {
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-            }
+            CheckStateChange();
         }
         
         public override void TickLate(float deltaTime)
@@ -36,8 +49,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.Controller.enabled = true;
             StateMachine.transform.position = _topPosition.position;
+            SetControllerEnable(true);
         }
+
+        #endregion
     }
 }
