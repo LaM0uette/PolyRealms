@@ -20,6 +20,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     
             var offset = _ladder.forward * .3f;
             ladderPosition -= offset;
+            ladderPosition += Vector3.up * .1f;
 
             StateMachine.transform.position = ladderPosition;
 
