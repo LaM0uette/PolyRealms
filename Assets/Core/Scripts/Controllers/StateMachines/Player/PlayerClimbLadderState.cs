@@ -15,13 +15,22 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            var ladderPosition = _ladder.position;
+            ladderPosition.y = StateMachine.transform.position.y;
+    
+            var offset = _ladder.forward * .3f;
+            ladderPosition -= offset;
+
+            StateMachine.transform.position = ladderPosition;
+
+            var lookAtPosition = _ladder.position;
+            StateMachine.transform.LookAt(lookAtPosition);
         }
 
         public override void Tick(float deltaTime)
         {
             float verticalInput = StateMachine.Inputs.MoveValue.y;
 
-            // Faire face à l'échelle
             Vector3 lookAtPosition = _ladder.position;
             lookAtPosition.y = StateMachine.transform.position.y;
             StateMachine.transform.LookAt(lookAtPosition);
@@ -37,7 +46,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderDown);
             }
             
-            // Ajout de la vérification pour descendre de l'échelle
             if (verticalInput < 0 && StateMachine.transform.position.y <= _ladder.position.y)
             {
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));

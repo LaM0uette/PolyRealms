@@ -1,3 +1,4 @@
+using System;
 using Core.Scripts.Controllers.StateMachines.Player;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace Core.Scripts.Controllers
             }
             else if (other.gameObject.CompareTag("TopLadder"))
             {
-                Transform topPosition = other.gameObject.transform.Find("LadderTopPosition");
+                var topPosition = other.gameObject.transform.Find("LadderTopPosition");
                 StateMachine.SwitchState(new PlayerClimbTopLadderState(StateMachine, other.transform, topPosition));
             }
         }

@@ -37,7 +37,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             StateMachine.Controller.enabled = true;
-            
             StateMachine.transform.position = _topPosition.position;
         }
     }
