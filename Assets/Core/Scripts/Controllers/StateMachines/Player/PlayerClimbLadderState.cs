@@ -6,6 +6,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerClimbLadderState : PlayerBaseState
     {
+        #region Statements
+
         private readonly Transform _ladder;
 
         public PlayerClimbLadderState(PlayerStateMachine stateMachine, Transform ladder) : base(stateMachine)
@@ -13,36 +15,34 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _ladder = ladder;
         }
 
+        #endregion
+
         public override void Enter()
         {
         }
 
         public override void Tick(float deltaTime)
         {
-            float verticalInput = StateMachine.Inputs.MoveValue.y;
-
-            Vector3 lookAtPosition = _ladder.position;
+            var MoveValueY = StateMachine.Inputs.MoveValue.y;
+            var lookAtPosition = _ladder.position;
             lookAtPosition.y = StateMachine.transform.position.y;
+            
             StateMachine.transform.LookAt(lookAtPosition);
+            StateMachine.transform.Translate(0, MoveValueY * StateMachine.LadderSpeed * deltaTime, 0);
 
-            StateMachine.transform.Translate(0, verticalInput * StateMachine.LadderSpeed * deltaTime, 0);
-
-            if (verticalInput > 0)
+            switch (MoveValueY)
             {
-                StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderUp);
-            }
-            else if (verticalInput < 0)
-            {
-                StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderDown);
+                case > 0: StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderUp); break;
+                case < 0: StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderDown); break;
             }
             
-            if (verticalInput < 0 && StateMachine.transform.position.y <= _ladder.position.y)
+            if (MoveValueY < 0 && StateMachine.transform.position.y <= _ladder.position.y)
             {
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
                 return;
             }
             
-            StateMachine.Animator.speed = Math.Abs(verticalInput);
+            StateMachine.Animator.speed = Math.Abs(MoveValueY);
         }
 
         public override void TickLate(float deltaTime)
