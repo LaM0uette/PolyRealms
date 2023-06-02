@@ -4,6 +4,8 @@ namespace Core.Scripts.StaticUtilities
 {
     public class PlayerAnimationIds : MonoBehaviour
     {
+        public static readonly int Vertical = Animator.StringToHash("Vertical");
+        
         #region Locomotion
 
         public static readonly int MoveBlendTree = Animator.StringToHash("MoveBlendTree");
@@ -20,8 +22,7 @@ namespace Core.Scripts.StaticUtilities
         public static readonly int Roll = Animator.StringToHash("Actions.Roll");
         public static readonly int Slide = Animator.StringToHash("Actions.Slide");
         
-        public static readonly int ClimbingLadderUp = Animator.StringToHash("Actions.ClimbingLadderUp");
-        public static readonly int ClimbingLadderDown = Animator.StringToHash("Actions.ClimbingLadderDown");
+        public static readonly int ClimbingLadder = Animator.StringToHash("Actions.ClimbingLadder");
         public static readonly int ClimbingLadderTop = Animator.StringToHash("Actions.ClimbingLadderTop");
 
         #endregion

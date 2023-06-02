@@ -64,6 +64,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            ResetCapsuleSize();
+            
             var transform = StateMachine.transform;
             
             _startPosition = transform.position;
@@ -75,12 +77,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _stopDown = false;
             _stopUp = false;
             _climbingUp = false;
+            StateMachine.UseRootMotion = false;
+            StateMachine.Animator.applyRootMotion = false;
+            
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadder, 0.1f);
         }
 
         public override void Tick(float deltaTime)
         {
             var MoveValueY = StateMachine.Inputs.MoveValue.y;
-            
+
             if (_climbingUp)
             {
                 if (StateMachine.Animator.IsInTransition(0)) return;
@@ -90,43 +96,44 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 
                 if (normalizedTime > 0.95f)
                 {
-                    //StateMachine.transform.position += Vector3.right;
+                    StateMachine.transform.position += Vector3.right;
                     StateMachine.SwitchState(new PlayerMoveState(StateMachine));
                 }
+                
                 return;
-            }
-            
-            CheckVerticalLimits();
-
-            if (_stopUp && MoveValueY > 0)
-            {
-                if (_ladder.CanClimbOnTop)
-                {
-                    StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadderTop, 0.1f);
-                    StateMachine.UseRootMotion = false;
-                    _climbingUp = true;
-                    return;
-                }
             }
             
             var lookAtPosition = _ladder.transform.position;
             lookAtPosition.y = StateMachine.transform.position.y;
             StateMachine.transform.LookAt(lookAtPosition);
             StateMachine.transform.Translate(0, MoveValueY * StateMachine.LadderSpeed * deltaTime, 0);
-
-            switch (MoveValueY)
-            {
-                case > 0: StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderUp); break;
-                case < 0: StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderDown); break;
-            }
             
+            CheckVerticalLimits();
+
             if (MoveValueY < 0 && _stopDown)
             {
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
                 return;
             }
+            
+            if (_stopUp && MoveValueY > 0)
+            {
+                if (_ladder.CanClimbOnTop)
+                {
+                    StateMachine.UseRootMotion = true;
+                    StateMachine.Animator.applyRootMotion = true;
+                    
+                    //StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadderTop, 0.1f);
+                    StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
+                    _climbingUp = true;
+                    
+                    return;
+                }
+            }
 
-            StateMachine.Animator.speed = Math.Abs(MoveValueY);
+            if (_climbingUp) return;
+            
+            AnimatorSetFloat(PlayerAnimationIds.Vertical, MoveValueY);
         }
 
         public override void TickLate(float deltaTime)
@@ -137,6 +144,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             StateMachine.UseRootMotion = false;
+            StateMachine.Animator.applyRootMotion = false;
+            StateMachine.IsClimbing = false;
         }
 
         #endregion

@@ -6790,6 +6790,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 888449854970199360, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1346181111711270623, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_IsActive
