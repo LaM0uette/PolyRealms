@@ -10,8 +10,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #region Statements
 
         private readonly Ladder _ladder;
-        private Vector3 _startPosition, _targetPosition;
-        private Quaternion _startRotation, _targetRotation;
+        
         private bool _stopDown;
         private bool _stopUp;
         private bool _climbingUp;
@@ -24,26 +23,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #endregion
 
         #region Functions
-
-        private Vector3 GetCharPosition()
-        {
-            var position = _ladder.LadderTop.position + _ladder.LadderTop.forward * .3f;
-            position.y = StateMachine.transform.position.y;
-
-            if (position.y < _ladder.LadderBottom.position.y)
-                position.y = _ladder.LadderBottom.position.y;
-
-            var height = GetCapsuleHeight();
-            if (position.y + height > _ladder.LadderTop.position.y)
-                position.y = _ladder.LadderTop.position.y - height;
-
-            return position;
-        }
-
-        private Quaternion GetCharRotation()
-        {
-            return Quaternion.LookRotation(-_ladder.LadderTop.forward);
-        }
 
         private void CheckVerticalLimits()
         {
@@ -66,19 +45,18 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ResetCapsuleSize();
             
-            var transform = StateMachine.transform;
-            
-            _startPosition = transform.position;
-            _startRotation = transform.rotation;
-            
-            _targetPosition = GetCharPosition();
-            _targetRotation = GetCharRotation();
-            
             _stopDown = false;
             _stopUp = false;
             _climbingUp = false;
             StateMachine.UseRootMotion = false;
             StateMachine.Animator.applyRootMotion = false;
+
+            var transform = StateMachine.transform;
+            var ladderPosition = _ladder.Offset.position;
+            ladderPosition.y = transform.position.y;
+            
+            transform.position = ladderPosition;
+            transform.rotation = _ladder.transform.rotation;
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadder, 0.1f);
         }
@@ -103,9 +81,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 return;
             }
             
-            var lookAtPosition = _ladder.transform.position;
-            lookAtPosition.y = StateMachine.transform.position.y;
-            StateMachine.transform.LookAt(lookAtPosition);
             StateMachine.transform.Translate(0, MoveValueY * StateMachine.LadderSpeed * deltaTime, 0);
             
             CheckVerticalLimits();
