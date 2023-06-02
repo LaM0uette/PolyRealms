@@ -1,6 +1,5 @@
 using Core.Scripts.Controllers.StateMachines.Player;
 using Core.Scripts.Items;
-using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers

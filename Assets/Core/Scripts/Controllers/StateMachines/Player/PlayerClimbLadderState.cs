@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Scripts.Items;
+﻿using Core.Scripts.Items;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -65,6 +64,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             var MoveValueY = StateMachine.Inputs.MoveValue.y;
 
+            if (MoveValueY <= 0 && _stopUp && !_climbingUp)
+            {
+                var transform = StateMachine.transform.position;
+                var ladderPosition = _ladder.LadderTop.position;
+                var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
+
+                StateMachine.transform.position = new Vector3(transform.x, posY, transform.z);
+            }
+
             if (_climbingUp)
             {
                 if (StateMachine.Animator.IsInTransition(0)) return;
@@ -74,7 +82,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 
                 if (normalizedTime > 0.95f)
                 {
-                    StateMachine.transform.position += Vector3.right;
                     StateMachine.SwitchState(new PlayerMoveState(StateMachine));
                 }
                 
