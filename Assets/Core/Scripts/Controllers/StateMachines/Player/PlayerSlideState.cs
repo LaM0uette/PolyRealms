@@ -60,6 +60,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
+            
             SetCapsuleSize(.5f, StateMachine.InitialCapsuleRadius);
 
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);
@@ -79,6 +80,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
+            ResetCapsuleSize();
         }
 
         private void StopAnimation()

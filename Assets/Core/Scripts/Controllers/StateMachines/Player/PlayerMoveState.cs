@@ -59,7 +59,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            ResetCapsuleSize();
             
             StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .1f);

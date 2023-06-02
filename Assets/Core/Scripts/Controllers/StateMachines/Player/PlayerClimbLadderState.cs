@@ -9,7 +9,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #region Statements
 
         private readonly Ladder _ladder;
-        
         private bool _stopDown;
         private bool _stopUp;
         private bool _climbingUp;
@@ -22,6 +21,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #endregion
 
         #region Functions
+
+        private void ResetBooleen()
+        {
+            _stopDown = false;
+            _stopUp = false;
+            _climbingUp = false;
+            
+            StateMachine.UseRootMotion = false;
+            StateMachine.Animator.applyRootMotion = false;
+        }
 
         private void CheckVerticalLimits()
         {
@@ -42,13 +51,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            ResetCapsuleSize();
-            
-            _stopDown = false;
-            _stopUp = false;
-            _climbingUp = false;
-            StateMachine.UseRootMotion = false;
-            StateMachine.Animator.applyRootMotion = false;
+            ResetBooleen();
 
             var transform = StateMachine.transform;
             var ladderPosition = _ladder.Offset.position;
@@ -125,8 +128,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.UseRootMotion = false;
-            StateMachine.Animator.applyRootMotion = false;
+            ResetBooleen();
+            
             StateMachine.IsClimbing = false;
         }
 

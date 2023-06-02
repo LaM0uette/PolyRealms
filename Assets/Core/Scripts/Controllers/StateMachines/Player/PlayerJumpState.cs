@@ -70,6 +70,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
+            ResetCapsuleSize();
         }
         
         private void StopAnimation()

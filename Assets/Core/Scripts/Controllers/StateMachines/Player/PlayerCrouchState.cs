@@ -46,6 +46,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
+            
             SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Velocity.y = Physics.gravity.y;
@@ -72,6 +73,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
+            ResetCapsuleSize();
         }
         
         private void OnJump()
