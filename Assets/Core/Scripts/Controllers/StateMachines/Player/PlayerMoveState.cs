@@ -46,7 +46,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (!StateMachine.IsMoving())
             {
                 StateMachine.Inputs.RunValue = false;
-                StateMachine.Inputs.WalkValue = false;
             }
             
             if (StateMachine.Inputs.WalkValue) StateMachine.Inputs.RunValue = false;
