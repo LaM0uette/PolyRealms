@@ -104,6 +104,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SetCapsuleSize(StateMachine.InitialCapsuleHeight, StateMachine.InitialCapsuleRadius);
         }
 	    
+        protected float GetCapsuleHeight()
+        {
+            return StateMachine.Controller.height;
+        }
+        
         protected void SetCapsuleSize(float newHeight, float newRadius, float offsetY = 0)
         {
             StateMachine.Controller.height = newHeight;

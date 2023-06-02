@@ -1,4 +1,5 @@
 using Core.Scripts.Controllers.StateMachines.Player;
+using Core.Scripts.Items;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -21,10 +22,16 @@ namespace Core.Scripts.Controllers
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.TryGetComponent(out Ladder ladder))
+            {
+                _stateMachine.IsClimbing = true;
+                _stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, ladder));
+            }
+            
             if (other.gameObject.CompareTag(TagIds.Ladder))
             {
                 _stateMachine.IsClimbing = true;
-                _stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, other.transform));
+                //_stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, collider.transform));
             }
             else if (other.gameObject.CompareTag(TagIds.TopLadder))
             {
@@ -42,6 +49,14 @@ namespace Core.Scripts.Controllers
                 _stateMachine.IsClimbing = false;
                 _stateMachine.SwitchState(new PlayerMoveState(_stateMachine));
             }
+        }
+        
+        private void OnAnimatorMove()
+        {
+            if (!_stateMachine.UseRootMotion) return;
+
+            _stateMachine.Animator.ApplyBuiltinRootMotion();
+            transform.rotation *= _stateMachine.Animator.deltaRotation;
         }
 
         #endregion
