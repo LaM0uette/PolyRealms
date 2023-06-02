@@ -36,6 +36,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
+            if (StateMachine.Inputs.MoveValue.y < 0) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            
             if (StateMachine.Animator.IsInTransition(0)) return;
                 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
