@@ -32,6 +32,45 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Animator.applyRootMotion = false;
         }
 
+        private void UpdatePlayerPosition()
+        {
+            var transform = StateMachine.transform;
+            var ladderPosition = _ladder.Offset.position;
+            ladderPosition.y = transform.position.y;
+            
+            transform.position = ladderPosition;
+            transform.rotation = _ladder.transform.rotation;
+        }
+        
+        private void UpdateOffsetPlayerPosition()
+        {
+            var transform = StateMachine.transform.position;
+            var ladderPosition = _ladder.LadderTop.position;
+            var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
+
+            StateMachine.transform.position = new Vector3(transform.x, posY, transform.z);
+        }
+        
+        private bool CheckClimbingUp()
+        {
+            if (!_ladder.CanClimbOnTop) return false;
+            if (!_climbingUp) return false;
+            if (StateMachine.Animator.IsInTransition(0)) return false;
+                
+            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
+                
+            if (normalizedTime > 0.95f)
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+                
+            return true;
+        }
+
+        private void Move(float moveValueY, float deltaTime)
+        {
+            StateMachine.transform.Translate(0, moveValueY * StateMachine.LadderSpeed * deltaTime, 0);
+        }
+
         private void CheckVerticalLimits()
         {
             if (StateMachine.transform.position.y < _ladder.LadderBottom.position.y)
@@ -44,6 +83,26 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             else if (StateMachine.transform.position.y + GetCapsuleHeight() < _ladder.LadderTop.position.y - .15f)
                 _stopUp = false;
         }
+
+        private bool CheckLadderLimits(float moveValueY)
+        {
+            if (moveValueY < 0 && _stopDown)
+            {
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+                return true;
+            }
+
+            if (!_stopUp || !(moveValueY > 0)) return false;
+            if (!_ladder.CanClimbOnTop) return false;
+            
+            StateMachine.UseRootMotion = true;
+            StateMachine.Animator.applyRootMotion = true;
+                    
+            StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
+            _climbingUp = true;
+                    
+            return true;
+        }
         
         #endregion
 
@@ -52,13 +111,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             ResetBooleen();
-
-            var transform = StateMachine.transform;
-            var ladderPosition = _ladder.Offset.position;
-            ladderPosition.y = transform.position.y;
-            
-            transform.position = ladderPosition;
-            transform.rotation = _ladder.transform.rotation;
+            UpdatePlayerPosition();
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadder, 0.1f);
         }
@@ -67,57 +120,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             var MoveValueY = StateMachine.Inputs.MoveValue.y;
 
-            if (MoveValueY <= 0 && _stopUp && !_climbingUp)
-            {
-                var transform = StateMachine.transform.position;
-                var ladderPosition = _ladder.LadderTop.position;
-                var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
-
-                StateMachine.transform.position = new Vector3(transform.x, posY, transform.z);
-            }
-
-            if (_climbingUp)
-            {
-                if (StateMachine.Animator.IsInTransition(0)) return;
-                
-                var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-                var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
-                
-                if (normalizedTime > 0.95f)
-                {
-                    StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-                }
-                
-                return;
-            }
+            if (MoveValueY <= 0 && _stopUp && !_climbingUp) UpdateOffsetPlayerPosition();
+            if (CheckClimbingUp()) return;
             
-            StateMachine.transform.Translate(0, MoveValueY * StateMachine.LadderSpeed * deltaTime, 0);
+            Move(MoveValueY, deltaTime);
             
             CheckVerticalLimits();
+            if (CheckLadderLimits(MoveValueY)) return;
 
-            if (MoveValueY < 0 && _stopDown)
-            {
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-                return;
-            }
-            
-            if (_stopUp && MoveValueY > 0)
-            {
-                if (_ladder.CanClimbOnTop)
-                {
-                    StateMachine.UseRootMotion = true;
-                    StateMachine.Animator.applyRootMotion = true;
-                    
-                    //StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadderTop, 0.1f);
-                    StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
-                    _climbingUp = true;
-                    
-                    return;
-                }
-            }
-
-            if (_climbingUp) return;
-            
             AnimatorSetFloat(PlayerAnimationIds.Vertical, MoveValueY);
         }
 
