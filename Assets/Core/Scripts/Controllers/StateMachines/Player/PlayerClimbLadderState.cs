@@ -37,6 +37,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var ladderPosition = _ladder.Offset.position;
             ladderPosition.y = transform.position.y;
 
+            Debug.Log(ladderPosition);
+            Debug.Log(_ladder.LadderTop.position + (_ladder.Offset.position - _ladder.LadderTop.position));
+            
             transform.position = ladderPosition;
             transform.rotation = _ladder.transform.rotation;
         }
