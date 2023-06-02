@@ -19,5 +19,15 @@ namespace Core.Scripts.Items
         public bool CanClimbOnTop => _canClimbOnTop;
 
         #endregion
+
+        #region Functions
+
+        public bool IsRotated()
+        {
+            var rotation = transform.rotation;
+            return !rotation.x.Equals(0) || !rotation.z.Equals(0);
+        }
+
+        #endregion
     }
 }

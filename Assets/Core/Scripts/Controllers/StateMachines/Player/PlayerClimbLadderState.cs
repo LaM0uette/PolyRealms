@@ -37,9 +37,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var ladderPosition = _ladder.Offset.position;
             ladderPosition.y = transform.position.y;
 
-            Debug.Log(ladderPosition);
-            Debug.Log(_ladder.LadderTop.position + (_ladder.Offset.position - _ladder.LadderTop.position));
-            
             transform.position = ladderPosition;
             transform.rotation = _ladder.transform.rotation;
         }
@@ -49,8 +46,19 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var position = StateMachine.transform.position;
             var ladderPosition = _ladder.LadderTop.position;
             var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
+            
+            var pos = new Vector3(position.x, posY, position.z);
 
-            StateMachine.transform.position = new Vector3(position.x, posY, position.z);
+            if (_ladder.IsRotated())
+            {
+                pos = new Vector3(
+                    ladderPosition.x - _ladder.Offset.position.normalized.x, 
+                    posY, 
+                    ladderPosition.z // TODO A CORRIGER CAR ON SE DEPLACE SUR LE COTE QUAND ON PIVOTE
+                );
+            }
+            
+            StateMachine.transform.position = pos;
         }
         
         private bool CheckClimbingUp()
