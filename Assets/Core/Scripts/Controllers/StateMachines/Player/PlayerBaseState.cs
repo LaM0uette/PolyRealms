@@ -120,9 +120,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Controller.radius = newRadius;
         }
         
-        protected void SetControllerEnable(bool value)
+        protected void SetRootMotionEnable(bool value)
         {
-            StateMachine.Controller.enabled = value;
+            StateMachine.UseRootMotion = value;
+            StateMachine.Animator.applyRootMotion = value;
         }
 
         #endregion

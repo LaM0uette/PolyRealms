@@ -14,62 +14,35 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void SubscribeEvents()
         {
             StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
-            StateMachine.Inputs.StopAnimationEvent += StopAnimation;
         }
         
         private void UnsubscribeEvents()
         {
             StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
-            StateMachine.Inputs.StopAnimationEvent -= StopAnimation;
-        }
-        
-        private void OnCrouchAction()
-        {
-            if (!StateMachine.IsMoving()) return;
-            
-            StateMachine.SwitchState(new PlayerRollState(StateMachine));
         }
 
         #endregion
 
-        #region Functions
-
-        private void Slide(float speed)
-        {
-            var controllerVelocity = StateMachine.Controller.velocity;
-            var currentHorizontalSpeed = new Vector3(controllerVelocity.x, 0, controllerVelocity.z).magnitude;
-            var targetDirection = StateMachine.transform.forward;
-
-            var animationFraction = 1f - StateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            var adjustedSpeed = Mathf.Lerp(speed, 0, animationFraction);
-
-            if (currentHorizontalSpeed < adjustedSpeed - OFFSET || currentHorizontalSpeed > adjustedSpeed + OFFSET)
-            {
-                _speed = Mathf.Lerp(currentHorizontalSpeed, adjustedSpeed, Time.deltaTime * 10f);
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
-            }
-            else _speed = adjustedSpeed;
-
-            StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
-        }
-
-        #endregion
-        
         #region Events
 
         public override void Enter()
         {
             SubscribeEvents();
-            
             SetCapsuleSize(.5f, StateMachine.InitialCapsuleRadius);
 
+            SetRootMotionEnable(true);
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);
         }
 
         public override void Tick(float deltaTime)
         {
-            var speed = StateMachine.SlideSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed);
-            Slide(speed);
+            if (StateMachine.Animator.IsInTransition(0)) return;
+                
+            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
+                
+            if (normalizedTime > 0.95f)
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         public override void TickLate(float deltaTime)
@@ -80,12 +53,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
+            SetRootMotionEnable(false);
             ResetCapsuleSize();
         }
 
-        private void StopAnimation()
+        private void OnCrouchAction()
         {
-            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            if (!StateMachine.IsMoving()) return;
+            
+            StateMachine.SwitchState(new PlayerRollState(StateMachine));
         }
 
         #endregion
