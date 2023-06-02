@@ -4,6 +4,8 @@ namespace Core.Scripts.Items
 {
     public class Ladder : MonoBehaviour
     {
+        #region Statements
+
         [Header("Ladder transform references")]
         [SerializeField] private Transform _ladderTop;
         [SerializeField] private Transform _ladderBottom;
@@ -15,5 +17,7 @@ namespace Core.Scripts.Items
         public Transform LadderBottom => _ladderBottom;
         public Transform Offset => _offset;
         public bool CanClimbOnTop => _canClimbOnTop;
+
+        #endregion
     }
 }

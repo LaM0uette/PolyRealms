@@ -36,18 +36,18 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var transform = StateMachine.transform;
             var ladderPosition = _ladder.Offset.position;
             ladderPosition.y = transform.position.y;
-            
+
             transform.position = ladderPosition;
             transform.rotation = _ladder.transform.rotation;
         }
         
         private void UpdateOffsetPlayerPosition()
         {
-            var transform = StateMachine.transform.position;
+            var position = StateMachine.transform.position;
             var ladderPosition = _ladder.LadderTop.position;
             var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
 
-            StateMachine.transform.position = new Vector3(transform.x, posY, transform.z);
+            StateMachine.transform.position = new Vector3(position.x, posY, position.z);
         }
         
         private bool CheckClimbingUp()
