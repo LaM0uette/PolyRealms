@@ -20,6 +20,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #endregion
 
+        #region Subscribe/Unsubscribe Events
+
+        private void SubscribeEvents()
+        {
+            StateMachine.Inputs.JumpEvent += OnJump;
+        }
+        
+        private void UnsubscribeEvents()
+        {
+            StateMachine.Inputs.JumpEvent -= OnJump;
+        }
+
+        #endregion
+        
         #region Functions
 
         private void ResetBooleen()
@@ -105,6 +119,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            SubscribeEvents();
             ResetBooleen();
             UpdatePlayerPosition();
             
@@ -133,9 +148,22 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            UnsubscribeEvents();
             ResetBooleen();
             
             StateMachine.IsClimbing = false;
+        }
+        
+        private void OnJump()
+        {
+            
+            var transform = StateMachine.transform;
+            var ladderPosition = _ladder.OffsetBottom.position;
+            ladderPosition.y = transform.position.y;
+            
+            transform.position = ladderPosition;
+            
+            StateMachine.SwitchState(new PlayerJumpState(StateMachine));
         }
 
         #endregion
