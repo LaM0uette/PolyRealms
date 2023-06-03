@@ -2105,7 +2105,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 4360
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -8110,7 +8110,7 @@ PrefabInstance:
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
@@ -8120,7 +8120,7 @@ PrefabInstance:
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1412993977740703399, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
@@ -8166,6 +8166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ActiveDash
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292634708152794410, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7215445723340613764, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
