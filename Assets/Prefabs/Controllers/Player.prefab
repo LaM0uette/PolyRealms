@@ -11861,10 +11861,11 @@ MonoBehaviour:
   NormalSpeed: 2
   RunSpeed: 5
   RollSpeed: 3
-  SlideSpeed: 4.2
   LadderSpeed: 2
   JumpForce: 3
   Velocity: {x: 0, y: 0, z: 0}
+  IsClimbing: 0
+  UseRootMotion: 0
   MouseSensitivity: 30
   TopClamp: 70
   BottomClamp: -30

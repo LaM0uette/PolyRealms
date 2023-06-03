@@ -79,6 +79,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void Move(float moveValueY, float deltaTime)
         {
             StateMachine.transform.Translate(0, moveValueY * StateMachine.LadderSpeed * deltaTime, 0);
+            AnimatorSetFloat(PlayerAnimationIds.Vertical, moveValueY);
         }
 
         private void CheckVerticalLimits()
@@ -94,23 +95,23 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 _stopUp = false;
         }
 
-        private bool CheckLadderLimits(float moveValueY)
+        private void CheckLadderLimits(float moveValueY)
         {
             if (moveValueY < 0 && _stopDown)
             {
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-                return true;
+                return;
             }
 
-            if (!_stopUp || !(moveValueY > 0)) return false;
-            if (!_ladder.CanClimbOnTop) return false;
+            if (!_stopUp || !(moveValueY > 0)) return;
+            if (!_ladder.CanClimbOnTop) return;
             
             SetRootMotionEnable(true);
                     
             StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
             _climbingUp = true;
                     
-            return true;
+            return;
         }
         
         #endregion
@@ -136,9 +137,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             Move(MoveValueY, deltaTime);
             
             CheckVerticalLimits();
-            if (CheckLadderLimits(MoveValueY)) return;
-
-            AnimatorSetFloat(PlayerAnimationIds.Vertical, MoveValueY);
+            CheckLadderLimits(MoveValueY);
         }
 
         public override void TickLate(float deltaTime)
