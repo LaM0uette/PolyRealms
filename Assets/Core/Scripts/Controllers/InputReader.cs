@@ -37,7 +37,12 @@ namespace Core.Scripts.Controllers
         public void OnRun() => RunValue = !RunValue;
         public void OnCrouch()
         {
-            if (!RunValue) CrouchValue = !CrouchValue;
+            if (!RunValue || MoveValue.Equals(Vector2.zero))
+            {
+                CrouchValue = !CrouchValue; 
+                return;
+            }
+            
             if (CrouchValue && (WalkValue || RunValue)) CrouchValue = !CrouchValue;
         }
         
