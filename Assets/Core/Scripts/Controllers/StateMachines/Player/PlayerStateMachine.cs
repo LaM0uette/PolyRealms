@@ -25,6 +25,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [HideInInspector] public bool IsClimbing;
         [HideInInspector] public bool UseRootMotion;
         
+        [Header("Parameters")]
+        public bool ActiveDash = true;
+        
         [Header("Cinemachine")]
         [Range(0f, 100f)] public float MouseSensitivity = 30f;
         [Range(0f, 180f)] public float TopClamp = 70.0f;

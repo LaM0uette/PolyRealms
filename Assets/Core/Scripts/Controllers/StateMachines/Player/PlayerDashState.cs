@@ -77,6 +77,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            if (!StateMachine.ActiveDash)
+            {
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+                return;
+            }
+            
             var rotation = StateMachine.transform.rotation.eulerAngles;
             rotation.y = StateMachine.MainCamera.transform.rotation.eulerAngles.y;
             StateMachine.transform.rotation = Quaternion.Euler(rotation);
