@@ -47,6 +47,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SubscribeEvents();
             
+            StateMachine.Inputs.RunValue = false;
+            
             SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Velocity.y = Physics.gravity.y;

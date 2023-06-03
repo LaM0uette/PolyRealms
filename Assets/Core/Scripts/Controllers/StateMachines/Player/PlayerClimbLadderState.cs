@@ -42,6 +42,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _stopUp = false;
             _climbingUp = false;
 
+            StateMachine.Inputs.RunValue = false;
             SetRootMotionEnable(false);
         }
 

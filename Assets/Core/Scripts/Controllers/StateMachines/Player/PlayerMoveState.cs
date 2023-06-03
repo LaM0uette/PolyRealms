@@ -51,11 +51,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckLocomotionValue()
         {
-            if (!StateMachine.IsMoving())
-            {
-                StateMachine.Inputs.RunValue = false;
-            }
-            
             if (StateMachine.Inputs.WalkValue) StateMachine.Inputs.RunValue = false;
         }
 
