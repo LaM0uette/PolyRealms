@@ -63,6 +63,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             MoveRotation();
             
             var targetDirection = Quaternion.Euler(0, _targetRotation, 0) * Vector3.forward;
+            
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 

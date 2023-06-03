@@ -28,7 +28,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            SetCapsuleSize(.5f, StateMachine.InitialCapsuleRadius);
+            SetCapsuleSize(.4f, StateMachine.InitialCapsuleRadius);
 
             SetRootMotionEnable(true);
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);

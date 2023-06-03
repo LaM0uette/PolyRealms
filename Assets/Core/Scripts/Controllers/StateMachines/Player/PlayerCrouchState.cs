@@ -47,7 +47,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SubscribeEvents();
 
-            SetCapsuleSize(1.2f, StateMachine.InitialCapsuleRadius);
+            SetCapsuleSize(1f, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.CrouchBlendTree, .2f);

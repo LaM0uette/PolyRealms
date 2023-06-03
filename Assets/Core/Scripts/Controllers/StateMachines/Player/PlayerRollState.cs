@@ -49,7 +49,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SubscribeEvents();
             
-            SetCapsuleSize(.5f, StateMachine.InitialCapsuleRadius);
+            SetCapsuleSize(.6f, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .2f);
         }
