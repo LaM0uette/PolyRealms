@@ -19,6 +19,11 @@ namespace Core.Scripts.Controllers
         public Action CrouchActionEvent { get; set; }
         public Action SlideEvent { get; set; }
         
+        public Action DashForwardEvent { get; set; }
+        public Action DashBackwardEvent { get; set; }
+        public Action DashLeftEvent { get; set; }
+        public Action DashRightEvent { get; set; }
+        
         public Action StopAnimationEvent { get; set; }
 
         #endregion
@@ -27,7 +32,7 @@ namespace Core.Scripts.Controllers
 
         public void OnMove(InputValue value) => MoveValue = value.Get<Vector2>();
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
-        
+
         public void OnWalk() => WalkValue = !WalkValue;
         public void OnRun() => RunValue = !RunValue;
         public void OnCrouch()
@@ -40,6 +45,11 @@ namespace Core.Scripts.Controllers
         public void OnRoll() => RollEvent?.Invoke();
         public void OnCrouchAction() => CrouchActionEvent?.Invoke();
         public void OnSlide() { if (RunValue) SlideEvent?.Invoke(); }
+        
+        public void OnDashForward() => DashForwardEvent?.Invoke();
+        public void OnDashBackward() => DashBackwardEvent?.Invoke();
+        public void OnDashLeft() => DashLeftEvent?.Invoke();
+        public void OnDashRight() => DashRightEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 
