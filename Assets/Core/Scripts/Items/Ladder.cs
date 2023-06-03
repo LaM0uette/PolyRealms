@@ -9,24 +9,16 @@ namespace Core.Scripts.Items
         [Header("Ladder transform references")]
         [SerializeField] private Transform _ladderTop;
         [SerializeField] private Transform _ladderBottom;
-        [SerializeField] private Transform _offset;
+        [SerializeField] private Transform _offsetTop;
+        [SerializeField] private Transform _offsetBottom;
         
         [Space] [SerializeField] private bool _canClimbOnTop;
         
         public Transform LadderTop => _ladderTop;
         public Transform LadderBottom => _ladderBottom;
-        public Transform Offset => _offset;
+        public Transform OffsetTop => _offsetTop;
+        public Transform OffsetBottom => _offsetBottom;
         public bool CanClimbOnTop => _canClimbOnTop;
-
-        #endregion
-
-        #region Functions
-
-        public bool IsRotated()
-        {
-            var rotation = transform.rotation;
-            return !rotation.x.Equals(0) || !rotation.z.Equals(0);
-        }
 
         #endregion
     }

@@ -34,7 +34,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void UpdatePlayerPosition()
         {
             var transform = StateMachine.transform;
-            var ladderPosition = _ladder.Offset.position;
+            var ladderPosition = _ladder.OffsetBottom.position;
             ladderPosition.y = transform.position.y;
 
             transform.position = ladderPosition;
@@ -43,24 +43,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         private void UpdateOffsetPlayerPosition()
         {
-            var position = StateMachine.transform.position;
-            var ladderPosition = _ladder.LadderTop.position;
-            var posY = ladderPosition.y - GetCapsuleHeight() - .15f;
-            
-            var pos = new Vector3(position.x, posY, position.z);
-
-            if (_ladder.IsRotated())
-            {
-                pos = new Vector3(
-                    ladderPosition.x - _ladder.Offset.position.normalized.x, 
-                    posY, 
-                    ladderPosition.z // TODO A CORRIGER CAR ON SE DEPLACE SUR LE COTE QUAND ON PIVOTE
-                );
-            }
-            
-            StateMachine.transform.position = pos;
+            var ladderPosition = _ladder.OffsetTop.position;
+            StateMachine.transform.position = ladderPosition;
         }
-        
+
         private bool CheckClimbingUp()
         {
             if (!_ladder.CanClimbOnTop) return false;
