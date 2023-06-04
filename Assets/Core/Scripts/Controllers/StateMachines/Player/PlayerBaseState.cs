@@ -45,6 +45,21 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             return (StateMachine.NormalSpeed, 1f);
         }
+        
+        protected float GetMoveSpeed()
+        {
+            return StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
+        }
+
+        protected bool IsAnimationInTransition() => StateMachine.Animator.IsInTransition(0);
+        
+        protected bool HasAnimationReachedStage(float value)
+        {
+            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
+
+            return normalizedTime > value;
+        }
 
         protected void Move(float targetSpeed)
         {

@@ -21,14 +21,17 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RollSpeed = 3f;
         public float LadderSpeed = 2f;
         public float JumpForce = 4f;
+        [HideInInspector] public Vector3 Velocity;
+        [HideInInspector] public bool IsClimbing;
+        
+        [Header("Parameters")]
         public float Landing = -1f;
         public float MaxLanding = -7f;
         public float MaxHardLanding = -10f;
-        [HideInInspector] public Vector3 Velocity;
-        [HideInInspector] public bool IsClimbing;
-        [HideInInspector] public bool UseRootMotion;
-        
-        [Header("Parameters")]
+        [Space] 
+        [Range(0f, 1f)]public float CrouchSpeedModifier = .8f;
+        [Range(0f, 1f)]public float AirSpeedModifier = .6f;
+        [Space] 
         public bool ActiveDash = true;
         
         [Header("Cinemachine")]
@@ -36,9 +39,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Range(0f, 180f)] public float TopClamp = 70.0f;
         [Range(0f, -180f)] public float BottomClamp = -30.0f;
         public GameObject _cinemachineCameraTarget;
+        [HideInInspector] public bool UseRootMotion;
         
-        // Player
+        [Header("Player")]
         [HideInInspector] public float InitialCapsuleHeight;
+        public float JumpCapsuleHeight = 1f;
+        public float RollCapsuleHeight = .6f;
+        public float SlideCapsuleHeight = .4f;
         [HideInInspector] public float InitialCapsuleRadius;
 
         private void Awake()

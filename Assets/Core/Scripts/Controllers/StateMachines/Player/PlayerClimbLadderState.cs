@@ -66,7 +66,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (!_ladder.CanClimbOnTop) return false;
             if (!_climbingUp) return false;
-            if (StateMachine.Animator.IsInTransition(0)) return false;
+            if (IsAnimationInTransition()) return false;
                 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);

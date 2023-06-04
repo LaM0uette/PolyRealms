@@ -93,7 +93,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            if (StateMachine.Animator.IsInTransition(0)) return;
+            if (IsAnimationInTransition()) return;
 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);

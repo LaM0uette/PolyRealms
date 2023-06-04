@@ -28,7 +28,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            SetCapsuleSize(.4f, StateMachine.InitialCapsuleRadius);
+            SetCapsuleSize(StateMachine.SlideCapsuleHeight, StateMachine.InitialCapsuleRadius);
 
             SetRootMotion(true);
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);
@@ -40,7 +40,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             MoveRotation(.1f);
             
-            if (StateMachine.Animator.IsInTransition(0)) return;
+            if (IsAnimationInTransition()) return;
                 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);

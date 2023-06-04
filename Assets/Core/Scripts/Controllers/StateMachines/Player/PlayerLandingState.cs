@@ -56,7 +56,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            if (StateMachine.Animator.IsInTransition(0)) return;
+            if (IsAnimationInTransition()) return;
             
             if (_stateLanding == StateLanding.NoLanding)
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));

@@ -59,8 +59,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             CheckStateChange();
             
             var (speed, animationValue) = GetSpeed();
-            
-            Move(speed * 0.6f);
+            Move(speed * StateMachine.CrouchSpeedModifier);
             
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }

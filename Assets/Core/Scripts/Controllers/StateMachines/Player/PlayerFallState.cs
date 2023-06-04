@@ -31,9 +31,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
 
-            var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
+            var speed = GetMoveSpeed() * StateMachine.AirSpeedModifier;
             if (StateMachine.Velocity.y < StateMachine.MaxHardLanding) speed /= 3f;
-            Move(speed/1.2f);
+            Move(speed);
             
             CheckStateChange();
         }
