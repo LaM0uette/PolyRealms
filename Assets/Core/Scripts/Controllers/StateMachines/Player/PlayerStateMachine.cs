@@ -20,7 +20,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RunSpeed = 5f;
         public float RollSpeed = 3f;
         public float LadderSpeed = 2f;
-        public float JumpForce = 4f;
+        public float JumpForce = 6f;
         [HideInInspector] public Vector3 Velocity;
         [HideInInspector] public bool IsClimbing;
         
@@ -29,8 +29,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float MaxLanding = -7f;
         public float MaxHardLanding = -10f;
         [Space] 
-        [Range(0f, 1f)]public float CrouchSpeedModifier = .8f;
-        [Range(0f, 1f)]public float AirSpeedModifier = .6f;
+        [Range(0f, 1f)] public float CrouchSpeedModifier = .6f;
+        [Range(0f, 1f)] public float AirSpeedModifier = .8f;
         [Space] 
         public bool ActiveDash = true;
         
