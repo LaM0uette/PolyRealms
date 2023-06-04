@@ -1,6 +1,6 @@
-﻿using System;
-using Core.Scripts.StaticUtilities;
+﻿using Core.Scripts.StaticUtilities;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -8,8 +8,31 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     {
         #region Statements
 
+        private enum StateLanding
+        {
+            NoLanding,
+            Landing,
+            HardLanding
+        }
+        
+        private StateLanding _stateLanding;
+
         public PlayerLandingState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
+        }
+
+        #endregion
+
+        #region Functions
+
+        private StateLanding CheckVelocity()
+        {
+            var velocity = StateMachine.Velocity.y;
+            
+            if (velocity <= StateMachine.MaxHardLanding) return StateLanding.HardLanding;
+            if (velocity <= StateMachine.MaxLanding) return StateLanding.Landing;
+
+            return StateLanding.NoLanding;
         }
 
         #endregion
@@ -18,12 +41,26 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.FallingToLanding, .1f);
+            _stateLanding = CheckVelocity();
+            Debug.Log($"{StateMachine.Velocity.y} | {Physics.gravity.y} | {_stateLanding}");
+
+            var idAnim = _stateLanding switch
+            {
+                StateLanding.NoLanding => PlayerAnimationIds.JumpingDown,
+                StateLanding.Landing => PlayerAnimationIds.Landing,
+                StateLanding.HardLanding => PlayerAnimationIds.HardLanding,
+                _ => PlayerAnimationIds.JumpingDown
+            };
+            
+            StateMachine.Animator.CrossFadeInFixedTime(idAnim, .1f);
         }
 
         public override void Tick(float deltaTime)
         {
             if (StateMachine.Animator.IsInTransition(0)) return;
+            
+            if (_stateLanding == StateLanding.NoLanding)
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
             
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
@@ -34,10 +71,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void TickLate(float deltaTime)
         {
+            CameraRotation();
         }
 
         public override void Exit()
         {
+            StateMachine.Velocity.y = Physics.gravity.y;
         }
 
         #endregion

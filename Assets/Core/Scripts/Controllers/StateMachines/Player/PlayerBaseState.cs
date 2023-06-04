@@ -30,9 +30,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         protected void ApplyGravity()
         {
-            if (StateMachine.Velocity.y > Physics.gravity.y)
+            if (StateMachine.Velocity.y > Physics.gravity.y*2)
             {
-                StateMachine.Velocity.y += Physics.gravity.y * 1.5f * Time.deltaTime;
+                StateMachine.Velocity.y += Physics.gravity.y * Time.deltaTime;
             }
         }
 

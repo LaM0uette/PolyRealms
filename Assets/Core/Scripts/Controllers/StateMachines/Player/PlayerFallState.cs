@@ -30,8 +30,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
-            
-            var speed = (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed) / 3f;
+
+            var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
+            if (StateMachine.Velocity.y < StateMachine.MaxHardLanding) speed /= 3f;
             Move(speed);
             
             CheckStateChange();
@@ -44,7 +45,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.Velocity.y = Physics.gravity.y;
         }
 
         #endregion
