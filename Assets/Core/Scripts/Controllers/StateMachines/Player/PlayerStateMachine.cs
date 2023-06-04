@@ -29,8 +29,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float MaxLanding = -7f;
         public float MaxHardLanding = -10f;
         [Space] 
-        [Range(0f, 1f)] public float CrouchSpeedModifier = .6f;
-        [Range(0f, 1f)] public float AirSpeedModifier = .8f;
+        public float CrouchSpeedModifier = .6f;
+        public float AirSpeedModifier = .8f;
         [Space] 
         public bool ActiveDash = true;
         

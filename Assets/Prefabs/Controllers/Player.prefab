@@ -11862,18 +11862,24 @@ MonoBehaviour:
   RunSpeed: 5
   RollSpeed: 3
   LadderSpeed: 2
-  JumpForce: 4
-  MaxLanding: -7
-  MaxHardLanding: -10
+  JumpForce: 6
   Velocity: {x: 0, y: 0, z: 0}
   IsClimbing: 0
-  UseRootMotion: 0
+  Landing: -1
+  MaxLanding: -7
+  MaxHardLanding: -10
+  CrouchSpeedModifier: 0.6
+  AirSpeedModifier: 0.8
   ActiveDash: 0
   MouseSensitivity: 30
   TopClamp: 70
   BottomClamp: -30
   _cinemachineCameraTarget: {fileID: 522746014275061289}
+  UseRootMotion: 0
   InitialCapsuleHeight: 0
+  JumpCapsuleHeight: 1
+  RollCapsuleHeight: 0.6
+  SlideCapsuleHeight: 0.4
   InitialCapsuleRadius: 0
 --- !u!114 &6046284612448114656
 MonoBehaviour:

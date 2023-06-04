@@ -43,7 +43,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
             
-            var speed = GetMoveSpeed() * StateMachine.AirSpeedModifier;
+            var speed = GetMoveSpeed();
             Move(speed);
             
             CheckStateChange();

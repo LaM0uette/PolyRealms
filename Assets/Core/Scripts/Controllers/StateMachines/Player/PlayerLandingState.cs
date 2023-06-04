@@ -8,15 +8,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     {
         #region Statements
 
-        private enum StateLanding
-        {
-            NoLanding,
-            Landing,
-            HardLanding
-        }
-        
-        private StateLanding _stateLanding;
-
         public PlayerLandingState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }

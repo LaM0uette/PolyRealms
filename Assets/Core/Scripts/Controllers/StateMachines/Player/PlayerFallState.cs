@@ -1,5 +1,4 @@
 ﻿using Core.Scripts.StaticUtilities;
-using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -14,8 +13,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (!StateMachine.IsGrounded()) return;
-            
-            StateMachine.SwitchState(new PlayerLandingState(StateMachine));
+
+            if (StateMachine.Velocity.y > StateMachine.MaxLanding)
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            else
+                StateMachine.SwitchState(new PlayerLandingState(StateMachine));
         }
 
         #endregion
@@ -32,7 +34,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
 
             var speed = GetMoveSpeed() * StateMachine.AirSpeedModifier;
-            if (StateMachine.Velocity.y < StateMachine.MaxHardLanding) speed /= 3f;
             Move(speed);
             
             CheckStateChange();
