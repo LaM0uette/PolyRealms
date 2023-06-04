@@ -20,7 +20,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RunSpeed = 5f;
         public float RollSpeed = 3f;
         public float LadderSpeed = 2f;
-        public float JumpForce = 4f;
+        public float JumpForce = 5f;
         [HideInInspector] public Vector3 Velocity;
         [HideInInspector] public bool IsClimbing;
         [HideInInspector] public bool UseRootMotion;
@@ -62,7 +62,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         #region Checkers
 
         public bool IsMoving() => !Inputs.MoveValue.Equals(Vector2.zero);
-        public bool IsGround() => Controller.isGrounded;
+        public bool IsGrounded() => Controller.isGrounded;
 
         #endregion
     }

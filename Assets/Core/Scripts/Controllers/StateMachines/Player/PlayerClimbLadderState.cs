@@ -43,7 +43,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _climbingUp = false;
 
             StateMachine.Inputs.RunValue = false;
-            SetRootMotionEnable(false);
+            SetRootMotion(false);
         }
 
         private void UpdatePlayerPosition()
@@ -107,7 +107,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (!_stopUp || !(moveValueY > 0)) return;
             if (!_ladder.CanClimbOnTop) return;
             
-            SetRootMotionEnable(true);
+            SetRootMotion(true);
                     
             StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
             _climbingUp = true;

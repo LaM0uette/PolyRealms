@@ -45,9 +45,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGrounded()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
             
-            if (!StateMachine.IsGround()) return;
+            if (!StateMachine.IsGrounded()) return;
             
             if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
@@ -71,7 +71,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SubscribeEvents();
             
             StateMachine.Velocity.y = Physics.gravity.y;
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .1f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .2f);
 
         }
 

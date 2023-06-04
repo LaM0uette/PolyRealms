@@ -30,13 +30,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SubscribeEvents();
             SetCapsuleSize(.4f, StateMachine.InitialCapsuleRadius);
 
-            SetRootMotionEnable(true);
+            SetRootMotion(true);
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);
         }
 
         public override void Tick(float deltaTime)
         {
             if (StateMachine.Inputs.MoveValue.y < 0) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            
+            MoveRotation(.1f);
             
             if (StateMachine.Animator.IsInTransition(0)) return;
                 
@@ -55,7 +57,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
-            SetRootMotionEnable(false);
+            SetRootMotion(false);
             ResetCapsuleSize();
         }
 

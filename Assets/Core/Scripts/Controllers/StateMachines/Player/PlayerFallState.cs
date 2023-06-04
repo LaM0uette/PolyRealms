@@ -13,7 +13,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Controller.isGrounded) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            if (!StateMachine.IsGrounded()) return;
+            
+            StateMachine.SwitchState(new PlayerLandingState(StateMachine));
         }
 
         #endregion
@@ -42,6 +44,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            StateMachine.Velocity.y = Physics.gravity.y;
         }
 
         #endregion

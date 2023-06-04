@@ -8164,18 +8164,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
-      propertyPath: ActiveDash
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6292634708152794410, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_Antialiasing
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7215445723340613764, guid: 8757fd30e013beb428773fe8d2a9a600,
-        type: 3}
-      propertyPath: m_StepOffset
-      value: 0.25
+      propertyPath: JumpForce
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

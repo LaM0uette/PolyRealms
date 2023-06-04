@@ -35,7 +35,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGrounded()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
             else if (!StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 

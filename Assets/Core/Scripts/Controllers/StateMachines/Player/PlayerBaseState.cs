@@ -32,10 +32,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.Velocity.y > Physics.gravity.y)
             {
-                StateMachine.Velocity.y += Physics.gravity.y * 1.4f * Time.deltaTime;
+                StateMachine.Velocity.y += Physics.gravity.y * 1.5f * Time.deltaTime;
             }
         }
-        
+
         protected (float speed, float animationValue) GetSpeed()
         {
             if (!StateMachine.IsMoving()) return StateMachine.Inputs.CrouchValue ? (0, -1f) : (0, 0);
@@ -67,13 +67,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 
-        protected void MoveRotation()
+        protected void MoveRotation(float rotationImpact = 1f)
         {
             var inputDirection = new Vector3(StateMachine.Inputs.MoveValue.x, 0, StateMachine.Inputs.MoveValue.y).normalized;
             if (!StateMachine.IsMoving()) return;
-            
+
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET);
+            var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET * rotationImpact);
             StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
         }
 
@@ -121,7 +121,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Controller.radius = newRadius;
         }
         
-        protected void SetRootMotionEnable(bool value)
+        protected void SetRootMotion(bool value)
         {
             StateMachine.UseRootMotion = value;
             StateMachine.Animator.applyRootMotion = value;

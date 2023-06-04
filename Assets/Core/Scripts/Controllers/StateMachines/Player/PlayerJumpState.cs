@@ -6,8 +6,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     public class PlayerJumpState : PlayerBaseState
     {
         #region Statements
-        
-        private float _initialVelocityY;
 
         public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
@@ -33,8 +31,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < _initialVelocityY && !StateMachine.IsGround()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
-            else if (StateMachine.Velocity.y < 0 && StateMachine.IsGround()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
+
+            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGrounded()) 
+                StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            
+            if (normalizedTime > 0.2f && StateMachine.IsGrounded())
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
@@ -44,22 +48,23 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-
-            const float offset = .5f;
-            SetCapsuleSize(1.1f, StateMachine.InitialCapsuleRadius, offset);
             
-            _initialVelocityY = -StateMachine.JumpForce;
+            SetCapsuleSize(1f, StateMachine.InitialCapsuleRadius);
+            
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .2f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .1f);
         }
 
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
-            CheckStateChange();
             
             var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
             Move(speed);
+            
+            if (StateMachine.Animator.IsInTransition(0)) return;
+            
+            CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)
@@ -75,6 +80,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         private void StopAnimation()
         {
+            return;
+            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
             ResetCapsuleSize();
         }
 
