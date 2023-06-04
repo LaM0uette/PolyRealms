@@ -60,7 +60,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
             
             var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
-            Move(speed);
+            Move(speed/1.2f);
             
             if (StateMachine.Animator.IsInTransition(0)) return;
             

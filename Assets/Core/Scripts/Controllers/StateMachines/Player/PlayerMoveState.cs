@@ -45,16 +45,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < 0 && !StateMachine.IsGrounded()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
+            if (StateMachine.Velocity.y < StateMachine.Landing && !StateMachine.IsGrounded()) 
+                StateMachine.SwitchState(new PlayerFallState(StateMachine));
             
-            if (!StateMachine.IsGrounded()) return;
-            
-            if (StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
-        }
-
-        private void CheckLocomotionValue()
-        {
-            if (StateMachine.Inputs.WalkValue) StateMachine.Inputs.RunValue = false;
+            if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
+                StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
 
         private void ChangeStateDash(PlayerDashState.DashDirection dashDirection)
@@ -69,20 +64,18 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            
-            StateMachine.Velocity.y = Physics.gravity.y;
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .2f);
-
         }
 
         public override void Tick(float deltaTime)
         {
+            ApplyGravity();
             CheckStateChange();
-            CheckLocomotionValue();
             
             var (speed, animationValue) = GetSpeed();
+            
             Move(speed);
-            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .06f);
         }
         
         public override void TickLate(float deltaTime)
@@ -93,18 +86,17 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
-        }
-        
-        private void OnJump()
-        {
+            
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, 0);
-            StateMachine.SwitchState(new PlayerJumpState(StateMachine));
         }
         
-        private void OnRoll()
-        {
-            StateMachine.SwitchState(new PlayerRollState(StateMachine));
-        }
+        #endregion
+
+        #region InputEvents
+
+        private void OnJump() => StateMachine.SwitchState(new PlayerJumpState(StateMachine));
+        
+        private void OnRoll() => StateMachine.SwitchState(new PlayerRollState(StateMachine));
         
         private void OnCrouchAction()
         {
@@ -113,30 +105,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             OnRoll();
         }
         
-        private void OnSlide()
-        {
-            StateMachine.SwitchState(new PlayerSlideState(StateMachine));
-        }
+        private void OnSlide() => StateMachine.SwitchState(new PlayerSlideState(StateMachine));
         
-        private void OnDashForward()
-        {
-            ChangeStateDash(PlayerDashState.DashDirection.Forward);
-        }
-        
-        private void OnDashBackward()
-        {
-            ChangeStateDash(PlayerDashState.DashDirection.Backward);
-        }
-        
-        private void OnDashLeft()
-        {
-            ChangeStateDash(PlayerDashState.DashDirection.Left);
-        }
-        
-        private void OnDashRight()
-        {
-            ChangeStateDash(PlayerDashState.DashDirection.Right);
-        }
+        private void OnDashForward() =>  ChangeStateDash(PlayerDashState.DashDirection.Forward);
+        private void OnDashBackward() => ChangeStateDash(PlayerDashState.DashDirection.Backward);
+        private void OnDashLeft() => ChangeStateDash(PlayerDashState.DashDirection.Left);
+        private void OnDashRight() => ChangeStateDash(PlayerDashState.DashDirection.Right);
 
         #endregion
     }

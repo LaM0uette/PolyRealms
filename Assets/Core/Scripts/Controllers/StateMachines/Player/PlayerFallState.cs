@@ -33,7 +33,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             var speed = StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
             if (StateMachine.Velocity.y < StateMachine.MaxHardLanding) speed /= 3f;
-            Move(speed);
+            Move(speed/1.2f);
             
             CheckStateChange();
         }

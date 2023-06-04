@@ -42,7 +42,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             _stateLanding = CheckVelocity();
-            Debug.Log($"{StateMachine.Velocity.y} | {Physics.gravity.y} | {_stateLanding}");
 
             var idAnim = _stateLanding switch
             {

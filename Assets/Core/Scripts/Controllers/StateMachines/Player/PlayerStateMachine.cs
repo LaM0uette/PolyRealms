@@ -21,6 +21,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RollSpeed = 3f;
         public float LadderSpeed = 2f;
         public float JumpForce = 4f;
+        public float Landing = -1f;
         public float MaxLanding = -7f;
         public float MaxHardLanding = -10f;
         [HideInInspector] public Vector3 Velocity;

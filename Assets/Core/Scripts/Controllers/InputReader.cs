@@ -33,8 +33,16 @@ namespace Core.Scripts.Controllers
         public void OnMove(InputValue value) => MoveValue = value.Get<Vector2>();
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
 
-        public void OnWalk() => WalkValue = !WalkValue;
-        public void OnRun() => RunValue = !RunValue;
+        public void OnWalk()
+        {
+            WalkValue = !WalkValue;
+            if (WalkValue) RunValue = false;
+        }
+        public void OnRun()
+        {
+            RunValue = !RunValue;
+            if (RunValue) WalkValue = false;
+        }
         public void OnCrouch()
         {
             if (!RunValue || MoveValue.Equals(Vector2.zero))
