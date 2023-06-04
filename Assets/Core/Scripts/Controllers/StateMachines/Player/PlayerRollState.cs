@@ -8,20 +8,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public PlayerRollState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
-        
-        #region Subscribe/Unsubscribe Events
-
-        private void SubscribeEvents()
-        {
-            StateMachine.Inputs.StopAnimationEvent += StopAnimation;
-        }
-        
-        private void UnsubscribeEvents()
-        {
-            StateMachine.Inputs.StopAnimationEvent -= StopAnimation;
-        }
-
-        #endregion
 
         #region Functions
 
@@ -41,14 +27,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 
+        private void CheckStateChange()
+        {
+            if (IsAnimationInTransition()) return;
+            
+            if (HasAnimationReachedStage(.9f)) 
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+        }
+        
         #endregion
         
         #region Events
 
         public override void Enter()
         {
-            SubscribeEvents();
-            
             SetCapsuleSize(StateMachine.RollCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .2f);
@@ -56,9 +48,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
+            ApplyGravity(4f);
+            
             var speed = StateMachine.RollSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed);
             Roll(speed);
+            
             MoveRotation();
+            CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)
@@ -68,13 +64,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            UnsubscribeEvents();
             ResetCapsuleSize();
-        }
-
-        private void StopAnimation()
-        {
-            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion

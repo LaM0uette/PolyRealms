@@ -22,6 +22,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             return velocity <= StateMachine.MaxHardLanding ? PlayerAnimationIds.HardLanding : PlayerAnimationIds.Landing;
         }
 
+        private void CheckStateChange()
+        {
+            if (IsAnimationInTransition()) return;
+            
+            if (HasAnimationReachedStage(.9f)) 
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+        }
+
         #endregion
 
         #region Events
@@ -34,10 +42,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            if (IsAnimationInTransition()) return;
-            
-            if (HasAnimationReachedStage(.9f)) 
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)

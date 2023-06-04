@@ -5,29 +5,30 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 {
     public class PlayerSlideState : PlayerBaseState
     {
+        #region Statements
+
         public PlayerSlideState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
-        
-        #region Subscribe/Unsubscribe Events
 
-        private void SubscribeEvents()
+        #endregion
+        
+        #region Functions
+
+        private void CheckStateChange()
         {
-            StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
+            if (IsAnimationInTransition()) return;
+
+            if (HasAnimationReachedStage(.9f)) 
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
         
-        private void UnsubscribeEvents()
-        {
-            StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
-        }
-
         #endregion
 
         #region Events
 
         public override void Enter()
         {
-            SubscribeEvents();
             SetCapsuleSize(StateMachine.SlideCapsuleHeight, StateMachine.InitialCapsuleRadius);
 
             SetRootMotion(true);
@@ -36,17 +37,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
+            ApplyGravity(4f);
+            
             if (StateMachine.Inputs.MoveValue.y < 0) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
             
             MoveRotation(.1f);
-            
-            if (IsAnimationInTransition()) return;
-                
-            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
-                
-            if (normalizedTime > 0.95f)
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            CheckStateChange();
         }
 
         public override void TickLate(float deltaTime)
@@ -56,16 +52,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            UnsubscribeEvents();
             SetRootMotion(false);
             ResetCapsuleSize();
-        }
-
-        private void OnCrouchAction()
-        {
-            if (!StateMachine.IsMoving()) return;
-            
-            StateMachine.SwitchState(new PlayerRollState(StateMachine));
         }
 
         #endregion

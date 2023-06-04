@@ -28,11 +28,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         #region Functions
         
-        protected void ApplyGravity()
+        protected void ApplyGravity(float multiplier = 2f)
         {
             if (StateMachine.Velocity.y > StateMachine.Gravity)
             {
-                StateMachine.Velocity.y += Physics.gravity.y * 2 * Time.deltaTime;
+                StateMachine.Velocity.y += Physics.gravity.y * multiplier * Time.deltaTime;
             }
         }
 
@@ -82,13 +82,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 
-        protected void MoveRotation(float rotationImpact = 1f)
+        protected void MoveRotation(float multiplier = 1f)
         {
             var inputDirection = new Vector3(StateMachine.Inputs.MoveValue.x, 0, StateMachine.Inputs.MoveValue.y).normalized;
             if (!StateMachine.IsMoving()) return;
 
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
-            var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET * rotationImpact);
+            var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET * multiplier);
             StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
         }
 
