@@ -1,6 +1,5 @@
 ﻿using Core.Scripts.StaticUtilities;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -16,14 +15,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #region Functions
 
-        private StateLanding CheckVelocity()
+        private int GetIdAnimation()
         {
             var velocity = StateMachine.Velocity.y;
             
-            if (velocity <= StateMachine.MaxHardLanding) return StateLanding.HardLanding;
-            if (velocity <= StateMachine.MaxLanding) return StateLanding.Landing;
-
-            return StateLanding.NoLanding;
+            return velocity <= StateMachine.MaxHardLanding ? PlayerAnimationIds.HardLanding : PlayerAnimationIds.Landing;
         }
 
         #endregion
@@ -32,16 +28,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            _stateLanding = CheckVelocity();
-
-            var idAnim = _stateLanding switch
-            {
-                StateLanding.NoLanding => PlayerAnimationIds.JumpingDown,
-                StateLanding.Landing => PlayerAnimationIds.Landing,
-                StateLanding.HardLanding => PlayerAnimationIds.HardLanding,
-                _ => PlayerAnimationIds.JumpingDown
-            };
-            
+            var idAnim = GetIdAnimation();
             StateMachine.Animator.CrossFadeInFixedTime(idAnim, .1f);
         }
 
@@ -49,13 +36,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (IsAnimationInTransition()) return;
             
-            if (_stateLanding == StateLanding.NoLanding)
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-            
-            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-            var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
-
-            if (normalizedTime > 0.9f && StateMachine.IsGrounded())
+            if (HasAnimationReachedStage(.9f)) 
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
@@ -66,7 +47,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.Velocity.y = Physics.gravity.y;
+            ResetVelocity();
         }
 
         #endregion

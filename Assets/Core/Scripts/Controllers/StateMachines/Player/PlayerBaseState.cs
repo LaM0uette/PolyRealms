@@ -30,9 +30,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         protected void ApplyGravity()
         {
-            if (StateMachine.Velocity.y > Physics.gravity.y*5)
+            if (StateMachine.Velocity.y > StateMachine.Gravity)
             {
-                StateMachine.Velocity.y += Physics.gravity.y * Time.deltaTime * 2;
+                StateMachine.Velocity.y += Physics.gravity.y * 2 * Time.deltaTime;
             }
         }
 
@@ -140,6 +140,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             StateMachine.UseRootMotion = value;
             StateMachine.Animator.applyRootMotion = value;
+        }
+
+        protected void ResetVelocity()
+        {
+            StateMachine.Velocity = Vector3.zero;
         }
 
         #endregion

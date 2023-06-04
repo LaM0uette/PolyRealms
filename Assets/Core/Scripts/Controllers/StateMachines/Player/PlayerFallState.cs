@@ -1,4 +1,5 @@
 ﻿using Core.Scripts.StaticUtilities;
+using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -15,7 +16,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (!StateMachine.IsGrounded()) return;
 
             if (StateMachine.Velocity.y > StateMachine.MaxLanding)
+            {
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            }
             else
                 StateMachine.SwitchState(new PlayerLandingState(StateMachine));
         }

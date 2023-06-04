@@ -45,7 +45,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.Velocity.y < StateMachine.Landing && !StateMachine.IsGrounded()) 
+            if (!StateMachine.IsGrounded()) 
                 StateMachine.SwitchState(new PlayerFallState(StateMachine));
             
             if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
@@ -75,7 +75,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             var (speed, animationValue) = GetSpeed();
             
             Move(speed);
-            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .06f);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }
         
         public override void TickLate(float deltaTime)
@@ -86,6 +86,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
+            ResetVelocity();
             
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, 0);
         }

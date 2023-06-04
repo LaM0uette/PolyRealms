@@ -26,8 +26,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         [Header("Parameters")]
         public float Landing = -1f;
-        public float MaxLanding = -7f;
-        public float MaxHardLanding = -10f;
+        public float MaxLanding = -10f;
+        public float MaxHardLanding = -12f;
+        public float Gravity = -16f;
         [Space] 
         public float CrouchSpeedModifier = .6f;
         public float AirSpeedModifier = .8f;

@@ -32,19 +32,19 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            SetCapsuleSize(StateMachine.JumpCapsuleHeight, StateMachine.InitialCapsuleRadius);
-            
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
             
+            SetCapsuleSize(StateMachine.JumpCapsuleHeight, StateMachine.InitialCapsuleRadius);
+
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Jump, .1f);
         }
 
         public override void Tick(float deltaTime)
         {
-            ApplyGravity();
-            
             var speed = GetMoveSpeed();
             Move(speed);
+            
+            ApplyGravity();
             
             CheckStateChange();
         }

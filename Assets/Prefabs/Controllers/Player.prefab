@@ -11866,8 +11866,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   IsClimbing: 0
   Landing: -1
-  MaxLanding: -7
-  MaxHardLanding: -10
+  MaxLanding: -10
+  MaxHardLanding: -12
+  Gravity: -16
   CrouchSpeedModifier: 0.6
   AirSpeedModifier: 0.8
   ActiveDash: 0
