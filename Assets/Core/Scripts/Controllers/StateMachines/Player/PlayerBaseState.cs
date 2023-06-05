@@ -44,8 +44,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             return StateMachine.NormalSpeed;
         }
-
-        protected bool IsAnimationInTransition() => StateMachine.Animator.IsInTransition(0);
         
         protected bool HasAnimationReachedStage(float value)
         {

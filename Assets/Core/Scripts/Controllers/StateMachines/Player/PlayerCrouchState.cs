@@ -58,7 +58,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             SetCapsuleSize(StateMachine.CrouchCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.CrouchBlendTree, .2f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.CrouchBlendTree, .2f);
 
         }
 

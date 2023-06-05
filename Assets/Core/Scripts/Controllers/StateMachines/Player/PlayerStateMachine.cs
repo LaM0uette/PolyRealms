@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
@@ -34,6 +35,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float AirSpeedModifier = .8f;
         [Space] 
         public bool ActiveDash = true;
+        [HideInInspector] public bool IsTransitioning;
         
         [Header("Cinemachine")]
         [Range(0f, 100f)] public float MouseSensitivity = 30f;
@@ -75,6 +77,23 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public bool IsMoving() => !Inputs.MoveValue.Equals(Vector2.zero);
         public bool IsGrounded() => Controller.isGrounded;
+
+        #endregion
+
+        #region Animations
+
+        public void TransitionToAnimation(int animationId, float transitionDuration = .1f)
+        {
+            Animator.CrossFadeInFixedTime(animationId, transitionDuration);
+            IsTransitioning = true;
+            StartCoroutine(EndTransitionAfterDelay(transitionDuration));
+        }
+
+        private IEnumerator EndTransitionAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            IsTransitioning = false;
+        }
 
         #endregion
     }

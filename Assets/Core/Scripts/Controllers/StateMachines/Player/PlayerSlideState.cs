@@ -17,7 +17,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (IsAnimationInTransition()) return;
+            if (StateMachine.IsTransitioning) return;
             if (!HasAnimationReachedStage(.95f)) return;
             
             if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
@@ -35,7 +35,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SetCapsuleSize(StateMachine.SlideCapsuleHeight, StateMachine.InitialCapsuleRadius);
 
             SetRootMotion(true);
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Slide, .2f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.Slide, .2f);
         }
 
         public override void Tick(float deltaTime)

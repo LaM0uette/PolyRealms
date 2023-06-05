@@ -88,12 +88,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.transform.rotation = Quaternion.Euler(rotation);
 
             AnimatorSetFloat(PlayerAnimationIds.Speed, 3f);
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.DashBlendTree, .1f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.DashBlendTree);
         }
 
         public override void Tick(float deltaTime)
         {
-            if (IsAnimationInTransition()) return;
+            if (StateMachine.IsTransitioning) return;
 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);

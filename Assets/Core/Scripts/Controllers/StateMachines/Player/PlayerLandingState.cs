@@ -24,7 +24,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (IsAnimationInTransition()) return;
+            if (StateMachine.IsTransitioning) return;
             
             if (HasAnimationReachedStage(.95f)) 
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
@@ -37,7 +37,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             var idAnim = GetIdAnimation();
-            StateMachine.Animator.CrossFadeInFixedTime(idAnim, .1f);
+            StateMachine.TransitionToAnimation(idAnim);
         }
 
         public override void Tick(float deltaTime)

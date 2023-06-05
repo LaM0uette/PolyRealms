@@ -66,7 +66,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (!_ladder.CanClimbOnTop) return false;
             if (!_climbingUp) return false;
-            if (IsAnimationInTransition()) return false;
+            if (StateMachine.IsTransitioning) return false;
                 
             var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
@@ -111,8 +111,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                     
             StateMachine.Animator.Play(PlayerAnimationIds.ClimbingLadderTop, 0, 0f);
             _climbingUp = true;
-                    
-            return;
         }
         
         #endregion
@@ -125,7 +123,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ResetBooleen();
             UpdatePlayerPosition();
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.ClimbingLadder, 0.1f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.ClimbingLadder);
         }
 
         public override void Tick(float deltaTime)

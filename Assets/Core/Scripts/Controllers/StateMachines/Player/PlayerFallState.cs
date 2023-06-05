@@ -29,7 +29,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Fall, .4f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.Fall, .4f);
         }
 
         public override void Tick(float deltaTime)

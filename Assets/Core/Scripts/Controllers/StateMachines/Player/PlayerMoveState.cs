@@ -74,7 +74,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.MoveBlendTree, .2f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.MoveBlendTree, .2f);
         }
 
         public override void Tick(float deltaTime)

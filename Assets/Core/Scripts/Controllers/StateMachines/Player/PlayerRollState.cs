@@ -29,7 +29,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (IsAnimationInTransition()) return;
+            if (StateMachine.IsTransitioning) return;
             
             if (HasAnimationReachedStage(.95f)) 
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
@@ -43,7 +43,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SetCapsuleSize(StateMachine.RollCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .1f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.Roll);
         }
 
         public override void Tick(float deltaTime)
