@@ -18,9 +18,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (IsAnimationInTransition()) return;
-
-            if (HasAnimationReachedStage(.9f)) 
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            if (!HasAnimationReachedStage(.9f)) return;
+            
+            if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
+                StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
+            
+            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
         
         #endregion
