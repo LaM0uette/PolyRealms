@@ -7,6 +7,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
     {
         #region Statements
 
+        private bool _longSlideOn;
+
         public PlayerSlideState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
@@ -19,8 +21,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.IsTransitioning) return;
             if (!HasAnimationReachedStage(.95f)) return;
-            
-            if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
+
+            if ((StateMachine.Inputs.CrouchValue || ForceCrouchByHeight()) && StateMachine.IsGrounded()) 
                 StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
             
             StateMachine.SwitchState(new PlayerMoveState(StateMachine));

@@ -12,7 +12,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         protected const float OFFSET = .1f;
         
         // Move
-        protected float _speed;
+        protected float TargetSpeed;
         private float _targetRotation;
 
         // Rotation
@@ -62,16 +62,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             if (currentHorizontalSpeed < targetSpeed - OFFSET || currentHorizontalSpeed > targetSpeed + OFFSET)
             {
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * 10f);
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                TargetSpeed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * 10f);
+                TargetSpeed = Mathf.Round(TargetSpeed * 1000f) / 1000f;
             }
-            else _speed = targetSpeed;
+            else TargetSpeed = targetSpeed;
 
             MoveRotation();
             
             var targetDirection = Quaternion.Euler(0, _targetRotation, 0) * Vector3.forward;
             
-            StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
+            StateMachine.Controller.Move(targetDirection.normalized * (TargetSpeed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 
         protected void MoveRotation(float multiplier = 1f)

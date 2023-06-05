@@ -19,12 +19,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             if (currentHorizontalSpeed < speed - OFFSET || currentHorizontalSpeed > speed + OFFSET)
             {
-                _speed = Mathf.Lerp(currentHorizontalSpeed, speed, Time.deltaTime * 10f);
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                TargetSpeed = Mathf.Lerp(currentHorizontalSpeed, speed, Time.deltaTime * 10f);
+                TargetSpeed = Mathf.Round(TargetSpeed * 1000f) / 1000f;
             }
-            else _speed = speed;
+            else TargetSpeed = speed;
 
-            StateMachine.Controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
+            StateMachine.Controller.Move(targetDirection.normalized * (TargetSpeed * Time.deltaTime) + new Vector3(0, StateMachine.Velocity.y, 0) * Time.deltaTime);
         }
 
         private void CheckStateChange()
