@@ -37,7 +37,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
 
             var speed = GetMoveSpeed() * StateMachine.AirSpeedModifier;
-            Move(speed);
+            Move(speed* StateMachine.AirSpeedModifier);
             
             CheckStateChange();
         }

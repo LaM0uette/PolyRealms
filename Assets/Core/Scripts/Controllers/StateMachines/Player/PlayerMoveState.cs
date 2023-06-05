@@ -51,6 +51,16 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
                 StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
         }
+        
+        private float GetMoveSpeedAnimation()
+        {
+            if (!StateMachine.IsMoving()) return 0;
+            
+            if (StateMachine.Inputs.WalkValue) return -1f;
+            if (StateMachine.Inputs.RunValue) return 2f;
+            
+            return 1f;
+        }
 
         private void ChangeStateDash(PlayerDashState.DashDirection dashDirection)
         {
@@ -72,9 +82,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             ApplyGravity();
             CheckStateChange();
             
-            var (speed, animationValue) = GetSpeed();
-            
+            var speed = GetMoveSpeed();
             Move(speed);
+            
+            var animationValue = GetMoveSpeedAnimation();
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }
         

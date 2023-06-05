@@ -39,6 +39,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             else if (!StateMachine.Inputs.CrouchValue && !ForceCrouchByHeight()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
+        private float GetSpeedAnimation()
+        {
+            var spd = !StateMachine.IsMoving() ? 0 : .6f;
+            if (StateMachine.Inputs.WalkValue) spd = .3f;
+            if (StateMachine.Inputs.RunValue) spd = 1.5f;
+            
+            return spd;
+        }
+
         #endregion
 
         #region Events
@@ -57,13 +66,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
             
-            var (speed, _) = GetSpeed();
-            Move(speed * StateMachine.CrouchSpeedModifier);
+            var speed = GetMoveSpeed() * StateMachine.CrouchSpeedModifier;
+            Move(speed);
 
-            var spd = !StateMachine.IsMoving() ? 0 : .6f;
-            if (StateMachine.Inputs.WalkValue) spd = .3f;
-            if (StateMachine.Inputs.RunValue) spd = 1.5f;
-            
+            var spd = GetSpeedAnimation();
             AnimatorSetFloat(PlayerAnimationIds.Speed, spd, .1f);
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, !StateMachine.IsMoving() ? 0 : 1f, .1f);
         }

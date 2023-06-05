@@ -36,19 +36,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             }
         }
 
-        protected (float speed, float animationValue) GetSpeed()
-        {
-            if (!StateMachine.IsMoving()) return StateMachine.Inputs.CrouchValue || ForceCrouchByHeight() ? (0, -1f) : (0, 0);
-
-            if (StateMachine.Inputs.WalkValue) return StateMachine.Inputs.CrouchValue ? (StateMachine.WalkSpeed, 0) : (StateMachine.WalkSpeed, -1f);
-            if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
-            
-            return (StateMachine.NormalSpeed, 1f);
-        }
-        
         protected float GetMoveSpeed()
         {
-            return StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed;
+            if (!StateMachine.IsMoving()) return 0;
+            if (StateMachine.Inputs.WalkValue) return StateMachine.WalkSpeed;
+            if (StateMachine.Inputs.RunValue) return StateMachine.RunSpeed;
+            
+            return StateMachine.NormalSpeed;
         }
 
         protected bool IsAnimationInTransition() => StateMachine.Animator.IsInTransition(0);
