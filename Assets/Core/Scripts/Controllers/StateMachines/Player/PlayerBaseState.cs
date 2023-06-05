@@ -38,8 +38,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         protected (float speed, float animationValue) GetSpeed()
         {
-            if (!StateMachine.IsMoving()) return StateMachine.Inputs.CrouchValue ? (0, -1f) : (0, 0);
-            
+            if (!StateMachine.IsMoving()) return StateMachine.Inputs.CrouchValue || ForceCrouchByHeight() ? (0, -1f) : (0, 0);
+
             if (StateMachine.Inputs.WalkValue) return StateMachine.Inputs.CrouchValue ? (StateMachine.WalkSpeed, 0) : (StateMachine.WalkSpeed, -1f);
             if (StateMachine.Inputs.RunValue) return (StateMachine.RunSpeed, 2f);
             
@@ -90,6 +90,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + StateMachine.MainCamera.transform.eulerAngles.y;
             var rotation = Mathf.LerpAngle(StateMachine.transform.eulerAngles.y, _targetRotation, OFFSET * multiplier);
             StateMachine.transform.rotation = Quaternion.Euler(0, rotation, 0);
+        }
+        
+        protected bool ForceCrouchByHeight()
+        {
+            if (!Physics.SphereCast(StateMachine.transform.position, StateMachine.InitialCapsuleRadius, Vector3.up, out var hit,
+                    StateMachine.InitialCapsuleHeight, -1, QueryTriggerInteraction.Ignore)) return false;
+            
+            return hit.point.y - StateMachine.transform.position.y > StateMachine.CrouchCapsuleHeight;
         }
 
         protected void CameraRotation()

@@ -45,6 +45,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Header("Player")]
         [HideInInspector] public float InitialCapsuleHeight;
         public float JumpCapsuleHeight = 1f;
+        public float CrouchCapsuleHeight = 1f;
         public float RollCapsuleHeight = .6f;
         public float SlideCapsuleHeight = .4f;
         [HideInInspector] public float InitialCapsuleRadius;

@@ -36,7 +36,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (StateMachine.Velocity.y < 0 && !StateMachine.IsGrounded()) StateMachine.SwitchState(new PlayerFallState(StateMachine));
-            else if (!StateMachine.Inputs.CrouchValue) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            else if (!StateMachine.Inputs.CrouchValue && !ForceCrouchByHeight()) StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SubscribeEvents();
 
-            SetCapsuleSize(1f, StateMachine.InitialCapsuleRadius);
+            SetCapsuleSize(StateMachine.CrouchCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
             StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.CrouchBlendTree, .2f);
 
@@ -57,10 +57,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             CheckStateChange();
             
-            var (speed, animationValue) = GetSpeed();
+            var (speed, _) = GetSpeed();
             Move(speed * StateMachine.CrouchSpeedModifier);
+
+            var spd = !StateMachine.IsMoving() ? 0 : .6f;
+            if (StateMachine.Inputs.WalkValue) spd = .3f;
+            if (StateMachine.Inputs.RunValue) spd = 1.5f;
             
-            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
+            AnimatorSetFloat(PlayerAnimationIds.Speed, spd, .1f);
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, !StateMachine.IsMoving() ? 0 : 1f, .1f);
         }
         
         public override void TickLate(float deltaTime)
