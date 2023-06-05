@@ -31,7 +31,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (IsAnimationInTransition()) return;
             
-            if (HasAnimationReachedStage(.9f)) 
+            if (HasAnimationReachedStage(.95f)) 
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
         
@@ -43,14 +43,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             SetCapsuleSize(StateMachine.RollCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
-            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .2f);
+            StateMachine.Animator.CrossFadeInFixedTime(PlayerAnimationIds.Roll, .1f);
         }
 
         public override void Tick(float deltaTime)
         {
             ApplyGravity(4f);
             
-            var speed = StateMachine.RollSpeed + (StateMachine.Inputs.RunValue ? StateMachine.RunSpeed : StateMachine.NormalSpeed);
+            var speed = GetMoveSpeed() + StateMachine.RollSpeed;
             Roll(speed);
             
             MoveRotation();

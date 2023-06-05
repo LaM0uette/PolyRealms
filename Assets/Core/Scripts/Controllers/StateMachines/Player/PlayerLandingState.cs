@@ -26,7 +26,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (IsAnimationInTransition()) return;
             
-            if (HasAnimationReachedStage(.9f)) 
+            if (HasAnimationReachedStage(.95f)) 
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
