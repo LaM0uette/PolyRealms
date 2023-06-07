@@ -4874,15 +4874,80 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1735670249710150101, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2914757909131272155, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062362307203962810, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062362307203962810, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4928125882287655940, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: CameraRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4928125882287655940, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: CameraDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4928125882287655940, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: CameraCollisionFilter.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119172349056376038, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: CameraCollisionFilter.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226101169459400936, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_DefaultBlend.m_Time
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755867805531616393, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770283780925262541, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458647049834750825, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965261733519871219, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: CameraCollisionFilter.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

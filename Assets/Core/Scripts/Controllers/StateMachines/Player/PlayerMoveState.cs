@@ -74,6 +74,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
+
+            if (ForceCrouchByHeight())
+            { 
+                StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
+                return;
+            }
+            
             StateMachine.TransitionToAnimation(PlayerAnimationIds.MoveBlendTree, .2f);
         }
 

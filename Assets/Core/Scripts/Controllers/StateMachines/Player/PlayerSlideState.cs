@@ -1,5 +1,4 @@
 ﻿using Core.Scripts.StaticUtilities;
-using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
