@@ -118,39 +118,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DashForward"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""333956fa-0fab-4a3d-a8a4-d16461e720c3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""MultiTap"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DashBackward"",
-                    ""type"": ""Button"",
-                    ""id"": ""5fb492d0-4ad5-47ae-b049-637d4fe52773"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DashLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""773f12a9-945d-41f7-880a-8cac491b5f0f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DashRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""5246b75f-d522-4454-8f46-0ea639bad242"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -443,89 +416,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4dedce4f-0d86-402b-a259-c6a9a74f9d70"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""DashLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""78dbb1cd-ac33-4d88-9dc7-1b5322a16eca"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DashLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""06fb17d1-60b9-4bd3-95b9-9aab5e778e57"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""DashRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0a831fdc-0f75-4b5c-ad39-2ce583704269"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DashRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e3c35e56-5781-4830-a2f6-d3fdbc4441f1"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""DashForward"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""a2a183bb-9bb6-4381-9587-9921c0e8e6bd"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""DashForward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""364f4129-6bc5-4f7e-9f12-1ac1170c726c"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""DashBackward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f6074f1d-e732-42fa-8f29-ce0bfca0c732"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DashBackward"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -585,10 +492,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_CrouchAction = m_Player.FindAction("CrouchAction", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
-        m_Player_DashForward = m_Player.FindAction("DashForward", throwIfNotFound: true);
-        m_Player_DashBackward = m_Player.FindAction("DashBackward", throwIfNotFound: true);
-        m_Player_DashLeft = m_Player.FindAction("DashLeft", throwIfNotFound: true);
-        m_Player_DashRight = m_Player.FindAction("DashRight", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -660,10 +564,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_CrouchAction;
     private readonly InputAction m_Player_Slide;
-    private readonly InputAction m_Player_DashForward;
-    private readonly InputAction m_Player_DashBackward;
-    private readonly InputAction m_Player_DashLeft;
-    private readonly InputAction m_Player_DashRight;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -678,10 +579,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @CrouchAction => m_Wrapper.m_Player_CrouchAction;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
-        public InputAction @DashForward => m_Wrapper.m_Player_DashForward;
-        public InputAction @DashBackward => m_Wrapper.m_Player_DashBackward;
-        public InputAction @DashLeft => m_Wrapper.m_Player_DashLeft;
-        public InputAction @DashRight => m_Wrapper.m_Player_DashRight;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -721,18 +619,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Slide.started += instance.OnSlide;
             @Slide.performed += instance.OnSlide;
             @Slide.canceled += instance.OnSlide;
-            @DashForward.started += instance.OnDashForward;
-            @DashForward.performed += instance.OnDashForward;
-            @DashForward.canceled += instance.OnDashForward;
-            @DashBackward.started += instance.OnDashBackward;
-            @DashBackward.performed += instance.OnDashBackward;
-            @DashBackward.canceled += instance.OnDashBackward;
-            @DashLeft.started += instance.OnDashLeft;
-            @DashLeft.performed += instance.OnDashLeft;
-            @DashLeft.canceled += instance.OnDashLeft;
-            @DashRight.started += instance.OnDashRight;
-            @DashRight.performed += instance.OnDashRight;
-            @DashRight.canceled += instance.OnDashRight;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -767,18 +656,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Slide.started -= instance.OnSlide;
             @Slide.performed -= instance.OnSlide;
             @Slide.canceled -= instance.OnSlide;
-            @DashForward.started -= instance.OnDashForward;
-            @DashForward.performed -= instance.OnDashForward;
-            @DashForward.canceled -= instance.OnDashForward;
-            @DashBackward.started -= instance.OnDashBackward;
-            @DashBackward.performed -= instance.OnDashBackward;
-            @DashBackward.canceled -= instance.OnDashBackward;
-            @DashLeft.started -= instance.OnDashLeft;
-            @DashLeft.performed -= instance.OnDashLeft;
-            @DashLeft.canceled -= instance.OnDashLeft;
-            @DashRight.started -= instance.OnDashRight;
-            @DashRight.performed -= instance.OnDashRight;
-            @DashRight.canceled -= instance.OnDashRight;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -826,9 +706,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnCrouchAction(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
-        void OnDashForward(InputAction.CallbackContext context);
-        void OnDashBackward(InputAction.CallbackContext context);
-        void OnDashLeft(InputAction.CallbackContext context);
-        void OnDashRight(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

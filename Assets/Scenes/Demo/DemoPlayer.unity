@@ -4908,6 +4908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
+      propertyPath: ActiveDash
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781422814450638667, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
       propertyPath: BottomClamp
       value: -20
       objectReference: {fileID: 0}

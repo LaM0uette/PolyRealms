@@ -24,6 +24,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RollSpeed = 3f;
         public float LadderSpeed = 2f;
         public float JumpForce = 6f;
+        public float DashDistance = 8f;
+        public float DashDuration = 0.4f;
         [HideInInspector] public Vector3 Velocity;
         [HideInInspector] public bool IsClimbing;
         
@@ -36,7 +38,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float CrouchSpeedModifier = .6f;
         public float AirSpeedModifier = .8f;
         [Space] 
-        public bool ActiveDash = true;
         [HideInInspector] public bool IsTransitioning;
         
         [Header("Cinemachine")]

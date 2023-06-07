@@ -19,11 +19,7 @@ namespace Core.Scripts.Controllers
         public Action RollEvent { get; set; }
         public Action CrouchActionEvent { get; set; }
         public Action SlideEvent { get; set; }
-        
-        public Action DashForwardEvent { get; set; }
-        public Action DashBackwardEvent { get; set; }
-        public Action DashLeftEvent { get; set; }
-        public Action DashRightEvent { get; set; }
+        public Action DashEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
 
@@ -65,11 +61,7 @@ namespace Core.Scripts.Controllers
         public void OnRoll() => RollEvent?.Invoke();
         public void OnCrouchAction() => CrouchActionEvent?.Invoke();
         public void OnSlide() { if (RunValue) SlideEvent?.Invoke(); }
-        
-        public void OnDashForward() => DashForwardEvent?.Invoke();
-        public void OnDashBackward() => DashBackwardEvent?.Invoke();
-        public void OnDashLeft() => DashLeftEvent?.Invoke();
-        public void OnDashRight() => DashRightEvent?.Invoke();
+        public void OnDash() => DashEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 

@@ -21,10 +21,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.RollEvent += OnRoll;
             StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
             StateMachine.Inputs.SlideEvent += OnSlide;
-            StateMachine.Inputs.DashForwardEvent += OnDashForward;
-            StateMachine.Inputs.DashBackwardEvent += OnDashBackward;
-            StateMachine.Inputs.DashLeftEvent += OnDashLeft;
-            StateMachine.Inputs.DashRightEvent += OnDashRight;
+            StateMachine.Inputs.DashEvent += OnDash;
         }
         
         private void UnsubscribeEvents()
@@ -33,10 +30,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.RollEvent -= OnRoll;
             StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
             StateMachine.Inputs.SlideEvent -= OnSlide;
-            StateMachine.Inputs.DashForwardEvent -= OnDashForward;
-            StateMachine.Inputs.DashBackwardEvent -= OnDashBackward;
-            StateMachine.Inputs.DashLeftEvent -= OnDashLeft;
-            StateMachine.Inputs.DashRightEvent -= OnDashRight;
+            StateMachine.Inputs.DashEvent -= OnDash;
         }
 
         #endregion
@@ -60,11 +54,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (StateMachine.Inputs.RunValue) return 2f;
             
             return 1f;
-        }
-
-        private void ChangeStateDash(PlayerDashState.DashDirection dashDirection)
-        {
-            StateMachine.SwitchState(new PlayerDashState(StateMachine, dashDirection));
         }
 
         #endregion
@@ -127,10 +116,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         private void OnSlide() => StateMachine.SwitchState(new PlayerSlideState(StateMachine));
         
-        private void OnDashForward() =>  ChangeStateDash(PlayerDashState.DashDirection.Forward);
-        private void OnDashBackward() => ChangeStateDash(PlayerDashState.DashDirection.Backward);
-        private void OnDashLeft() => ChangeStateDash(PlayerDashState.DashDirection.Left);
-        private void OnDashRight() => ChangeStateDash(PlayerDashState.DashDirection.Right);
+        private void OnDash() =>  StateMachine.SwitchState(new PlayerDashState(StateMachine));
 
         #endregion
     }

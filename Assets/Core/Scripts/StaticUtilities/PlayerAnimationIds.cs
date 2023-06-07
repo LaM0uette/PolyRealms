@@ -17,7 +17,6 @@ namespace Core.Scripts.StaticUtilities
 
         public static readonly int MoveBlendTree = Animator.StringToHash("MoveBlendTree");
         public static readonly int CrouchBlendTree = Animator.StringToHash("CrouchBlendTree");
-        public static readonly int DashBlendTree = Animator.StringToHash("DashBlendTree");
 
         #endregion
         
@@ -26,6 +25,7 @@ namespace Core.Scripts.StaticUtilities
         public static readonly int Jump = Animator.StringToHash("Actions.Jump");
         public static readonly int Roll = Animator.StringToHash("Actions.Roll");
         public static readonly int Slide = Animator.StringToHash("Actions.Slide");
+        public static readonly int Dash = Animator.StringToHash("Actions.Dash");
 
         #endregion
 
