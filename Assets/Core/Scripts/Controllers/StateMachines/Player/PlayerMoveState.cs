@@ -62,7 +62,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
-            Time.timeScale = .1f;
             SubscribeEvents();
 
             if (ForceCrouchByHeight())
