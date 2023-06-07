@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "CameraZoom",
+                    "type": "Value",
+                    "id": "08c626a8-42cb-4eed-9472-91d22c07527a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Run",
                     "type": "Button",
                     "id": "6b2eff20-0caf-4083-9ae5-a3bd124defd0",
@@ -495,6 +504,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "DashBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "842b4c48-ba6a-42db-aad4-1cb6530065e2",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "Invert,Clamp(min=-10,max=10)",
+                    "groups": "PC",
+                    "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

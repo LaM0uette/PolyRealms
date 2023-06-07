@@ -1,5 +1,7 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
@@ -14,7 +16,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public InputReader Inputs { get; private set; }
         public CharacterController Controller { get; private set; }
         public Camera MainCamera { get; private set; }
-        
+
         [Header("Move")]
         public float WalkSpeed = 1f;
         public float NormalSpeed = 2f;
@@ -42,6 +44,10 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Range(0f, 180f)] public float TopClamp = 70.0f;
         [Range(0f, -180f)] public float BottomClamp = -30.0f;
         public GameObject _cinemachineCameraTarget;
+        public CinemachineVirtualCamera[] cinemachineCameras;
+        public float MinZoom = 1f;
+        public float MaxZoom = 8f;
+        public float ZoomForce = 10f;
         [HideInInspector] public bool UseRootMotion;
         
         [Header("Player")]

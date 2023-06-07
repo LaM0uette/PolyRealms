@@ -77,6 +77,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void TickLate(float deltaTime)
         {
             CameraRotation();
+            CameraZoom();
         }
 
         public override void Exit()

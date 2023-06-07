@@ -1,3 +1,4 @@
+using Cinemachine;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -103,6 +104,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             _cinemachineTargetPitch = _cinemachineTargetPitch.ClampAngle(StateMachine.BottomClamp, StateMachine.TopClamp);
 
             StateMachine._cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
+        }
+
+        protected void CameraZoom()
+        {
+            if (StateMachine.Inputs.CameraZoomValue.Equals(0)) return;
+
+            foreach (var camera in StateMachine.cinemachineCameras)
+            {
+                var thirdPersonFollow = camera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+                thirdPersonFollow.CameraDistance += StateMachine.Inputs.CameraZoomValue * StateMachine.ZoomForce * Time.deltaTime;
+                
+                if (thirdPersonFollow.CameraDistance <= StateMachine.MinZoom) thirdPersonFollow.CameraDistance = StateMachine.MinZoom;
+                if (thirdPersonFollow.CameraDistance >= StateMachine.MaxZoom) thirdPersonFollow.CameraDistance = StateMachine.MaxZoom;
+            }
         }
 
         protected void AnimatorSetFloat(int id, float value)
