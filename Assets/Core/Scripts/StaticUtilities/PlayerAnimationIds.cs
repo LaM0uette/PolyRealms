@@ -24,6 +24,7 @@ namespace Core.Scripts.StaticUtilities
 
         public static readonly int Jump = Animator.StringToHash("Actions.Jump");
         public static readonly int Roll = Animator.StringToHash("Actions.Roll");
+        public static readonly int RollJump = Animator.StringToHash("Actions.RollJump");
         public static readonly int Slide = Animator.StringToHash("Actions.Slide");
         public static readonly int Dash = Animator.StringToHash("Actions.Dash");
 

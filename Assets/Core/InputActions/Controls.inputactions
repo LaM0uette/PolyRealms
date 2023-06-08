@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RollJump",
+                    "type": "Button",
+                    "id": "7e2ff016-e8d2-4dfd-988d-92e4715009ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Roll",
                     "type": "Button",
                     "id": "ece4c656-7a35-48ed-87bf-b7d22cf58ac1",
@@ -453,6 +462,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d7ca7f9-ed13-4036-a03a-c5e667b7fed8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RollJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a778aa21-ed09-46c3-808d-868488c8c894",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RollJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

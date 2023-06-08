@@ -13,6 +13,20 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         #endregion
 
+        #region Subscribe/Unsubscribe Events
+
+        private void SubscribeEvents()
+        {
+            StateMachine.Inputs.RollJumpEvent += OnRollJump;
+        }
+        
+        private void UnsubscribeEvents()
+        {
+            StateMachine.Inputs.RollJumpEvent -= OnRollJump;
+        }
+
+        #endregion
+        
         #region Functions
 
         private void CheckStateChange()
@@ -32,6 +46,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Enter()
         {
+            SubscribeEvents();
+            
             StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
             
             SetCapsuleSize(StateMachine.JumpCapsuleHeight, StateMachine.InitialCapsuleRadius);
@@ -57,8 +73,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         public override void Exit()
         {
+            UnsubscribeEvents();
             ResetCapsuleSize();
         }
+
+        #endregion
+        
+        #region InputEvents
+
+        private void OnRollJump() => StateMachine.SwitchState(new PlayerRollJumpState(StateMachine));
 
         #endregion
     }

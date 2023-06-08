@@ -82,6 +82,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""RollJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e2ff016-e8d2-4dfd-988d-92e4715009ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Roll"",
                     ""type"": ""Button"",
                     ""id"": ""ece4c656-7a35-48ed-87bf-b7d22cf58ac1"",
@@ -477,6 +486,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d7ca7f9-ed13-4036-a03a-c5e667b7fed8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""RollJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a778aa21-ed09-46c3-808d-868488c8c894"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RollJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -519,6 +550,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Walk = m_Player.FindAction("Walk", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_RollJump = m_Player.FindAction("RollJump", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_CrouchAction = m_Player.FindAction("CrouchAction", throwIfNotFound: true);
@@ -592,6 +624,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Walk;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_RollJump;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_CrouchAction;
@@ -608,6 +641,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Walk => m_Wrapper.m_Player_Walk;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @RollJump => m_Wrapper.m_Player_RollJump;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @CrouchAction => m_Wrapper.m_Player_CrouchAction;
@@ -641,6 +675,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @RollJump.started += instance.OnRollJump;
+            @RollJump.performed += instance.OnRollJump;
+            @RollJump.canceled += instance.OnRollJump;
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
@@ -681,6 +718,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @RollJump.started -= instance.OnRollJump;
+            @RollJump.performed -= instance.OnRollJump;
+            @RollJump.canceled -= instance.OnRollJump;
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
@@ -742,6 +782,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnWalk(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRollJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnCrouchAction(InputAction.CallbackContext context);

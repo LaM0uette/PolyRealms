@@ -16,6 +16,7 @@ namespace Core.Scripts.Controllers
         public bool CrouchValue  { get; set; }
         
         public Action JumpEvent { get; set; }
+        public Action RollJumpEvent { get; set; }
         public Action RollEvent { get; set; }
         public Action CrouchActionEvent { get; set; }
         public Action SlideEvent { get; set; }
@@ -59,6 +60,7 @@ namespace Core.Scripts.Controllers
         }
         
         public void OnJump() => JumpEvent?.Invoke();
+        public void OnRollJump() => RollJumpEvent?.Invoke();
         public void OnRoll() => RollEvent?.Invoke();
         public void OnCrouchAction() => CrouchActionEvent?.Invoke();
         public void OnSlide() { if (RunValue) SlideEvent?.Invoke(); }
