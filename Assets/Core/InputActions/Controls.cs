@@ -87,7 +87,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""id"": ""7e2ff016-e8d2-4dfd-988d-92e4715009ce"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": ""MultiTap(tapDelay=0.2)"",
                     ""initialStateCheck"": false
                 },
                 {
