@@ -20,6 +20,7 @@ namespace Core.Scripts.Controllers
         public Action CrouchActionEvent { get; set; }
         public Action SlideEvent { get; set; }
         public Action DashEvent { get; set; }
+        public Action SwitchCameraEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
 
@@ -62,6 +63,7 @@ namespace Core.Scripts.Controllers
         public void OnCrouchAction() => CrouchActionEvent?.Invoke();
         public void OnSlide() { if (RunValue) SlideEvent?.Invoke(); }
         public void OnDash() => DashEvent?.Invoke();
+        public void OnSwitchCamera() => SwitchCameraEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 

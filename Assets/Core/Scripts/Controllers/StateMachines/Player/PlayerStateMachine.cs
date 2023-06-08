@@ -45,7 +45,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         [Range(0f, 180f)] public float TopClamp = 70.0f;
         [Range(0f, -180f)] public float BottomClamp = -30.0f;
         public GameObject _cinemachineCameraTarget;
-        public CinemachineVirtualCamera[] cinemachineCameras;
+        public CinemachineVirtualCamera[] CinemachineCameras;
+        public CinemachineStateDrivenCamera CinemachineStateDrivenCamera;
         public float MinZoom = 1f;
         public float MaxZoom = 8f;
         public float ZoomForce = 10f;
@@ -74,6 +75,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            Inputs.SwitchCameraEvent += () => { CinemachineStateDrivenCamera.enabled = !CinemachineStateDrivenCamera.enabled; };
             
             SwitchState(new PlayerMoveState(this));
         }

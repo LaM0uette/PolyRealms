@@ -41,11 +41,19 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private float GetSpeedAnimation()
         {
-            var spd = !StateMachine.IsMoving() ? 0 : .6f;
-            if (StateMachine.Inputs.WalkValue) spd = .3f;
+            var spd = !StateMachine.IsMoving() ? 0 : .8f;
+            if (StateMachine.Inputs.WalkValue) spd = .4f;
             if (StateMachine.Inputs.RunValue) spd = 1.5f;
             
             return spd;
+        }
+        
+        private float GetMoveSpeedAnimation()
+        {
+            if (!StateMachine.IsMoving()) return 0;
+            if (StateMachine.Inputs.RunValue) return 2f;
+            
+            return 1f;
         }
 
         #endregion
@@ -71,7 +79,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             var spd = GetSpeedAnimation();
             AnimatorSetFloat(PlayerAnimationIds.Speed, spd, .1f);
-            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, !StateMachine.IsMoving() ? 0 : 1f, .1f);
+            
+            var animationValue = GetMoveSpeedAnimation();
+            AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
         }
         
         public override void TickLate(float deltaTime)

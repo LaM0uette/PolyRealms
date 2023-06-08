@@ -110,7 +110,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.Inputs.CameraZoomValue.Equals(0)) return;
 
-            foreach (var camera in StateMachine.cinemachineCameras)
+            foreach (var camera in StateMachine.CinemachineCameras)
             {
                 var thirdPersonFollow = camera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
                 thirdPersonFollow.CameraDistance += StateMachine.Inputs.CameraZoomValue * StateMachine.ZoomForce * Time.deltaTime;
