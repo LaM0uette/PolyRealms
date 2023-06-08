@@ -67,11 +67,11 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             SetCapsuleSize(StateMachine.CrouchCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
             StateMachine.TransitionToAnimation(PlayerAnimationIds.CrouchBlendTree, .2f);
-
         }
 
         public override void Tick(float deltaTime)
         {
+            ApplyGravity();
             CheckStateChange();
             
             var speed = GetMoveSpeed() * StateMachine.CrouchSpeedModifier;

@@ -33,6 +33,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (StateMachine.IsTransitioning) return;
 
+            //if (!StateMachine.IsGrounded() && StateMachine.Inputs.CrouchValue)
+            //    StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
+            
             if (HasAnimationReachedStage(.2f) && StateMachine.IsGrounded())
                 StateMachine.SwitchState(new PlayerMoveState(StateMachine));
             
