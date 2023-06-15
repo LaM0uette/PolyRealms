@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
 {
-    public class PlayerJumpState : PlayerBaseState
+    public class PlayerTargetingState : PlayerBaseState
     {
         #region Statements
 
-        public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+        public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -31,16 +31,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void CheckStateChange()
         {
-            if (StateMachine.IsTransitioning) return;
-
-            //if (!StateMachine.IsGrounded() && StateMachine.Inputs.CrouchValue)
-            //    StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
-            
-            if (HasAnimationReachedStage(.2f) && StateMachine.IsGrounded())
-                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
-            
-            if (StateMachine.Velocity.y < StateMachine.Landing && !StateMachine.IsGrounded()) 
-                StateMachine.SwitchState(new PlayerFallState(StateMachine));
         }
 
         #endregion
@@ -50,10 +40,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SubscribeEvents();
-            
-            StateMachine.Velocity = new Vector3(StateMachine.Velocity.x, StateMachine.JumpForce, StateMachine.Velocity.z);
-            
-            SetCapsuleSize(StateMachine.JumpCapsuleHeight, StateMachine.InitialCapsuleRadius);
 
             StateMachine.TransitionToAnimation(PlayerAnimationIds.Jump);
         }
@@ -77,7 +63,6 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Exit()
         {
             UnsubscribeEvents();
-            ResetCapsuleSize();
         }
 
         #endregion
