@@ -58,7 +58,7 @@ namespace Core.Scripts.Controllers
             
             if (CrouchValue && (WalkValue || RunValue)) CrouchValue = !CrouchValue;
         }
-        
+
         public void OnJump() => JumpEvent?.Invoke();
         public void OnRollJump() => RollJumpEvent?.Invoke();
         public void OnRoll() => RollEvent?.Invoke();
