@@ -66,13 +66,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
             SetCapsuleSize(StateMachine.CrouchCapsuleHeight, StateMachine.InitialCapsuleRadius);
             
-            StateMachine.TransitionToAnimation(PlayerAnimationIds.CrouchBlendTree, .2f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.CrouchBlendTree);
         }
 
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
-            CheckStateChange();
             
             var speed = GetMoveSpeed() * StateMachine.CrouchSpeedModifier;
             Move(speed);
@@ -82,6 +81,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             var animationValue = GetMoveSpeedAnimation();
             AnimatorSetFloat(PlayerAnimationIds.MoveSpeed, animationValue, .1f);
+            
+            CheckStateChange();
         }
         
         public override void TickLate(float deltaTime)

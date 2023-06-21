@@ -15,6 +15,8 @@ namespace Core.Scripts.Controllers
         //InputActions
         private InputActionAsset _inputActions;
         private InputAction _walkAction;
+        private InputAction _runAction;
+        private InputAction _crouchAction;
         private InputAction _attackAction;
         
         public bool WalkValue  { get; set; }
@@ -37,9 +39,12 @@ namespace Core.Scripts.Controllers
             _inputActions = GetComponent<PlayerInput>().actions;
             InitializeInputActions();
         }
+        
         private void InitializeInputActions()
         {
             _walkAction = _inputActions.FindAction("Walk");
+            _runAction = _inputActions.FindAction("Run");
+            _crouchAction = _inputActions.FindAction("Crouch");
             _attackAction = _inputActions.FindAction("Attack");
         }
 
@@ -52,23 +57,40 @@ namespace Core.Scripts.Controllers
             _walkAction.started += OnWalkTrue;
             _walkAction.canceled += OnWalkFalse;
             
-            //_attackAction.started += _ => {AttackValue = true;};
-            //_attackAction.canceled += _ => {AttackValue = false;};
+            _runAction.started += OnRunTrue;
+            _runAction.canceled += OnRunFalse;
+            
+            _crouchAction.started += OnCrouchTrue;
+            _crouchAction.canceled += OnCrouchFalse;
+            
+            _attackAction.started += OnAttackTrue;
+            _attackAction.canceled += OnAttackFalse;
             
             _inputActions.Enable();
             _walkAction.Enable();
+            _runAction.Enable();
+            _crouchAction.Enable();
             _attackAction.Enable();
         }
+        
         private void UnsubscribeActions()
         {
             _walkAction.started -= OnWalkTrue;
             _walkAction.canceled -= OnWalkFalse;
             
-            //_attackAction.started -= _ => {AttackValue = true;};
-            //_attackAction.canceled -= _ => {AttackValue = false;};
+            _runAction.started -= OnRunTrue;
+            _runAction.canceled -= OnRunFalse;
             
+            _crouchAction.started -= OnCrouchTrue;
+            _crouchAction.canceled -= OnCrouchFalse;
+            
+            _attackAction.started -= OnAttackTrue;
+            _attackAction.canceled -= OnAttackFalse;
+
             _inputActions.Disable();
             _walkAction.Disable();
+            _runAction.Disable();
+            _crouchAction.Disable();
             _attackAction.Disable();
         }
 
@@ -93,41 +115,46 @@ namespace Core.Scripts.Controllers
             CameraZoomValue = zoomValue.Equals(0) ? 0 : zoomValue;
         }
         
-        private void OnWalkTrue(InputAction.CallbackContext context)
+        private void OnWalkTrue(InputAction.CallbackContext _)
         {
             WalkValue = true;
             RunValue = false;
         }
-        private void OnWalkFalse(InputAction.CallbackContext context)
+        private void OnWalkFalse(InputAction.CallbackContext _)
         {
             WalkValue = false;
         }
-        
-        public void OnRun()
+        private void OnRunTrue(InputAction.CallbackContext _)
         {
-            RunValue = !RunValue;
-            if (RunValue) WalkValue = false;
+            RunValue = true;
+            WalkValue = false;
         }
-        public void OnCrouch()
+        private void OnRunFalse(InputAction.CallbackContext _)
         {
-            if (!RunValue || MoveValue.Equals(Vector2.zero))
-            {
-                CrouchValue = !CrouchValue; 
-                return;
-            }
+            RunValue = false;
+        }
+        private void OnCrouchTrue(InputAction.CallbackContext _)
+        {
+            if (RunValue && !MoveValue.Equals(Vector2.zero)) return;
             
-            if (CrouchValue && (WalkValue || RunValue)) CrouchValue = !CrouchValue;
+            CrouchValue = true;
         }
-        public void OnAttack()
+        private void OnCrouchFalse(InputAction.CallbackContext _)
         {
-            AttackValue = !AttackValue;
-
-            if (!AttackValue) return;
+            CrouchValue = false;
+        }
+        private void OnAttackTrue(InputAction.CallbackContext _)
+        {
+            AttackValue = true;
             WalkValue = false;
             RunValue = false;
             CrouchValue = false;
         }
-
+        private void OnAttackFalse(InputAction.CallbackContext _)
+        {
+            AttackValue = false;
+        }
+        
         public void OnJump() => JumpEvent?.Invoke();
         public void OnRollJump() => RollJumpEvent?.Invoke();
         public void OnRoll() => RollEvent?.Invoke();
