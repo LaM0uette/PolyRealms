@@ -46,9 +46,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             return StateMachine.NormalSpeed;
         }
         
-        protected bool HasAnimationReachedStage(float value)
+        protected bool HasAnimationReachedStage(float value, int layerIndex = 0)
         {
-            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+            var state = StateMachine.Animator.GetCurrentAnimatorStateInfo(layerIndex);
             var normalizedTime = Mathf.Repeat(state.normalizedTime,1f);
 
             return normalizedTime > value;

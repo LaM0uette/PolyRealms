@@ -44,5 +44,13 @@ namespace Core.Scripts.StaticUtilities
         public static readonly int ClimbingLadderTop = Animator.StringToHash("Climb.ClimbingLadderTop");
 
         #endregion
+
+        #region Attack
+
+        public static readonly int DrawSword = Animator.StringToHash("Attack.DrawSword");
+        public static readonly int SheathSword = Animator.StringToHash("Attack.SheathSword");
+        public static readonly int SwordAndShieldSlash = Animator.StringToHash("Attack.SwordAndShieldSlash");
+
+        #endregion
     }
 }

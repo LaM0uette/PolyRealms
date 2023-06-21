@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
 namespace Core.Scripts.Controllers.StateMachines.Player
@@ -100,6 +101,18 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             yield return new WaitForSeconds(delay);
             IsTransitioning = false;
+        }
+        
+        public void EndAttack()
+        {
+            StartCoroutine(EndAttackAfterDelay());
+        }
+        private IEnumerator EndAttackAfterDelay()
+        {
+            if (Inputs.AttackValue) yield break;
+            
+            yield return new WaitForSeconds(5);
+            TransitionToAnimation(PlayerAnimationIds.SheathSword);
         }
 
         #endregion

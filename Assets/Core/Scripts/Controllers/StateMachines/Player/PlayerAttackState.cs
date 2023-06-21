@@ -17,11 +17,22 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void CheckStateChange()
         {
             if (StateMachine.IsTransitioning) return;
-            if (!HasAnimationReachedStage(.95f)) return;
+            if (!HasAnimationReachedStage(.95f, 1)) return;
             
             if (StateMachine.Inputs.AttackValue) return;
-
+            
+            StateMachine.EndAttack();
             StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+        }
+
+        private void Attack()
+        {
+            if (!StateMachine.Inputs.AttackValue) return;
+            
+            if (StateMachine.IsTransitioning) return;
+            if (!HasAnimationReachedStage(.95f, 1)) return;
+            
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.SwordAndShieldSlash);
         }
         
         #endregion
@@ -31,12 +42,14 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SetRootMotion(true);
-            StateMachine.TransitionToAnimation(PlayerAnimationIds.Slide, .2f);
+            StateMachine.TransitionToAnimation(PlayerAnimationIds.DrawSword);
         }
 
         public override void Tick(float deltaTime)
         {
             ApplyGravity();
+
+            Attack();
 
             MoveRotation(.1f);
             CheckStateChange();
