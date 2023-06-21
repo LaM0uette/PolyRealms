@@ -105,10 +105,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         public void EndAttack()
         {
+            if (!IsTimerRunning) return;
             StartCoroutine(CountdownTimer());
         }
         
         public int TimerValue = 5;
+        public bool IsTimerRunning;
         
         private IEnumerator CountdownTimer()
         {
@@ -125,7 +127,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (Inputs.AttackValue) yield break;
             
             yield return new WaitForSeconds(timerValue);
-            TransitionToAnimation(PlayerAnimationIds.SheathSword);
+            if (IsTimerRunning) TransitionToAnimation(PlayerAnimationIds.SheathSword);
+            IsTimerRunning = false;
         }
 
         #endregion

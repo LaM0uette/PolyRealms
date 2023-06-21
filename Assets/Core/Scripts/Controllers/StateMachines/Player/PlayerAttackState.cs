@@ -44,7 +44,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public override void Enter()
         {
             SetRootMotion(true);
-            StateMachine.TransitionToAnimation(PlayerAnimationIds.DrawSword);
+            if (!StateMachine.IsTimerRunning)  StateMachine.TransitionToAnimation(PlayerAnimationIds.DrawSword);
+            StateMachine.IsTimerRunning = true;
         }
 
         public override void Tick(float deltaTime)
