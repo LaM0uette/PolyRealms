@@ -7,6 +7,11 @@ namespace Core.Scripts.Controllers
     public class InputReader : MonoBehaviour
     {
         #region Statements
+        
+        //InputActions
+        private InputActionAsset _inputActions;
+        private InputAction _walkAction;
+        private InputAction _attackAction;
 
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
@@ -25,6 +30,23 @@ namespace Core.Scripts.Controllers
         public Action SwitchCameraEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
+        
+        private void Awake()
+        {
+            _inputActions = GetComponent<PlayerInput>().actions;
+            InitializeInputActions();
+            
+            _walkAction.started += _ => {WalkValue = true;};
+            _walkAction.canceled += _ => {WalkValue = false;};
+            
+            //_attackAction.started += _ => {AttackValue = true;};
+            //_attackAction.canceled += _ => {AttackValue = false;};
+        }
+        private void InitializeInputActions()
+        {
+            _walkAction = _inputActions.FindAction("Walk");
+            _attackAction = _inputActions.FindAction("Attack");
+        }
 
         #endregion
 
@@ -39,7 +61,7 @@ namespace Core.Scripts.Controllers
             CameraZoomValue = zoomValue.Equals(0) ? 0 : zoomValue;
         }
 
-        public void OnWalk()
+        public void OnWalkp()
         {
             WalkValue = !WalkValue;
             if (WalkValue) RunValue = false;
