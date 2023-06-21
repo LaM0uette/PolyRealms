@@ -14,6 +14,7 @@ namespace Core.Scripts.Controllers
         public bool WalkValue  { get; set; }
         public bool RunValue  { get; set; }
         public bool CrouchValue  { get; set; }
+        public bool AttackValue  { get; set; }
         
         public Action JumpEvent { get; set; }
         public Action RollJumpEvent { get; set; }
@@ -57,6 +58,15 @@ namespace Core.Scripts.Controllers
             }
             
             if (CrouchValue && (WalkValue || RunValue)) CrouchValue = !CrouchValue;
+        }
+        public void OnAttack()
+        {
+            AttackValue = !AttackValue;
+
+            if (!AttackValue) return;
+            WalkValue = false;
+            RunValue = false;
+            CrouchValue = false;
         }
 
         public void OnJump() => JumpEvent?.Invoke();

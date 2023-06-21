@@ -42,8 +42,13 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (!StateMachine.IsGrounded()) 
                 StateMachine.SwitchState(new PlayerFallState(StateMachine));
             
-            if (StateMachine.Inputs.CrouchValue && StateMachine.IsGrounded()) 
+            if (!StateMachine.IsGrounded()) return;
+            
+            if (StateMachine.Inputs.CrouchValue) 
                 StateMachine.SwitchState(new PlayerCrouchState(StateMachine));
+            
+            if (StateMachine.Inputs.AttackValue) 
+                StateMachine.SwitchState(new PlayerAttackState(StateMachine));
         }
         
         private float GetMoveSpeedAnimation()
