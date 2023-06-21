@@ -8,14 +8,15 @@ namespace Core.Scripts.Controllers
     {
         #region Statements
         
+        public Vector2 MoveValue { get; private set; }
+        public Vector2 LookValue { get; private set; }
+        public float CameraZoomValue { get; private set; }
+        
         //InputActions
         private InputActionAsset _inputActions;
         private InputAction _walkAction;
         private InputAction _attackAction;
-
-        public Vector2 MoveValue { get; private set; }
-        public Vector2 LookValue { get; private set; }
-        public float CameraZoomValue { get; private set; }
+        
         public bool WalkValue  { get; set; }
         public bool RunValue  { get; set; }
         public bool CrouchValue  { get; set; }
@@ -35,12 +36,6 @@ namespace Core.Scripts.Controllers
         {
             _inputActions = GetComponent<PlayerInput>().actions;
             InitializeInputActions();
-            
-            _walkAction.started += _ => {WalkValue = true;};
-            _walkAction.canceled += _ => {WalkValue = false;};
-            
-            //_attackAction.started += _ => {AttackValue = true;};
-            //_attackAction.canceled += _ => {AttackValue = false;};
         }
         private void InitializeInputActions()
         {
@@ -50,22 +45,64 @@ namespace Core.Scripts.Controllers
 
         #endregion
 
+        #region Subscriptions
+
+        private void SubscribeActions()
+        {
+            _walkAction.started += OnWalkTrue;
+            _walkAction.canceled += OnWalkFalse;
+            
+            //_attackAction.started += _ => {AttackValue = true;};
+            //_attackAction.canceled += _ => {AttackValue = false;};
+            
+            _inputActions.Enable();
+            _walkAction.Enable();
+            _attackAction.Enable();
+        }
+        private void UnsubscribeActions()
+        {
+            _walkAction.started -= OnWalkTrue;
+            _walkAction.canceled -= OnWalkFalse;
+            
+            //_attackAction.started -= _ => {AttackValue = true;};
+            //_attackAction.canceled -= _ => {AttackValue = false;};
+            
+            _inputActions.Disable();
+            _walkAction.Disable();
+            _attackAction.Disable();
+        }
+
+        #endregion
+
         #region Events
+        
+        private void OnEnable()
+        {
+            SubscribeActions();
+        }
+        private void OnDisable()
+        {
+            UnsubscribeActions();
+        }
 
         public void OnMove(InputValue value) => MoveValue = value.Get<Vector2>();
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
-
         public void OnCameraZoom(InputValue value)
         {
             var zoomValue = value.Get<float>();
             CameraZoomValue = zoomValue.Equals(0) ? 0 : zoomValue;
         }
-
-        public void OnWalkp()
+        
+        private void OnWalkTrue(InputAction.CallbackContext context)
         {
-            WalkValue = !WalkValue;
-            if (WalkValue) RunValue = false;
+            WalkValue = true;
+            RunValue = false;
         }
+        private void OnWalkFalse(InputAction.CallbackContext context)
+        {
+            WalkValue = false;
+        }
+        
         public void OnRun()
         {
             RunValue = !RunValue;
