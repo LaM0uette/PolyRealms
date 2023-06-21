@@ -105,13 +105,26 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         
         public void EndAttack()
         {
-            StartCoroutine(EndAttackAfterDelay());
+            StartCoroutine(CountdownTimer());
         }
-        private IEnumerator EndAttackAfterDelay()
+        
+        public int TimerValue = 5;
+        
+        private IEnumerator CountdownTimer()
+        {
+            while(TimerValue > 0)
+            {
+                yield return new WaitForSeconds(1); 
+                TimerValue -= 1; 
+            }
+            StartCoroutine(EndAttackAfterDelay(TimerValue));
+        }
+        
+        private IEnumerator EndAttackAfterDelay(int timerValue)
         {
             if (Inputs.AttackValue) yield break;
             
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(timerValue);
             TransitionToAnimation(PlayerAnimationIds.SheathSword);
         }
 

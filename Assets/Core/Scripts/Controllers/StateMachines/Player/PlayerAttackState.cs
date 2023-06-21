@@ -29,6 +29,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             if (!StateMachine.Inputs.AttackValue) return;
             
+            StateMachine.TimerValue = 5;
+            
             if (StateMachine.IsTransitioning) return;
             if (!HasAnimationReachedStage(.95f, 1)) return;
             
