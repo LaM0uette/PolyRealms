@@ -103,32 +103,47 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             IsTransitioning = false;
         }
         
-        public void EndAttack()
-        {
-            if (!IsTimerRunning) return;
-            StartCoroutine(CountdownTimer());
-        }
+        
+        // TEST
         
         public int TimerValue = 5;
-        public bool IsTimerRunning;
+        public bool IsInAttackingState;
         
+        private Coroutine countdownCoroutine;
+
+        public void EndAttack()
+        {
+            Debug.Log("EndAttack");
+
+            if (countdownCoroutine != null)
+            {
+                StopCoroutine(countdownCoroutine);
+            }
+
+            countdownCoroutine = StartCoroutine(CountdownTimer());
+        }
+
         private IEnumerator CountdownTimer()
         {
+            Debug.Log("CountdownTimerStart");
+
             while(TimerValue > 0)
             {
                 yield return new WaitForSeconds(1); 
                 TimerValue -= 1; 
             }
-            StartCoroutine(EndAttackAfterDelay(TimerValue));
+    
+            Debug.Log("CountdownTimerEnd");
+            if (!Inputs.AttackValue) EndAttackAfter();
+            IsInAttackingState = false;
+            countdownCoroutine = null;
         }
-        
-        private IEnumerator EndAttackAfterDelay(int timerValue)
+
+        private void EndAttackAfter()
         {
-            if (Inputs.AttackValue) yield break;
+            Debug.Log("EndAttackAfterDelay");
             
-            yield return new WaitForSeconds(timerValue);
-            if (IsTimerRunning) TransitionToAnimation(PlayerAnimationIds.SheathSword);
-            IsTimerRunning = false;
+            if (IsInAttackingState) TransitionToAnimation(PlayerAnimationIds.SheathSword);
         }
 
         #endregion
