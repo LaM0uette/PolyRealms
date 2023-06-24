@@ -31,6 +31,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             StateMachine.TimerValue = 5;
             
+            var isSwordAndShieldSlash = StateMachine.Animator.GetCurrentAnimatorStateInfo(1).IsName("Attack.SwordIdle");
+            if (isSwordAndShieldSlash) StateMachine.TransitionToAnimation(PlayerAnimationIds.SwordAndShieldSlash);
+            
             if (StateMachine.IsTransitioning) return;
             if (!HasAnimationReachedStage(.95f, 1)) return;
             
