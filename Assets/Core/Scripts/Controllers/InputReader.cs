@@ -23,6 +23,7 @@ namespace Core.Scripts.Controllers
         public bool RunValue  { get; set; }
         public bool CrouchValue  { get; set; }
         public bool AttackValue  { get; set; }
+        public bool HintVisionValue  { get; set; }
         
         public Action JumpEvent { get; set; }
         public Action RollJumpEvent { get; set; }
@@ -31,6 +32,7 @@ namespace Core.Scripts.Controllers
         public Action SlideEvent { get; set; }
         public Action DashEvent { get; set; }
         public Action SwitchCameraEvent { get; set; }
+        public Action HintVisionEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
         
@@ -162,6 +164,11 @@ namespace Core.Scripts.Controllers
         public void OnSlide() { if (RunValue) SlideEvent?.Invoke(); }
         public void OnDash() => DashEvent?.Invoke();
         public void OnSwitchCamera() => SwitchCameraEvent?.Invoke();
+        public void OnHintVision() 
+        {
+            HintVisionEvent?.Invoke();
+            HintVisionValue = !HintVisionValue;
+        }
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 
