@@ -52,8 +52,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             
             if (StateMachine.Inputs.AttackValue)
             {
-                StateMachine.SwitchState(new PlayerAttackState(StateMachine));
-                return;
+                //StateMachine.SwitchState(new PlayerAttackState(StateMachine));
             }
         }
         

@@ -5188,15 +5188,100 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1735670249710150101, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3805849856785643149, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_Radius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4062362307203962810, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_DefaultBlend.m_Time
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.size
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[14].m_Hash
+      value: 1702453250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[15].m_Hash
+      value: -1369426840
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[16].m_Hash
+      value: -1161306794
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[17].m_Hash
+      value: 2134108115
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[18].m_Hash
+      value: -1958546146
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[19].m_Hash
+      value: 133438990
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[20].m_Hash
+      value: -270230663
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[21].m_Hash
+      value: -1936291765
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[14].m_ParentHash
+      value: -2043135007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[15].m_ParentHash
+      value: 1619415391
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[17].m_ParentHash
+      value: -1369426840
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[18].m_ParentHash
+      value: 1619415391
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291858271049058276, guid: 8757fd30e013beb428773fe8d2a9a600,
+        type: 3}
+      propertyPath: m_ParentHash.Array.data[21].m_ParentHash
+      value: -1958546146
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
