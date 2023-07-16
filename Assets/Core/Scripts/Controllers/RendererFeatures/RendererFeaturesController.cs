@@ -7,19 +7,25 @@ namespace Core.Scripts.Controllers.RendererFeatures
     {
         public UniversalRendererData RendererData;
         
-        private static ScriptableRendererFeature _normalFeature;
+        private static ScriptableRendererFeature _hintFeature;
+        private static ScriptableRendererFeature _hidingFeature;
 
         private void Awake()
         {
             foreach (var feature in RendererData.rendererFeatures)
             {
-                if (feature.name == "RenderObjects")
+                if (feature.name == "HidingObjects")
                 {
-                    _normalFeature = feature;
+                    _hidingFeature = feature;
+                }
+                else if (feature.name == "HintObjects")
+                {
+                    _hintFeature = feature;
                 }
             }
 
-            if (_normalFeature != null) _normalFeature.SetActive(false);
+            if (_hidingFeature != null) _hidingFeature.SetActive(true);
+            if (_hintFeature != null) _hintFeature.SetActive(true);
         }
     }
 }
