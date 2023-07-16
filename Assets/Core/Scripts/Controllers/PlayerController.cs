@@ -7,7 +7,7 @@ namespace Core.Scripts.Controllers
     public class PlayerController : MonoBehaviour
     {
         #region Statements
-
+        
         private PlayerStateMachine _stateMachine;
 
         private void Awake()
