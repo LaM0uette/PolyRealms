@@ -9089,7 +9089,7 @@ PrefabInstance:
         type: 3}
       propertyPath: HintVisionFeature
       value: 
-      objectReference: {fileID: 8467802053140226874, guid: c40be3174f62c4acf8c1216858c64956,
+      objectReference: {fileID: 4789573120792489594, guid: c40be3174f62c4acf8c1216858c64956,
         type: 2}
     - target: {fileID: 6863874087592112825, guid: 8757fd30e013beb428773fe8d2a9a600,
         type: 3}

@@ -13,6 +13,7 @@ namespace Core.Scripts.Controllers.RendererFeatures
         public ScriptableRendererFeature HintRedFeature;
         public ScriptableRendererFeature HintBlueFeature;
         public ScriptableRendererFeature HintGreenFeature;
+        public ScriptableRendererFeature HintFeature;
         
         private PlayerStateMachine _stateMachine;
 
@@ -52,6 +53,7 @@ namespace Core.Scripts.Controllers.RendererFeatures
             HintRedFeature.SetActive(_hintVisionValue);
             HintBlueFeature.SetActive(_hintVisionValue);
             HintGreenFeature.SetActive(_hintVisionValue);
+            HintFeature.SetActive(_hintVisionValue);
         }
 
         #endregion
