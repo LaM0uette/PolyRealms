@@ -11,11 +11,11 @@ TagManager:
   - Player
   - Water
   - UI
-  - HintAll
-  - HintRed
-  - HintBlue
-  - HintGreen
-  - Hint
+  - VisionHint
+  - VisionHideHint
+  - VisionTrack
+  - HintHideTrack
+  - 
   - 
   - 
   - 

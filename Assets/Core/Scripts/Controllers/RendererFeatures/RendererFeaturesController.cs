@@ -8,12 +8,11 @@ namespace Core.Scripts.Controllers.RendererFeatures
     {
         #region Statements
 
-        public ScriptableRendererFeature HintVisionFeature;
-        public ScriptableRendererFeature HintAllFeature;
-        public ScriptableRendererFeature HintRedFeature;
-        public ScriptableRendererFeature HintBlueFeature;
-        public ScriptableRendererFeature HintGreenFeature;
-        public ScriptableRendererFeature HintFeature;
+        public ScriptableRendererFeature VisionFeature;
+        public ScriptableRendererFeature VisionHintFeature;
+        public ScriptableRendererFeature VisionHideFeature;
+        public ScriptableRendererFeature VisionTrackFeature;
+        public ScriptableRendererFeature VisionHideTrackFeature;
         
         private PlayerStateMachine _stateMachine;
 
@@ -48,12 +47,11 @@ namespace Core.Scripts.Controllers.RendererFeatures
         {
             var _hintVisionValue = _stateMachine.Inputs.HintVisionValue;
             
-            HintVisionFeature.SetActive(_hintVisionValue);
-            HintAllFeature.SetActive(_hintVisionValue);
-            HintRedFeature.SetActive(_hintVisionValue);
-            HintBlueFeature.SetActive(_hintVisionValue);
-            HintGreenFeature.SetActive(_hintVisionValue);
-            HintFeature.SetActive(_hintVisionValue);
+            VisionFeature.SetActive(_hintVisionValue);
+            VisionHintFeature.SetActive(_hintVisionValue);
+            VisionHideFeature.SetActive(_hintVisionValue);
+            VisionTrackFeature.SetActive(_hintVisionValue);
+            VisionHideTrackFeature.SetActive(_hintVisionValue);
         }
 
         #endregion
