@@ -161,6 +161,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""0641ac70-9ec5-435a-a6b1-3dfaa4d6988b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -570,6 +579,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""HintVision"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5e35a41-8958-4655-8dfc-241ad45c3030"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92f133cc-f845-44a2-b90e-eb17b032f35c"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -621,6 +652,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_SwitchCamera = m_Player.FindAction("SwitchCamera", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_HintVision = m_Player.FindAction("HintVision", throwIfNotFound: true);
+        m_Player_SwitchTime = m_Player.FindAction("SwitchTime", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -697,6 +729,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchCamera;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_HintVision;
+    private readonly InputAction m_Player_SwitchTime;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -716,6 +749,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @SwitchCamera => m_Wrapper.m_Player_SwitchCamera;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @HintVision => m_Wrapper.m_Player_HintVision;
+        public InputAction @SwitchTime => m_Wrapper.m_Player_SwitchTime;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -770,6 +804,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @HintVision.started += instance.OnHintVision;
             @HintVision.performed += instance.OnHintVision;
             @HintVision.canceled += instance.OnHintVision;
+            @SwitchTime.started += instance.OnSwitchTime;
+            @SwitchTime.performed += instance.OnSwitchTime;
+            @SwitchTime.canceled += instance.OnSwitchTime;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -819,6 +856,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @HintVision.started -= instance.OnHintVision;
             @HintVision.performed -= instance.OnHintVision;
             @HintVision.canceled -= instance.OnHintVision;
+            @SwitchTime.started -= instance.OnSwitchTime;
+            @SwitchTime.performed -= instance.OnSwitchTime;
+            @SwitchTime.canceled -= instance.OnSwitchTime;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -871,5 +911,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSwitchCamera(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnHintVision(InputAction.CallbackContext context);
+        void OnSwitchTime(InputAction.CallbackContext context);
     }
 }

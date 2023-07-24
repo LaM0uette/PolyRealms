@@ -1,4 +1,5 @@
 using System;
+using Core.Scripts.ControlTimePower;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -169,6 +170,7 @@ namespace Core.Scripts.Controllers
             HintVisionEvent?.Invoke();
             HintVisionValue = !HintVisionValue;
         }
+        public void OnSwitchTime() => ControlTime.OnSwitch();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 
