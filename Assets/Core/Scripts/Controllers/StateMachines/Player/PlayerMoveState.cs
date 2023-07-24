@@ -22,6 +22,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.CrouchActionEvent += OnCrouchAction;
             StateMachine.Inputs.SlideEvent += OnSlide;
             StateMachine.Inputs.DashEvent += OnDash;
+            StateMachine.Inputs.InteractEvent += OnInteract;
         }
         
         private void UnsubscribeEvents()
@@ -31,6 +32,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             StateMachine.Inputs.CrouchActionEvent -= OnCrouchAction;
             StateMachine.Inputs.SlideEvent -= OnSlide;
             StateMachine.Inputs.DashEvent -= OnDash;
+            StateMachine.Inputs.InteractEvent -= OnInteract;
         }
 
         #endregion
@@ -127,6 +129,8 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void OnSlide() => StateMachine.SwitchState(new PlayerSlideState(StateMachine));
         
         private void OnDash() =>  StateMachine.SwitchState(new PlayerDashState(StateMachine));
+        
+        private void OnInteract() =>  StateMachine.InteractObject?.Interact();
 
         #endregion
     }

@@ -166,7 +166,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 256
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: fab778e119b8f4f47b65372606390d97, type: 2}
+    overrideMaterial: {fileID: 2100000, guid: 3b2fe0cda55ec1843b78083119e4eead, type: 2}
     overrideMaterialPassIndex: 0
     overrideShader: {fileID: 0}
     overrideShaderPassIndex: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 128
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 78298b236e25d8c49ac088c4834f51d9, type: 2}
+    overrideMaterial: {fileID: 2100000, guid: 4f4994f0c00dd6e4aac4caf81a8b2344, type: 2}
     overrideMaterialPassIndex: 0
     overrideShader: {fileID: 0}
     overrideShaderPassIndex: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 64
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 78298b236e25d8c49ac088c4834f51d9, type: 2}
+    overrideMaterial: {fileID: 2100000, guid: 4f4994f0c00dd6e4aac4caf81a8b2344, type: 2}
     overrideMaterialPassIndex: 0
     overrideShader: {fileID: 0}
     overrideShaderPassIndex: 0

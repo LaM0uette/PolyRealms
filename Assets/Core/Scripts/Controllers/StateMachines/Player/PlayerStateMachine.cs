@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using Core.Scripts.InteractObjects;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -59,6 +60,9 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float SlideCapsuleHeight = .4f;
         [HideInInspector] public float InitialCapsuleRadius;
 
+        // TODO: A AMELIORER
+        public IInteractObject InteractObject;
+        
         private void Awake()
         {
             Animator = GetComponent<Animator>();

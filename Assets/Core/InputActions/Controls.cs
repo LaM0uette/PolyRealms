@@ -170,6 +170,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""bca57f89-5a6e-4e85-ac7c-c88f1466f350"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -601,6 +610,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2943d7b-8c78-47df-ae07-860b5a711724"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e41e8bf1-1000-400a-b85b-74052e8a89e8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -653,6 +684,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_HintVision = m_Player.FindAction("HintVision", throwIfNotFound: true);
         m_Player_SwitchTime = m_Player.FindAction("SwitchTime", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -730,6 +762,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_HintVision;
     private readonly InputAction m_Player_SwitchTime;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -750,6 +783,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @HintVision => m_Wrapper.m_Player_HintVision;
         public InputAction @SwitchTime => m_Wrapper.m_Player_SwitchTime;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -807,6 +841,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchTime.started += instance.OnSwitchTime;
             @SwitchTime.performed += instance.OnSwitchTime;
             @SwitchTime.canceled += instance.OnSwitchTime;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -859,6 +896,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchTime.started -= instance.OnSwitchTime;
             @SwitchTime.performed -= instance.OnSwitchTime;
             @SwitchTime.canceled -= instance.OnSwitchTime;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -912,5 +952,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnHintVision(InputAction.CallbackContext context);
         void OnSwitchTime(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

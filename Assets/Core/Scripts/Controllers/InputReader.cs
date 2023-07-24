@@ -34,6 +34,7 @@ namespace Core.Scripts.Controllers
         public Action DashEvent { get; set; }
         public Action SwitchCameraEvent { get; set; }
         public Action HintVisionEvent { get; set; }
+        public Action InteractEvent { get; set; }
         
         public Action StopAnimationEvent { get; set; }
         
@@ -171,6 +172,7 @@ namespace Core.Scripts.Controllers
             HintVisionValue = !HintVisionValue;
         }
         public void OnSwitchTime() => ControlTime.OnSwitch();
+        public void OnInteract() => InteractEvent?.Invoke();
         
         public void StopAnimation() => StopAnimationEvent?.Invoke();
 
