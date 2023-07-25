@@ -2,23 +2,25 @@
 
 namespace Core.Scripts.InteractObjects
 {
-    public class InteractObject : MonoBehaviour, IInteractObject
+    public abstract class InteractObject : MonoBehaviour, IInteractObject
     {
-        private Animator _animator;
-        
+        #region Statements
+
+        protected static readonly int InteractTrigger = Animator.StringToHash("Interact");
+        protected Animator _animator;
+        protected bool _isInteracted;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
         }
-        
-        public void Interact()
-        {
-            _animator.enabled = true;
-        }
-        
-        public void DisableAnimator()
-        {
-            _animator.enabled = false;
-        }
+
+        #endregion
+
+        #region Functions
+
+        public abstract void Interact();
+
+        #endregion
     }
 }

@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SimpleInteractObjectAnimatorTest
+  m_Controller: {fileID: 9100000, guid: cc16ef480b183f8409d101bcf10eafde, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 429c04e80a56c4e4799c958c1696eacc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 429c04e80a56c4e4799c958c1696eacc, type: 2}

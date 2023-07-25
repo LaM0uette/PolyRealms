@@ -59,8 +59,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         public float RollCapsuleHeight = .6f;
         public float SlideCapsuleHeight = .4f;
         [HideInInspector] public float InitialCapsuleRadius;
-
-        // TODO: A AMELIORER
+        
         public IInteractObject InteractObject;
         
         private void Awake()
