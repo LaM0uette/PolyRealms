@@ -89,6 +89,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         {
             ApplyGravity();
             CheckStateChange();
+            CheckInteractObject();
             
             var speed = GetMoveSpeed();
             Move(speed);

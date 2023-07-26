@@ -29,16 +29,6 @@ namespace Core.Scripts.Controllers
                 _stateMachine.IsClimbing = true;
                 _stateMachine.SwitchState(new PlayerClimbLadderState(_stateMachine, ladder));
             }
-            
-            if (other.TryGetComponent(out IInteractObject obj))
-            {
-                _stateMachine.InteractObject = obj;
-            }
-        }
-        
-        private void OnTriggerExit(Collider other)
-        {
-            _stateMachine.InteractObject = null;
         }
 
         private void OnAnimatorMove()

@@ -1,4 +1,5 @@
 using Cinemachine;
+using Core.Scripts.InteractObjects;
 using Core.Scripts.StaticUtilities;
 using UnityEngine;
 
@@ -127,6 +128,53 @@ namespace Core.Scripts.Controllers.StateMachines.Player
             if (interactObject is null) return;
             
             if (!interactObject.IsInteracted) interactObject.Interact();
+            StateMachine.Text.SetActive(false);
+        }
+        
+        protected void CheckInteractObject()
+        {
+            if (StateMachine.IsClimbing) return;
+            
+            const float maxDistance = 8f;
+            
+            var middleScreenPoint = new Vector3(0.5f, 0.5f, 0f); 
+            var ray = StateMachine.MainCamera.ViewportPointToRay(middleScreenPoint);
+    
+            var playerLayer = 1 << LayerMask.NameToLayer("Player");
+            var allLayersExceptPlayer = ~playerLayer;
+
+            if (!Physics.Raycast(ray, out var hit, maxDistance, allLayersExceptPlayer))
+            {
+                if (StateMachine.InteractObject is not null)
+                {
+                    StateMachine.Text.SetActive(false);
+                    StateMachine.InteractObject = null;
+                }
+                
+                return;
+            }
+    
+            if (hit.collider.TryGetComponent(out IInteractObject obj))
+            {
+                if (obj.IsInteracted)
+                {
+                    StateMachine.Text.SetActive(false);
+                    StateMachine.InteractObject = null;
+                    return;
+                }
+                
+                StateMachine.Text.SetActive(true);
+                StateMachine.InteractObject = obj;
+                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
+            }
+            else
+            {
+                if (StateMachine.InteractObject is not null)
+                {
+                    StateMachine.Text.SetActive(false);
+                    StateMachine.InteractObject = null;
+                }
+            }
         }
 
         protected void AnimatorSetFloat(int id, float value)
