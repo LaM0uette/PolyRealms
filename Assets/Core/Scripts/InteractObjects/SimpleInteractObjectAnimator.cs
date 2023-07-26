@@ -1,15 +1,12 @@
 ﻿namespace Core.Scripts.InteractObjects
 {
-    public class SimpleInteractObject : InteractObject
+    public class SimpleInteractObjectAnimator : InteractObjectAnimator
     {
         #region Functions
 
         public override void Interact()
         {
-            if (_isInteracted) return;
-            
-            _isInteracted = true;
-            
+            IsInteracted = true;
             TriggerInteraction();
         }
 

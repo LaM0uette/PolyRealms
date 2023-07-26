@@ -129,8 +129,12 @@ namespace Core.Scripts.Controllers.StateMachines.Player
         private void OnSlide() => StateMachine.SwitchState(new PlayerSlideState(StateMachine));
         
         private void OnDash() =>  StateMachine.SwitchState(new PlayerDashState(StateMachine));
-        
-        private void OnInteract() =>  StateMachine.InteractObject?.Interact();
+
+        private void OnInteract()
+        {
+            if (StateMachine.InteractObject.IsInteracted)
+                StateMachine.InteractObject?.Interact();
+        }
 
         #endregion
     }
