@@ -132,8 +132,7 @@ namespace Core.Scripts.Controllers.StateMachines.Player
 
         private void OnInteract()
         {
-            if (StateMachine.InteractObject.IsInteracted)
-                StateMachine.InteractObject?.Interact();
+            Interact();
         }
 
         #endregion

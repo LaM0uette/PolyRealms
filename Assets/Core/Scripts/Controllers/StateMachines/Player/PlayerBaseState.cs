@@ -119,6 +119,15 @@ namespace Core.Scripts.Controllers.StateMachines.Player
                 if (thirdPersonFollow.CameraDistance >= StateMachine.MaxZoom) thirdPersonFollow.CameraDistance = StateMachine.MaxZoom;
             }
         }
+        
+        protected void Interact()
+        {
+            var interactObject = StateMachine.InteractObject;
+            
+            if (interactObject is null) return;
+            
+            if (!interactObject.IsInteracted) interactObject.Interact();
+        }
 
         protected void AnimatorSetFloat(int id, float value)
         {
