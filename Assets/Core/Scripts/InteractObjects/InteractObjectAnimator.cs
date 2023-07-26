@@ -2,11 +2,9 @@
 
 namespace Core.Scripts.InteractObjects
 {
-    public abstract class InteractObjectAnimator : MonoBehaviour, IInteractObject
+    public abstract class InteractObjectAnimator : InteractObject
     {
         #region Statements
-
-        public bool IsInteracted  { get; set; }
         
         protected static readonly int InteractTrigger = Animator.StringToHash("Interact");
         protected Animator _animator;
@@ -15,12 +13,6 @@ namespace Core.Scripts.InteractObjects
         {
             _animator = GetComponent<Animator>();
         }
-
-        #endregion
-
-        #region Functions
-
-        public abstract void Interact();
 
         #endregion
     }

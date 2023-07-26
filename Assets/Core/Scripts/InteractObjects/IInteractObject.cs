@@ -2,7 +2,7 @@
 {
     public interface IInteractObject
     {
-        public bool IsInteracted { get; set; }
+        public bool IsInteracted { get; }
         public void Interact();
     }
 }
